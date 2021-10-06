@@ -1,37 +1,73 @@
-import React from "react";
-import Loggin from "./components/Loggin";
-import ProductManager from "./components/ProductManager";
-import SalesManager from "./components/SalesManager";
-import SellerManager from "./components/SellerManager";
-import Navbar from "./components/Navbar"
-import Sidebar from "./components/Sidebar";
-import '../src/App.scss'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
+import AddOrder from 'pages/seller/AddOrder';
+import UserList  from 'pages/admin/UserList';
+import Products from 'pages/admin/Products';
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  NavLink
-} from "react-router-dom";
+import AuthLayout from 'layouts/AuthLayout';
+import AdminLayout from 'layouts/AdminLayout';
+import SellerLayout from 'layouts/SellerLayout';
+import OrdersList from 'pages/seller/OrdersList';
+<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"></link>
 
 function App() {
   return (
+
     <Router>
-      <Navbar />
-      <div className="flex">
-        <Sidebar />
-        <div className="content">
-          <Route path="/" exact={true} component={Loggin} />
-          <Route path="/product-manager" exact={true} component={ProductManager} />
-          <Route path="/seller-manager" exact={true} component={SellerManager} />
-          <Route path="/sales-manager" exact={true} component={SalesManager} />
-        </div>
-      </div>
+      <Switch>
+
+      <Route path='/login'>
+        <AuthLayout/>
+
+      </Route>
+      <Route path={['/admin','/admin/productos','/admin/ventas','/admin/usuarios']}>
+       <AdminLayout>
+        <Switch>
+          <Route path= '/admin/productos'>
+          <Products/>
+          </Route>
+          <Route path= '/admin/ventas/agregarventa'>
+          <AddOrder/>
+          </Route>
+          <Route path= '/admin/ventas/listadoventas'>
+          <OrdersList/>
+          </Route>
+          <Route path= '/admin/usuarios'>
+          <UserList/>
+          </Route>
+          <Route path= '/admin'>
+          
+          </Route>
+        </Switch>
+      </AdminLayout>
+      </Route>
+
+
+     <Route path= {['/vendedor','vendedor/ventas']}>
+       <SellerLayout>
+         <Switch>
+          <Route path= '/vendedor/ventas/registrarVenta'>
+         <AddOrder/>
+          </Route>
+          <Route path= '/vendedor/ventas/listadoventas'>
+          <OrdersList/>
+          </Route>
+
+          <Route path= '/vendedor'>
+          
+          </Route>
+         </Switch>
+       </SellerLayout>
+     </Route>
+     
+      </Switch>
     </Router>
+    
 
   );
 }
 
 export default App;
+
+
+ 
