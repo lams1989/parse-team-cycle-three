@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="author" content="Victoria Yuan - grupo PARSE">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./user-list-styles.css">
+  <title>Usuarios</title>
+</head>
+
+<body>
+  
+  <div class="userListSection">
+    <div class="titlepage">
+      <h1> Lista de Usuarios</h1>
+    </div>
+
+    <button class="btnGeneral addNewUserBtn">
+      <span>Agregar Usuario</span>
+    </button>
+
+
+    <div class="addUserContainer">
+
+      <form class="addUserForm">
+
+        <ul class="listFields">
+
+          <li class="addData">
+            <label> Nombre</label>
+            <input type="text" required placeholder="Nombre"></input>
+          </li>
+
+          <li class="addData">
+            <label> Correo Electrónico</label>
+            <input type="email" autoComplete="email" required placeholder="Correo electrónico"></input>
+          </li>
+
+          <li class="addDataRoleContainer">
+            <label> Rol </label>
+            <select class="selectRole">
+              <option class="sellerRole" value="noRoleYet" disabled>Selecciona un rol</option>
+              <option class="sellerRole" value="sellerRole">Vendedor</option>
+              <option class="adminRole" value="adminRole">Administrador</option>
+            </select>
+          </li>
+
+          <li class="addData">
+            <label> Estado </label>
+            <select class="selectStatus">
+              <option class="aproved" value="aproved">Aprobado</option>
+              <option class="denied" value="denied">No Aprobado</option>
+              <option class="pending" value="pending">Pendiente</option>
+            </select>
+          </li>
+
+        </ul>
+
+        <div class="btnOptionsContainer">
+          <button type="submit" class="btnGeneral btnAdd">Crear Usuario</button>
+          <button type="reset" class="btnGeneral btnCancel">Cancelar</button>
+        </div>
+
+      </form>
+
+    </div>
+
+
+    <div class="searchUserContainer">
+
+      <form>
+        <span>Buscar Usuario por </span>
+        <select class="selectRole selectSearchUser">
+          <option>Nombre</option>
+          <option>Correo</option>
+          <option>Rol</option>
+          <option>Estado</option>
+        </select>
+
+        <input type="text" class="toSearchInput" placeholder="Nombre usuario" />
+
+        <button type="submit" class="btnGeneral btnSearchUser" id="submitUserSearchBtn">
+          Buscar</button>
+
+      </form>
+
+    </div>
+
+
+    <div class="listSection">
+
+      <table class="userListTable">
+
+        <thead>
+          <tr>
+            <th class="col_title">Nombre</th>
+            <th class="col_title">Correo</th>
+            <th class="col_title">Rol</th>
+            <th class="col_title">Estado</th>
+            <th class="col-title"></th>
+          </tr>
+        </thead>
+
+        <!--All of this data rows of users are only examples
+              In the delivery of React it will be use a map that reads a json file with users information and base on that, show the rows -->
+        <tbody>
+          <tr class="datarowUser">
+            <td>Angela Bermudez</td>
+            <td class="emailrow">angelabermudez99@gmail.com</td>
+            <td>Admin</td>
+            <td class="aproved">Aprobado</td>
+            <td>
+              <div class="editBtnContanier">
+                <button type="button" class="btnGeneral btnEdit">Editar</button>
+                <button type="button" class="btnGeneral btnDelete">Eliminar</button>
+              </div>
+            </td>
+          </tr>
+
+
+          <!--example of datarow for editing information --will be implement later in react
+                <tr class="datarowUserEditable">
+                  <td> Camila Mar </td>
+                  <td> camilaMar001@gmail.com</td>
+                  <td> <select class="selectRole">
+                    <option class= "sellerRole"value="noRoleYet" disabled>Selecciona un rol</option>
+                    <option class= "sellerRole"value="sellerRole">Vendedor</option>
+                    <option class= "adminRole" value="adminRole">Administrador</option>
+                  </select></td>
+                  <td class= "aproved"> <select  class="selectStatus" >
+                    <option class="aproved" value="aproved">Aprobado</option>
+                    <option class="denied" value="denied">No Aprobado</option>
+                    <option class="pending" value="pending">Pendiente</option>
+                  </select></td>
+                  <td><div class="editBtnContanier">
+                      <button type= "button" class="btnGeneral btnEdit">Editar</button>
+                      <button type= "button"class="btnGeneral btnDelete">Eliminar</button>
+                    </div>
+                  </td>
+                  </tr>
+                  -->
+
+          <tr>
+            <td>Camila Mar</td>
+            <td class="emailrow">camilaMar001@gmail.com</td>
+            <td>Admin</td>
+            <td class="aproved">Aprobado</td>
+            <td>
+              <div class="editBtnContanier">
+                <button type="button" class="btnGeneral btnEdit">Editar</button>
+                <button type="button" class="btnGeneral btnDelete">Eliminar</button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+
+            <td>Fabio Bermudez</td>
+            <td class="emailrow">fabioberm@gmail.com</td>
+            <td>Vendedor</td>
+            <td class="pending">Pending</td>
+            <td>
+              <div class="editBtnContanier">
+                <button type="button" class="btnGeneral btnEdit">Editar</button>
+                <button type="button" class="btnGeneral btnDelete">Eliminar</button>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Tati Díaz</td>
+            <td class="emailrow">tatidiazm@gmail.com</td>
+            <td>Vendedor</td>
+            <td class="aproved">Aprobado</td>
+            <td>
+              <div class="editBtnContanier">
+                <button type="button" class="btnGeneral btnEdit">Editar</button>
+                <button type="button" class="btnGeneral btnDelete">Eliminar</button>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Roger Rodriguez</td>
+            <td class="emailrow">rogerodri@gmail.com</td>
+            <td>Vendedor</td>
+            <td class="pending">Pendiente</td>
+            <td>
+              <div class="editBtnContanier">
+                <button type="button" class="btnGeneral btnEdit">Editar</button>
+                <button type="button" class="btnGeneral btnDelete">Eliminar</button>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Angela Camila</td>
+            <td class="emailrow">angez99@gmail.com</td>
+            <td>Vendedor</td>
+            <td class="denied">No aprobado</td>
+            <td>
+              <div class="editBtnContanier">
+                <button type="button" class="btnGeneral btnEdit">Editar</button>
+                <button type="button" class="btnGeneral btnDelete">Eliminar</button>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Dimitri Garces</td>
+            <td class="emailrow">dimitrigarces1@gmail.com</td>
+            <td>Vendedor</td>
+            <td class="denied">No aprobado</td>
+            <td>
+              <div class="editBtnContanier">
+                <button type="button" class="btnGeneral btnEdit">Editar</button>
+                <button type="button" class="btnGeneral btnDelete">Eliminar</button>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Luisa Ordoñez</td>
+            <td class="emailrow">luisaord@gmail.com</td>
+            <td>Vendedor</td>
+            <td class="denied">No aprobado</td>
+            <td>
+              <div class="editBtnContanier">
+                <button type="button" class="btnGeneral btnEdit">Editar</button>
+                <button type="button" class="btnGeneral btnDelete">Eliminar</button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Karina Gigi</td>
+            <td class="emailrow">kargina@gmail.com</td>
+            <td>Vendedor</td>
+            <td class="aproved">Aprobado</td>
+            <td>
+              <div class="editBtnContanier">
+                <button type="button" class="btnGeneral btnEdit">Editar</button>
+                <button type="button" class="btnGeneral btnDelete">Eliminar</button>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Daria Torres</td>
+            <td class="emailrow">dariatorress@gmail.com</td>
+            <td>Vendedor</td>
+            <td class="denied">No aprobado</td>
+            <td>
+              <div class="editBtnContanier">
+                <button type="button" class="btnGeneral btnEdit">Editar</button>
+                <button type="button" class="btnGeneral btnDelete">Eliminar</button>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Francisco Kim</td>
+            <td class="emailrow">fransciscokimti@gmail.com</td>
+            <td>Vendedor</td>
+            <td class="pending">pendiente</td>
+            <td>
+              <div class="editBtnContanier">
+                <button type="button" class="btnGeneral btnEdit">Editar</button>
+                <button type="button" class="btnGeneral btnDelete">Eliminar</button>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Angela Bermudez</td>
+            <td class="emailrow">angelabermudez99@gmail.com</td>
+            <td>Vendedor</td>
+            <td class="denied">No aprobado</td>
+            <td>
+              <div class="editBtnContanier">
+                <button type="button" class="btnGeneral btnEdit">Editar</button>
+                <button type="button" class="btnGeneral btnDelete">Eliminar</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+
+    </div>
+
+    </table>
+  </div>
+
+
+
+
+</body>
+
+</html>
