@@ -1,0 +1,51 @@
+.headerOpt{
+   
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+   
+    background: lavender;
+    box-shadow: midnightblue 1px 1px;
+   
+}
+.greeting{
+    font-size: 20px;
+    margin-left: 20px;
+    margin-right: 50px;
+    padding: 0px;
+}
+.userdisplay{
+    display: grid;
+    padding: 5px;
+    
+}
+.username{
+font-size: 30px;
+color: black;
+}
+
+.dateSection{
+display: grid;
+
+margin-left: 600px;
+padding-inline:2px;
+}
+
+.date{
+    font-style: italic;
+    font-weight: 500;
+    font-size: 20px;
+}
+.role{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    color: forestgreen;
+}
+.username{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 30px;
+    color:blue;
+    
+}
