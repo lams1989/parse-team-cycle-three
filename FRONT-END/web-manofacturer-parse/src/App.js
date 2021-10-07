@@ -8,7 +8,6 @@ import AuthLayout from 'layouts/AuthLayout';
 import AdminLayout from 'layouts/AdminLayout';
 import SellerLayout from 'layouts/SellerLayout';
 import OrdersList from 'pages/seller/OrdersList';
-<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"></link>
 
 function App() {
   return (
@@ -46,7 +45,7 @@ function App() {
      <Route path= {['/vendedor','vendedor/ventas']}>
        <SellerLayout>
          <Switch>
-          <Route path= '/vendedor/ventas/registrarVenta'>
+          <Route path= '/vendedor/ventas/agregarventa'>
          <AddOrder/>
           </Route>
           <Route path= '/vendedor/ventas/listadoventas'>

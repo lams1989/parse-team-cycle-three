@@ -1,5 +1,5 @@
 import React from 'react'
-import 'styles/admin-layout-style.css';
+import 'styles/layouts-style.css';
 import Sidebar from 'components/Sidebar';
 
 const AdminLayout = ({children}) => {
