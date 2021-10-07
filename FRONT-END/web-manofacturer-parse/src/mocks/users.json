@@ -1,0 +1,82 @@
+[
+    {
+        "id": "001",
+        "names": "Luis Alejandro",
+        "surNames": "Muñoz Sierra",
+        "password": "micd1122",
+        "email": "luis@email.com",
+        "roll": "Admin",
+        "userName": "luismunoz",
+        "state": true
+    },
+    {
+        "id": "002",
+        "names": "Carlos Andres",
+        "surNames": "Mantilla Herrera",
+        "password": "micd1122",
+        "email": "carlos@email.com",
+        "roll": "Admin",
+        "userName": "carlos",
+        "state": false
+    },
+    {
+        "id": "003",
+        "names": "Beto Antonio",
+        "surNames": "Soto Sierra",
+        "password": "micd1122",
+        "email": "beto@email.com",
+        "roll": "Admin",
+        "userName": "beto",
+        "state": false
+    },
+    {
+        "id": "004",
+        "names": "Luz Aida",
+        "surNames": "Buitrago Rodriguez",
+        "password": "micd1122",
+        "email": "luz@email.com",
+        "roll": "Admin",
+        "userName": "luz",
+        "state": true
+    },
+    {
+        "id": "005",
+        "names": "Victoria",
+        "surNames": "Yuan Chen",
+        "password": "micd1122",
+        "email": "victoria@email.com",
+        "roll": "Seller",
+        "userName": "victoria",
+        "state": false
+    },
+    {
+        "id": "006",
+        "names": "Luis Fernando",
+        "surNames": "Velasquez Tangarife",
+        "password": "micd1122",
+        "email": "fernando@email.com",
+        "roll": "Admin",
+        "userName": "fernando",
+        "state": true
+    },
+    {
+        "id": "007",
+        "names": "Cristian Eduardo",
+        "surNames": "Perez Padilla",
+        "password": "micd1122",
+        "email": "cristian@email.com",
+        "roll": "Seller",
+        "userName": "cristian",
+        "state": true
+    },
+    {
+        "id": "008",
+        "names": "Uribe Paraco",
+        "surNames": "Triple Hijodeputa",
+        "password": "micd1122",
+        "email": "paraco@email.com",
+        "roll": "Seller",
+        "userName": "paraco",
+        "state": false
+    }
+]

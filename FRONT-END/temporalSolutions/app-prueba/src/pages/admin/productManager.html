@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javscript" src="./productManager.js"></script>
+    <link rel="stylesheet" href="./productManager.css">
+    <title>PRODUCT MANAGER</title>
+</head>
+
+<body>
+        <form action="">
+            <div name="data" class="productManager">
+                <h1>PRODUCT MANAGER</h1>
+
+                <label for="idNumber">ID</label>
+                <input type="text" id="idNumber" class="inputId">
+
+                <label for="description">Description</label>
+                <input type="text" id="description" class="inputDescription">
+                <br>
+                <label for="unitaryPrice">Unitary Price</label>
+                <span class="currency">$</span>
+                <input id="unitaryPrice" name="amount" type="text" maxlength="15" class="inputUnitaryPrice">
+
+
+                <label for="state">State</label>
+                <select name="state" id="state" class="selectState">
+                    <option value="available">Available</option>
+                    <option value="notAvailable">Not available</option>
+                </select>
+            </div>
+            <div name="crudButtons" class="buttonsManager">
+                <button>Search</button>
+                <button>Create</button>
+                <button>Update</button>
+                <button>Delete</button>
+            </div>
+            <div name="listData" class="listManager">
+                <table style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Description</th>
+                            <th>Unit Price</th>
+                            <th>State</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="productManager : ${listData}">
+                            <td th:text="${object.id}">Produc ID</td>
+                            <td th:text="${object.descripcion}">Descripcion</td>
+                            <td th:text="${object.unitPrice}">Unit Price</td>
+                            <td th:text="${object.state}">State</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </form>
+</body>
+
+</html>
