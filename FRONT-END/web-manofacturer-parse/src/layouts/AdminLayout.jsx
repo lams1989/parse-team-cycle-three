@@ -2,18 +2,13 @@ import React from 'react'
 import 'styles/layouts-style.css';
 import Sidebar from 'components/Sidebar';
 
-const AdminLayout = ({children}) => {
+const AdminLayout = ({ children }) => {
     return (
         <div className="adminLayoutContainer">
-            
-            <Sidebar/>
+            <Sidebar />
             <main className="mainPage">
-               
                 {children}
-                
-            
-                </main>
-                
+            </main>
         </div>
     )
 }

@@ -2,8 +2,6 @@ import React from 'react'
 import img from '../media/ico1.png'
 import users from '../mocks/users.json'
 
-
-
 const Loggin = () => {
 
 	const [userNameLog, setUserName] = React.useState('')
@@ -33,12 +31,12 @@ const Loggin = () => {
 			console.log('User logged')
 			if (userIn[0].roll === 'Admin') {
 				console.log('is Admin')
-				
+
 			}
 			if (userIn[0].roll === 'Seller') {
 				console.log('is Seller')
 			}
-				
+
 		}
 	}
 
