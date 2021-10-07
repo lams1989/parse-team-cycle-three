@@ -102,7 +102,7 @@ const AddOrder = () => {
               </td>
                 <td className="smallTD">XL173</td>
                 <td className="descripTD">Producto # 173 Tamaño Extragrande</td>
-                <td className="smallTD">2</td>
+                <td className="smallTD" >2</td>
                 <td className="smallTD">$ 71.000</td>
                 <td className="smallTD">$ 142.000</td>
                 <td className="smallTD">    
@@ -115,7 +115,7 @@ const AddOrder = () => {
               </td>
                 <td className="smallTD"><input className="inputNumber" placeholder="XL1"></input></td>
                 <td className="descripTD">Producto # 1</td>
-                <td className="smallTD"><input className="inputNumber" placeholder="1"></input></td>
+                <td className="smallTD"><input type="number"className="inputNumber" placeholder="1"></input></td>
                 <td className="smallTD"><input className="inputNumber inputValue" placeholder="$"></input></td>
                 <td className="smallTD"><input className="inputNumber inputValue" placeholder="$"></input></td>
                 <td className="smallTD">    

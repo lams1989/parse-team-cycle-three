@@ -107,27 +107,7 @@ const UserList = () => {
           </tr>
           
 
-       {/*xample of datarow for editing information --will be implement later in react
-                <tr className="datarowUserEditable">
-                  <td> Camila Mar </td>
-                  <td> camilaMar001@gmail.com</td>
-                  <td> <select className="selectRole">
-                    <option className= "sellerRole"value="noRoleYet" disabled>Selecciona un rol</option>
-                    <option className= "sellerRole"value="sellerRole">Vendedor</option>
-                    <option className= "adminRole" value="adminRole">Administrador</option>
-                  </select></td>
-                  <td className= "aproved"> <select  className="selectStatus" >
-                    <option className="aproved" value="aproved">Aprobado</option>
-                    <option className="denied" value="denied">No Aprobado</option>
-                    <option className="pending" value="pending">Pendiente</option>
-                  </select></td>
-                  <td><div className="editBtnContanier">
-                      <button type= "button" className="btnGeneral btnEdit">Editar</button>
-                      <button type= "button"className="btnGeneral btnDelete">Eliminar</button>
-                    </div>
-                  </td>
-                  </tr>
-       */}
+      
 
           <tr>
             <td>Camila Mar</td>
@@ -141,9 +121,11 @@ const UserList = () => {
               </div>
             </td>
           </tr>
+
+           {/*Example of datarow for editing information --will be implement later in react*/}
           <tr className="datarowUserEditable">
-                  <td> <input className= "toSearchInput" type="text" placeholder="Camila Mar" /></td>
-                  <td> <input className= "toSearchInput" type="text" placeholder="camilaMar001@gmail.com" /></td>
+                  <td> <input className= "toSearchInput" type="text" placeholder="Camila Mar" disabled/></td>
+                  <td> <input className= "toSearchInput" type="text" placeholder="camilaMar001@gmail.com" disabled/></td>
                   <td> <select className="selectRole">
                     <option className= "sellerRole"value="noRoleYet" disabled>Selecciona un rol</option>
                     <option className= "sellerRole"value="sellerRole">Vendedor</option>
