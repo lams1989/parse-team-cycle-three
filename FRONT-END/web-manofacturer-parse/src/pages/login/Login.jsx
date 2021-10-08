@@ -29,13 +29,13 @@ const Login = () => {
 
 		let userIn = users.filter(user => user.userName === userNameLog)
 
-		if (userIn[0].state === true && userIn[0].password === passwordLog) {
+		if (userIn[0].state === "Aprobado" && userIn[0].password === passwordLog) {
 			console.log('User logged')
-			if (userIn[0].roll === 'Admin') {
+			if (userIn[0].role === 'Admin') {
 				console.log('is Admin')
 
 			}
-			if (userIn[0].roll === 'Seller') {
+			if (userIn[0].role === 'Seller') {
 				console.log('is Seller')
 			}
 

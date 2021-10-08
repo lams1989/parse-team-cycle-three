@@ -1,5 +1,5 @@
-/* Google Font Link */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+
 
 :root{
 --margin_separar: 240px;
@@ -22,22 +22,19 @@
     
     background:#212529;
     padding: 6px 14px;
-    z-index: 99;
-    transition: all 0.5s ease;
     
   }
  
   .sidebar .logo-details{
     height: 60px;
     display: flex;
-    align-items: center;
     position: relative;
+    align-items: center;
+    
     
   }
   .sidebar .logo-details .img{
     opacity: 1;
-
-    transition: all 0.5s ease;
   }
   .sidebar .logo-details .logo_name {
     color: whitesmoke;
@@ -45,7 +42,6 @@
     font-weight: 800;
     opacity: 1;
     
-    transition: all 0.5s ease;
     
     
   }
@@ -54,27 +50,29 @@
     position: absolute;
     top: 50%;
     right: 0;
-    transform: translateY(-50%);
     font-size: 22px;
-    transition: all 0.4s ease;
     font-size: 23px;
     text-align: center;
     cursor: pointer;
-    transition: all 0.5s ease;
     
   }
 
- 
-  img{
-    height: 20px;
-    width: 20px;
-    object-fit: cover;
-    margin: 5px;
-    border-radius: 6px;
-    margin-right: 5px;
+  .homeicon{
     
+    height: 36px;
+    
+    margin-right: 10px;
+  }
+
+  .iconSidebar{
+    height: 24px;
+    width: 24px;
+    margin-top:4px;
+    
+    border-radius: 6px;
     font-size: 15px; 
   }
+    
   .sidebar .nav-list{
     margin-top: 20px;
     height: calc(100%-200px);
@@ -85,11 +83,11 @@
   }
 
   .sidebar li, .logoutsection li{
-    position: relative;
+    
     margin: 0px 0px;
     list-style: none;
     border-radius: 1px;
-
+    height: 100%;
     
   }
   .sidebar li a, .logoutsection a{
@@ -100,24 +98,27 @@
     justify-content: space-evenly;
     text-decoration: none;
    
-    transition: all 0.4s ease;
-    background:#0d6efd;
+    
+    
+    background: #1960c9;
     margin-bottom: 10px;
     align-items: center;
   
   }
 
-  .sidebar li a:hover{
-    background: lightseagreen;
+  .sidebar li :hover{
+    background:#0d6efd;
+
+    /* background:#0d6efd;
+    background: #1960c9;*/
     
   }
   .logoutsection{
       position: relative;
-      margin-top: 350px;
+      margin-top: 400px;
   }
   .logoutsection a:hover{
-    background: lightseagreen;
-    box-shadow: lightslategray  2px 2px ;
+    background: #0d6efd;
 }
 
 .links_name{

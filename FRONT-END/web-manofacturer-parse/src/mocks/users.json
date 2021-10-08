@@ -1,82 +1,68 @@
 [
-    {
-        "id": "001",
-        "names": "Luis Alejandro",
-        "surNames": "Muñoz Sierra",
-        "password": "micd1122",
-        "email": "luis@email.com",
-        "roll": "Admin",
-        "userName": "luismunoz",
-        "state": true
-    },
-    {
-        "id": "002",
-        "names": "Carlos Andres",
-        "surNames": "Mantilla Herrera",
-        "password": "micd1122",
-        "email": "carlos@email.com",
-        "roll": "Admin",
-        "userName": "carlos",
-        "state": false
-    },
-    {
-        "id": "003",
-        "names": "Beto Antonio",
-        "surNames": "Soto Sierra",
-        "password": "micd1122",
-        "email": "beto@email.com",
-        "roll": "Admin",
-        "userName": "beto",
-        "state": false
-    },
-    {
-        "id": "004",
-        "names": "Luz Aida",
-        "surNames": "Buitrago Rodriguez",
-        "password": "micd1122",
-        "email": "luz@email.com",
-        "roll": "Admin",
-        "userName": "luz",
-        "state": true
-    },
-    {
-        "id": "005",
-        "names": "Victoria",
-        "surNames": "Yuan Chen",
-        "password": "micd1122",
-        "email": "victoria@email.com",
-        "roll": "Seller",
-        "userName": "victoria",
-        "state": false
-    },
-    {
-        "id": "006",
-        "names": "Luis Fernando",
-        "surNames": "Velasquez Tangarife",
-        "password": "micd1122",
-        "email": "fernando@email.com",
-        "roll": "Admin",
-        "userName": "fernando",
-        "state": true
-    },
-    {
-        "id": "007",
-        "names": "Cristian Eduardo",
-        "surNames": "Perez Padilla",
-        "password": "micd1122",
-        "email": "cristian@email.com",
-        "roll": "Seller",
-        "userName": "cristian",
-        "state": true
-    },
-    {
-        "id": "008",
-        "names": "Uribe Paraco",
-        "surNames": "Triple Hijodeputa",
-        "password": "micd1122",
-        "email": "paraco@email.com",
-        "roll": "Seller",
-        "userName": "paraco",
-        "state": false
-    }
+
+{
+  "id": "001",
+  "name": "Luis Alejandro Muñoz Sierra",
+  "usernme": "luis",
+  "password": "micd1122",
+  "email": "luis@email.com",
+  "role": "Admin",
+  "state": "Aprobado"
+},
+{
+  "id": "002",
+  "name": "Victoria Yuan Chen",
+  "usernme": "victoria",
+  "password": "micd1122",
+  "email": "victoria@email.com",
+  "role": "Admin",
+  "state": "Aprobado"
+},
+{
+  "id": "003",
+  "name": "Luz Aida Buitrago Rodriguez" ,
+  "usernme": "luz",
+  "password": "micd1122",
+  "email": "luz@email.com",
+  "role": "Admin",
+  "state": "Aprobado"
+},
+{
+  "id": "004",
+  "name": "Luis Fernando Velasquez Tangarife",
+  "usernme": "luis fernando",
+  "password": "micd1122",
+  "email": "fernando@email.com",
+  "role": "Admin",
+  "name": "fernando",
+  "state": "Aprobado"
+},
+{
+  "id": "006",
+  "name": "Cristian Eduardo Perez Padilla",
+  "usernme": "cristian",
+  "password": "micd1122",
+  "email": "cristian@email.com",
+  "role": "Admin",
+  "state": "Pendiente"
+},
+{
+  "id": "007",
+  "name": "Laura Diaz",
+  "usernme": "laura",
+  "password": "micd1122",
+  "email": "lauradiaz@email.com",
+  "role": "Seller",
+  "state": "No aprobado"
+}
+,
+{
+    "id": "008",
+    "name": "Carlos Andres Mantilla Herrera",
+    "usernme": "carlos",
+    "password": "micd1122",
+    "email": "carlos@email.com",
+    "role": "Seller",
+    "state": "Pendiente"
+  }
 ]

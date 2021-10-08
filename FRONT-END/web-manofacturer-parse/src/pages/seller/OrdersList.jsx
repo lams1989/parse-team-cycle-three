@@ -3,14 +3,19 @@ import { Link } from 'react-router-dom';
 import "styles/pages-styles.css"
 const OrdersList = () => {
   return (
-    <div className="MainSectionOrders">
+    <div className="MainSection">
       <div classNameName="titlepage">
         <span className="title"> LISTA de Ventas</span>
         <Link to='/admin/ventas/agregarVenta'>
-          <button className=" btnListaVentas">Agregar Nueva Venta</button>
+          <div className="divBtnChangePage">
+          <button className="btnGeneral btnListaVentas">Agregar Nueva Venta</button>
+          </div>
+         
         </Link>
       </div>
+      <h3 className=" addNewSubt marg-l"> Consulta el listado de las ventas</h3>
       <div className="searchContainer  marg-l">
+        
         <form>
           <span>Buscar Venta por </span>
           <select className="selectRole selectSearchUser">
@@ -26,9 +31,9 @@ const OrdersList = () => {
           <button type="submit" className="btnGeneral btnSearchUser" id="submitUserSearchBtn">Buscar</button>
         </form>
       </div>
-      <div className="listSectionProductsToBuy divOrders">
-        <table className="ListTableProductsToBuy">
-          <thead className="thead theadFix">
+      <div className="listSectionContainer divOrders">
+        <table className="ListTable">
+          <thead className="thead ">
             <tr>
               <th className="col_title ">ID Venta</th>
               <th className="col_title">Cliente</th>
@@ -36,11 +41,11 @@ const OrdersList = () => {
               <th className="col_title">Total</th>
               <th className="col_title">Fecha Venta</th>
               <th className="col_title">Estado</th>
-              <th className="col-title">Modificar</th>
+              <th className="col-title mg-l">Modificar</th>
             </tr>
           </thead>
           {/*All this data rows are examples. Later it will be implemented a function map that fills the rows*/}
-          <tbody className="tbodyNToBuy">
+          <tbody>
             <tr className="datarow">
               <td className="smallTD">20</td>
               <td className="mediumTD">Cliente </td>
