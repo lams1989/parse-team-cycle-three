@@ -5,7 +5,7 @@ import edituser from "media/manage_accounts_white_24dp.svg"
 
 const UsersTable = () => {
     return (
-        <div className="listSectionContainer ">
+        <div className="listSectionContainer divUsuariosList">
         <table className="ListTable">
             <thead className="thead">
               <tr>
@@ -14,7 +14,7 @@ const UsersTable = () => {
                 <th className="col_title">Correo</th>
                 <th className="col_title">Rol</th>
                 <th className="col_title">Estado</th>
-                <th className="col-title"><span className="mg-l">EDITAR</span></th>
+                <th className="col-title col-last">Modificar</th>
               </tr>
             </thead>
            
@@ -24,7 +24,7 @@ const UsersTable = () => {
               return (
                 <tr className="datarow">
                 <td className="smallTD">{user.id}</td>
-                <td className="descripTD">{user.username}</td>
+                <td className="descripTD">{user.name}</td>
                 <td className="mediumTD emailrow ">{user.email}</td>
                 <td className="smallLargeTD">{user.role}</td>
                 

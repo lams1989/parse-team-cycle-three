@@ -1,6 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import "styles/pages-styles.css"
+import sellList from "media/receipt_long_white_48dp.svg"
+import checkicon from "media/done_outline_white_48dp.svg"
+import deleteicon from "media/backspace_black_48dp.svg"
 const AddOrder = () => {
   return (
     <div className="MainSection">
@@ -8,7 +11,9 @@ const AddOrder = () => {
         <span className="title"> Registro de Ventas</span>
         <Link to='/admin/ventas/listadoventas'>
         <div className="divBtnChangePage">
-          <button className="btnGeneral btnListaVentas">Ver Listado Ventas</button>
+          <button className="btnGeneral btnListaVentas">
+              <img className="btnIcon" src={sellList} alt="img"></img>
+              Ver Listado Ventas</button>
           </div>
         </Link>
       </div>
@@ -61,13 +66,13 @@ const AddOrder = () => {
         <table className="ListTable">
           <thead className="thead">
             <tr>
-              <th className="col_title">Añadir Producto</th>
+              <th className="col_title">Añadir</th>
               <th className="col_title ">ID</th>
               <th className="col_title">Descripción</th>
               <th className="col_title">Cantidad</th>
               <th className="col_title">Precio Unitario</th>
               <th className="col_title">Total</th>
-              <th className="col-title mg-l">Quitar</th>
+              <th className="col-title col-last">Quitar</th>
             </tr>
           </thead>
 
@@ -75,7 +80,8 @@ const AddOrder = () => {
           <tbody>
             <tr className="datarow">
               <td className="smallTD">
-                <button type="button" className="btnGeneral btnEdit">Añadir</button>
+                <button type="button" className="btnGeneral btnEdit">
+                <img className="btnIcon" src={checkicon}  alt="img"></img>Añadir</button>
               </td>
               <td className="smallTD">XL173</td>
               <td className="descripTD">Producto # 173 Tamaño Extragrande</td>
@@ -83,12 +89,14 @@ const AddOrder = () => {
               <td className="smallTD">$ 71.000</td>
               <td className="smallTD">$ 142.000</td>
               <td className="smallTD">
-                <button type="button" className="btnGeneral btnDelete">Quitar</button>
+                <button type="button" className="btnGeneral btnDelete">
+                <img className="btnIcon" src={deleteicon} id="btnlistOrders" alt="img"></img>Quitar</button>
               </td>
             </tr>
             <tr className="datarow ">
               <td className="smallTD">
-                <button type="button" className="btnGeneral btnEdit">Añadir</button>
+                <button type="button" className="btnGeneral btnEdit">
+                <img className="btnIcon" src={checkicon} alt="img"></img>Añadir</button>
               </td>
               <td className="smalTD "><input className="inputChange inputValue" placeholder="XL1"></input></td>
               <td className="descripTD">Producto # 1</td>
@@ -96,7 +104,8 @@ const AddOrder = () => {
               <td className="smallTD pad-b"><input className="inputChange  inputValue" placeholder="$"></input></td>
               <td className="smallTD pad-b"><input className="inputChange inputValue" placeholder="$"></input></td>
               <td className="smallTD">
-                <button type="button" className="btnGeneral btnDelete">Quitar</button>
+                <button type="button" className="btnGeneral btnDelete">
+                <img className="btnIcon" src={deleteicon} id="btnlistOrders" alt="img"></img>Quitar</button>
               </td>
             </tr>
           </tbody>
@@ -106,7 +115,7 @@ const AddOrder = () => {
         <div className="divBtnTotalOrder">
           <span className="totaltext">Total $142.000</span>
           <button className="btnBig btnAddOrder">
-            Guardar
+          <img className="btnIcon" src={checkicon}  alt="img"></img> Guardar
           </button>
           <button className=" btnBig btnCancelOrder">
             Cancelar

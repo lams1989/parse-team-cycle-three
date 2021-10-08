@@ -1,6 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import "styles/pages-styles.css"
+import search from "media/zoom_in_white_48dp.svg"
+import editicon from "media/mode_edit_white_48dp.svg"
+import sellcart from "media/sell_white_48dp.svg"
 const OrdersList = () => {
   return (
     <div className="MainSection">
@@ -8,7 +11,9 @@ const OrdersList = () => {
         <span className="title"> LISTA de Ventas</span>
         <Link to='/admin/ventas/agregarVenta'>
           <div className="divBtnChangePage">
-          <button className="btnGeneral btnListaVentas">Agregar Nueva Venta</button>
+          <button className="btnGeneral btnListaVentas">
+          <img className="btnIcon" src={sellcart} id="btnSell" alt="img"></img>
+          Agregar Nueva Venta</button>
           </div>
          
         </Link>
@@ -28,7 +33,9 @@ const OrdersList = () => {
             <option>Total Venta</option>
           </select>
           <input type="text" className="toSearchInput" placeholder="Digite el ID de la Venta" />
-          <button type="submit" className="btnGeneral btnSearchUser" id="submitUserSearchBtn">Buscar</button>
+          <button type="submit" className="btnGeneral btnSearchUser" id="submitUserSearchBtn">
+          <img className="btnIcon"  src={search} alt="img"></img> 
+            Buscar</button>
         </form>
       </div>
       <div className="listSectionContainer divOrders">
@@ -41,7 +48,7 @@ const OrdersList = () => {
               <th className="col_title">Total</th>
               <th className="col_title">Fecha Venta</th>
               <th className="col_title">Estado</th>
-              <th className="col-title mg-l">Modificar</th>
+              <th className="col-title col-last">Modificar</th>
             </tr>
           </thead>
           {/*All this data rows are examples. Later it will be implemented a function map that fills the rows*/}
@@ -54,7 +61,8 @@ const OrdersList = () => {
               <td className="smallTD">5/10/2021</td>
               <td className="smallTD pending" >En proceso</td>
               <td className="smallTD btnDviv2">
-                <button type="button" className="btnGeneral btnEdit">Modificar</button>
+                <button type="button" className="btnGeneral btnEdit">
+                <img className="btnIcon" src={editicon}  alt="img"/>   Modificar</button>
               </td>
             </tr>
             <tr className="datarow">

@@ -65,6 +65,7 @@
 /*icons*/
 .btnIcon{
   height: 20px;
+  margin-right: 2px;
 }
 
 /*buttons */
@@ -202,7 +203,7 @@
   padding-top: 10px;
   padding-bottom: 5px;
   padding-left: 10px;
-  margin: 10px 45px 30px 30px;
+  margin: 10px 45px 20px 30px;
   border: 2px solid;
   border-color: lightslategray;
 }
@@ -212,7 +213,7 @@
   background-color:var(--colorbackground1);
   display: flex;
   margin: 5px 50px 20px 30px;
-  padding: 20px 2px 0px 0px;
+  padding: 10px 2px 0px 0px;
   border-radius: 6px;
   border: 1px solid;
   border-color: gray;
@@ -260,56 +261,72 @@
 
 /*Table styles*/
 .listSectionContainer{
-display: -moz-grid;
+
 align-items: center;
 overflow-x: hidden;
 overflow-y: scroll;
 margin-left: 30px;
 margin-right: 50px;
+position: relative;
 
-background-color: white;
+border:0.5px solid black;
 
 }
 
-.divOrderslist{
-  height: 600px;
-  width: fit-content;
-}
-
-
+/*size for table in list products in new order section*/
 .divProductToAdd{
   height: 300px;
+}
+/*size for orders list*/
+.divOrderslist{
+  height: 600px;
+  
+}
+
+/*size for products list*/
+.divProducts{
+  height: 380px;
+  
+}
+
+
+/**size for user table*/
+.divUsuariosList{
+  
+  height:360px;
 }
 
 
 .ListTable{
-  
   background-color: white;
-  border-collapse:collapse;
   text-align: left; 
+  width: 100%;
   
- 
 }
-
 .thead{
+  background-color: black;
+  color:white;
+}
+.thead tr th { 
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: var(--black);
 
-  border-color: var(--btn_color);
 }
 
 .col_title{
-  padding: 10px;
+  padding: 5px;
   padding-inline: 10px;
   text-transform: uppercase;
   letter-spacing: 0.1rem;
   font-weight: 900;
-  
-  border: 1px solid gray;
-  color: var(--colortitle);
+  background-color: white;
 }
 
-.mg-l{
-  margin-left: 20px;
-  color: #1960c9;
+.col-last{
+ padding-left: 20px;
+  color: white;
 }
 .datarow{
   height: 40px;
@@ -444,9 +461,6 @@ background-color: white;
   padding:20px;
 }
 
-.editBtnContainer{
-
-}
 /*in list order section*/
 .divBtnChangePage{
   margin-bottom: 20px;

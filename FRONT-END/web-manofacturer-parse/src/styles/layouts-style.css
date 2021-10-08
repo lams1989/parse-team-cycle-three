@@ -9,6 +9,7 @@
   display: flex;
   height:100%;
   overflow-x: hidden;
+  overflow-y: hidden !important;
   padding:0px;
   width: calc(100% - var(--margin_sidebar));
   box-sizing: border-box;
@@ -31,7 +32,7 @@
     width: 100%;
     background-color: white;
     display:-moz-grid-group;
-    
+    overflow-y: hidden;
     align-content: center;
     justify-content: center;  
     

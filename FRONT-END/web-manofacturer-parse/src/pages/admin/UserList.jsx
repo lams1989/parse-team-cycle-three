@@ -1,7 +1,6 @@
 import UsersTable from 'components/UsersTable';
 import React from 'react'
 import "styles/pages-styles.css"
-import logousers from "media/group_add_black_48dp.svg"
 import useradd from "media/person_add_alt_white_48dp.svg"
 import searchuser from "media/zoom_in_white_48dp.svg"
 

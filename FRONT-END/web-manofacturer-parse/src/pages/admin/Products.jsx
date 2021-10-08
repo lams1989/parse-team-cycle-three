@@ -1,4 +1,10 @@
 import React from 'react'
+import search from "media/zoom_in_white_48dp.svg"
+import deleteicon from "media/backspace_white_48dp.svg"
+import editicon from "media/mode_edit_white_48dp.svg"
+import checkicon from "media/done_outline_white_48dp.svg"
+
+
 const Products = () => {
   return (
     <div className="MainSection">
@@ -29,7 +35,8 @@ const Products = () => {
           </li>
         </ul>
         <div className="btnDiv">
-          <button type="submit" className="btnGeneral btnCreateProduct">Registrar Producto</button>
+          <button type="submit" className="btnGeneral btnCreateProduct">
+          <img className="btnIcon" src={checkicon}  alt="img"></img>Registrar Producto</button>
           <button type="reset" className="btnGeneral btnCancel">Cancelar</button>
         </div>
       </div>
@@ -43,11 +50,11 @@ const Products = () => {
           <input type="text" className="toSearchInput" placeholder="Digite el ID del producto" />
           <span>para </span>
           <button type="submit" className="btnGeneral btnSearchUser marg-l" id="submitProductSearchBtn">
-            Buscar</button>
+          <img className="btnIcon"  src={search} alt="img"></img>  Buscar</button>
           <button type="submit" className="btnGeneral btnSearchUser marg-l" id="updateProductSearchBtn">
-            Actualizar</button>
+          <img className="btnIcon"  src={editicon} alt="img"></img>  Actualizar</button>
           <button type="submit" className="btnGeneral btnSearchUser marg-l" id="deleteProductSearchBtn">
-            Eliminar</button>
+          <img className="btnIcon"  src={deleteicon} alt="img"></img>     Eliminar</button>
         </form>
       </div>
       <div className="listSectionContainer divProducts">
