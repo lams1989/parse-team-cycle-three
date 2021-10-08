@@ -3,6 +3,7 @@ import search from "media/zoom_in_white_48dp.svg"
 import deleteicon from "media/backspace_white_48dp.svg"
 import editicon from "media/mode_edit_white_48dp.svg"
 import checkicon from "media/done_outline_white_48dp.svg"
+import ProductTable from 'components/ProductTable'
 
 
 const Products = () => {
@@ -57,57 +58,9 @@ const Products = () => {
           <img className="btnIcon"  src={deleteicon} alt="img"></img>     Eliminar</button>
         </form>
       </div>
-      <div className="listSectionContainer divProducts">
-        <table className="ListTable">
-          <thead className="thead ">
-            <tr>
-              <th className="col_title ">ID Producto</th>
-              <th className="col_title">Descripción</th>
-              <th className="col_title">Precio Unitario</th>
-              <th className="col_title">Estado</th>
-            </tr>
-          </thead>
-          {/*All this data rows are examples. Later it will be implemented a function map that fills the rows*/}
-          <tbody>
-            <tr className="datarow">
-              <td className="smallTD">173</td>
-              <td className="xlargeTD">Producto # 173 Tamaño Extragrande</td>
-              <td className="smallTD">$ 71.000</td>
-              <td className="smallTD aproved" >Disponible</td>
-            </tr>
-            <tr className="datarow">
-              <td className="smallTD">171</td>
-              <td className=" xlargeTD">Producto # 171 Tamaño Extragrande</td>
-              <td className="smallTD">$ 70.000</td>
-              <td className="smallTD denied" >No Disponible</td>
-            </tr>
-            <tr className="datarow">
-              <td className="smallTD">170</td>
-              <td className=" xlargeTD">Producto # 170 Tamaño Extragrande, grande, pequeño</td>
-              <td className="smallTD">$ 90.000</td>
-              <td className="smallTD aproved" > Disponible</td>
-            </tr>
-            <tr className="datarow">
-              <td className="smallTD">170</td>
-              <td className=" xlargeTD">Producto # 170 Tamaño Extragrande, grande, pequeño</td>
-              <td className="smallTD">$ 90.000</td>
-              <td className="smallTD aproved" > Disponible</td>
-            </tr>
-            <tr className="datarow">
-              <td className="smallTD">170</td>
-              <td className=" descrLarge">Producto # 170 Tamaño Extragrande, grande, pequeño</td>
-              <td className="smallTD">$ 90.000</td>
-              <td className="smallTD aproved" > Disponible</td>
-            </tr>
-            <tr className="datarow">
-              <td className="smallTD">170</td>
-              <td className=" descrLarge">Producto # 170 Tamaño Extragrande, grande, pequeño</td>
-              <td className="smallTD">$ 90.000</td>
-              <td className="smallLargedTD aproved" > Disponible</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      
+      <ProductTable/>
+    
     </div>
   )
 }

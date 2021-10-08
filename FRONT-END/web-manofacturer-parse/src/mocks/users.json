@@ -64,23 +64,6 @@
     "email": "carlos@email.com",
     "role": "Seller",
     "state": "Pendiente"
-  },
-  {
-    "id": "008",
-    "name": "Carlos Andres Mantilla Herrera",
-    "usernme": "carlos",
-    "password": "micd1122",
-    "email": "carlos@email.com",
-    "role": "Seller",
-    "state": "Pendiente"
-  },
-  {
-    "id": "008",
-    "name": "Carlos Andres Mantilla Herrera",
-    "usernme": "carlos",
-    "password": "micd1122",
-    "email": "carlos@email.com",
-    "role": "Seller",
-    "state": "Pendiente"
   }
+  
 ]

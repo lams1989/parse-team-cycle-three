@@ -293,7 +293,7 @@ border:0.5px solid black;
 /**size for user table*/
 .divUsuariosList{
   
-  height:360px;
+  height:370px;
 }
 
 
@@ -345,6 +345,9 @@ border:0.5px solid black;
 .pad-b{
   padding-bottom: 5px;
 }
+.numberTD{
+  width: 80px;
+}
 .smallTD{
   width: 120px;
 }
@@ -382,7 +385,7 @@ border:0.5px solid black;
   border: 1px solid gray;
   padding: 4px;
   border-radius: 8px;
-  width: 300px;
+ 
   height: 30px;
   margin-top:8px;
  margin-left: 10px;
@@ -398,7 +401,7 @@ border:0.5px solid black;
   border: 1px solid gray;
   padding: 4px;
   border-radius: 8px;
-  width: 300px;
+  
   height: 30px;
   margin-top:8px;
 
@@ -420,10 +423,14 @@ border:0.5px solid black;
 .inputLarge{
   width: 700px;
 } 
+.emailrow{
+  width: 200px;
+}
 
 .inputTotal{
   background-color: lightgray;
   height: 40px;
+  width: 300px;
 }
 
 /*other styles for specific section*/
@@ -444,10 +451,15 @@ border:0.5px solid black;
 .stateDiv{
   margin-left: 150px;
 }
-.totalLi{
-  margin-left: 170px;
+.listFields .totalLi{
+
+  margin-left: 300px;
 }
 
+.listFields .stateDiv{
+
+  margin-left: 200px;
+}
 
 /*div containers de btn*/
 
@@ -465,6 +477,9 @@ border:0.5px solid black;
 .divBtnChangePage{
   margin-bottom: 20px;
   margin-left: 1000px;
+}
+.divBtnEditRow button{
+  margin-left: 20px;
 }
 /*in add order section*/
 .divBtnTotalOrder{
