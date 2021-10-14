@@ -1,0 +1,11 @@
+{
+	"firstName" : "Carlos",
+	"lastName" : "Duque",
+	"email" : "carlos.duque@udea.edu.co",
+	"phoneNumber" : "+573003000909",
+	"address": "udea",
+	"city": "Medellin",
+	"state": "Antioquia",
+	"zipCode": "0000",
+	"country": "Colombia"
+}
