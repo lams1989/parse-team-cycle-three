@@ -4,7 +4,7 @@ import deleteicon from "media/backspace_white_48dp.svg"
 import editicon from "media/mode_edit_white_48dp.svg"
 import checkicon from "media/done_outline_white_48dp.svg"
 import ProductTable from 'components/ProductTable'
-import { createProduct} from 'utils/Api-conexion';
+import { createProduct,obtainProducts} from 'utils/Api-connection';
 
 import { ToastContainer, toast,Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -12,6 +12,28 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Products = () => {
 
+  const [listProducts, setListProducts]= useState([]);
+  const [reload, setReload]= useState(false);
+   useEffect(() => {
+    console.log(
+      'Hola, soy un use effect que se ejecuta solo una vez cuando la pagina se renderiza, para cargar la lista de productos inicial'
+    );
+     obtainProducts(
+      (response) => {
+        console.log('la respuesta que se recibio fue', response);
+        console.log(response.data);
+        setListProducts(response.data);
+        //setProducts(response.data);
+      },
+      (error) => {
+        console.error('Salio un error:', error);
+      
+      }
+    );
+    setReload(false);
+  }, [reload]);
+
+  
     const changePlaceholder= (e)=>{
       var inputSearch = document.getElementById('toSearchInput');
       if(e.target.value=="searchbyid"){
@@ -52,7 +74,8 @@ const Products = () => {
       }
     );
     
-    
+      setReload(true);
+     
 };
 
   return (
@@ -67,7 +90,7 @@ const Products = () => {
         <ul className="ulProduct">
           <li>
             <label>ID Producto</label>
-            <input  name="id" className="inputChange inputNumber " placeholder="ID"  ></input>
+            <input  name="id" className="inputChange inputNumber " placeholder="ID"  required></input>
           </li>
           <li>
             <label>Precio Unitario</label>
@@ -78,8 +101,8 @@ const Products = () => {
             <select name="state" id="selectorState"className="selectStatus"  required 
             >
               <option value="" disabled>Selecciona</option>
-              <option className="aproved" value="available">Disponible</option>
-              <option className="denied" value="notavailable">No disponible</option>
+              <option className="aproved" value="Disponible">Disponible</option>
+              <option className="denied" value="No disponible">No disponible</option>
             </select>
           </li>
           <li>
@@ -122,7 +145,7 @@ const Products = () => {
         </form>
       </div>
       
-      <ProductTable/>
+    <ProductTable listpr={listProducts}/>
     
     </div>
   )

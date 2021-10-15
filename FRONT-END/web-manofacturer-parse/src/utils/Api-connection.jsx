@@ -10,3 +10,7 @@ const options = {
 
 await axios.request(options).then(successCallback).catch(errorCallback);
 };
+export const obtainProducts = async (successCallback, errorCallback) => {
+  var options = {method: 'GET', url: 'http://localhost:3002/products/'};
+  await axios.request(options).then(successCallback).catch(errorCallback);
+};

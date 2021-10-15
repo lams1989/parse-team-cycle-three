@@ -2,7 +2,7 @@ import React from 'react'
 import products from 'mocks/products.json'
 import { nanoid } from 'nanoid'
 
-const ProductTable = () => {
+const ProductTable = ({listpr}) => {
     return (
         <div className="listSectionContainer divProducts">
         <table className="ListTable">
@@ -17,7 +17,7 @@ const ProductTable = () => {
           {/*All this data rows are examples. Later it will be implemented a function map that fills the rows*/}
           <tbody>
 
-          {products.map((product) => {
+          {listpr.map((product) => {
               return (
                 <tr  key={nanoid()} className="datarow">
                 <td className="numberTD">{product.id}</td>
