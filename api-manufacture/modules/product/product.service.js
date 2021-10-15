@@ -31,8 +31,17 @@ const { findOneAndDelete } = require('./product.model');
     }
 
     function fetchProductByDescription(productDescrip) {
-        const a= `/.*${productDescrip}.*/`
+        //const product= `/.*${productDescrip}.*/`
+        //const roleContains = new RegExp(`/.*${productDescrip}.*/`);
+        //const descripToSearch= `/.*${productDescrip}.*/`;
+        
+        const descripToSearch = new RegExp("^"+ productDescrip);
+        console.log("desc: ",descripToSearch);
+        return ProductModel.find({description:descripToSearch})
+        .exec();
+        
       return ProductModel.find({description: a})
+
         .exec();
       
     

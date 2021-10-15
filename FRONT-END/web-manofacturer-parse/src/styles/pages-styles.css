@@ -415,17 +415,15 @@ border:0.5px solid black;
  width: 40px;
 }
 .inputMedium{
-  width: 60px;
+  width: 600px;
 }
 .inputValue{
   width: 70px;
 }
 .inputLarge{
-  width: 700px;
+  width: 670px;
 } 
-.emailrow{
-  width: 200px;
-}
+
 
 .inputTotal{
   background-color: lightgray;
@@ -486,3 +484,31 @@ border:0.5px solid black;
   margin-top:20px;
   margin-left: 700px;
 }
+
+
+/**adding update section for products module*/
+
+.withupdatesection{
+  margin: 20px 45px 0px 30px;
+}
+.updateSection{
+  height: 100px;
+  background-color: var(--colorbackground1);
+  justify-content: space-between;
+  
+  margin: 0px 45px 20px 30px;
+  border: 2px solid;
+  border-color: lightslategray;
+}
+.updateProductUl{
+  list-style: none;
+  display: flex;
+ 
+}
+  .updateProductUl li{
+    display: grid;
+    margin: 10px;
+  }
+  .btnFlex{
+    display:flex;
+  }

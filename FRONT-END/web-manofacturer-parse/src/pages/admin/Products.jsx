@@ -4,7 +4,7 @@ import deleteicon from "media/backspace_white_48dp.svg"
 import editicon from "media/mode_edit_white_48dp.svg"
 import checkicon from "media/done_outline_white_48dp.svg"
 import ProductTable from 'components/ProductTable'
-import { createProduct,obtainProducts} from 'utils/Api-connection';
+import { createProduct,obtainProducts,obtainProductById,obtainProductByDescrip} from 'utils/Api-connection';
 
 import { ToastContainer, toast,Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -12,8 +12,13 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Products = () => {
 
+  const formAddProduct = useRef(null);
+  const formEditProduct= useRef(null);
+  const formSearchProduct= useRef(null);
   const [listProducts, setListProducts]= useState([]);
+  const [showUpdateSection, setShowUpdateSection] = useState(false);
   const [reload, setReload]= useState(false);
+
    useEffect(() => {
     console.log(
       'Hola, soy un use effect que se ejecuta solo una vez cuando la pagina se renderiza, para cargar la lista de productos inicial'
@@ -33,20 +38,9 @@ const Products = () => {
     setReload(false);
   }, [reload]);
 
-  
-    const changePlaceholder= (e)=>{
-      var inputSearch = document.getElementById('toSearchInput');
-      if(e.target.value=="searchbyid"){
-        
-        inputSearch.placeholder='Digita el id del producto';
-      } else{
-        inputSearch.placeholder='Digita la descripción';
-      }
-    }
+    
 
-  const formAddProduct = useRef(null);
-
-  const submitForm = (e) => {
+  const submitCreateForm = (e) => {
     e.preventDefault();
     
     const fd = new FormData(formAddProduct.current);
@@ -78,6 +72,74 @@ const Products = () => {
      
 };
 
+
+const submitFormEditProduct = (e) => {
+  e.preventDefault();
+  
+  console.log("ok");
+}
+
+const submitSearchForm = (e) => {
+  e.preventDefault();
+  
+  const fd = new FormData(formSearchProduct.current);
+  console.log(fd);
+  const searchOpt = {};
+  fd.forEach((value, key) => {
+    searchOpt[key] = value;
+  });
+  const searchby= searchOpt.searchSelect;
+  console.log("s: ",searchby);
+  const info= searchOpt.toSearchInput;
+ 
+  if(searchby=="searchbyid"){
+    if (!Number(info)){
+      toast.error("digite un ID numérico",{
+        position: "bottom-center"
+      });
+    }else{
+      console.log("serachbyid");
+      obtainProductById(info,
+        (response) => {
+          console.log('la respuesta que se recibio fue', response);
+          console.log(response.data);
+          setListProducts(response.data);
+          
+          
+          //setProducts(response.data);
+        },
+        (error) => {
+          console.error('Salio un error:', error);
+        
+        }
+      ); 
+    }
+  
+ 
+  
+} 
+else if(searchby=="searchbyDescrip"){
+  console.log("serachbydescrip");
+  obtainProductByDescrip(info,
+    (response) => {
+      console.log('la respuesta que se recibio fue', response);
+      console.log(response.data);
+      setListProducts(response.data);
+      
+      //setProducts(response.data);
+    },
+    (error) => {
+      console.error('Salio un error:', error);
+    
+    }
+  );
+   
+ 
+
+} 
+}
+
+
   return (
     <div className="MainSection">
       <div className="titlepage">
@@ -86,7 +148,7 @@ const Products = () => {
       <h2 className=" addNewSubt marg-l">Agregar Producto</h2>
       
       <div className="newOrderContainer">
-        <form ref={formAddProduct} onSubmit={submitForm} >
+        <form ref={formAddProduct} onSubmit={submitCreateForm} >
         <ul className="ulProduct">
           <li>
             <label>ID Producto</label>
@@ -94,10 +156,10 @@ const Products = () => {
           </li>
           <li>
             <label>Precio Unitario</label>
-            <input  name="unitprice"type="number" min="1" className="inputChange inputMedium" placeholder="$" required></input>
+            <input  name="unitprice"type="number" min="1" className="inputChange inputValue" placeholder="$" required></input>
           </li>
           <li>
-            <label>Estado</label>
+            <label >Estado Producto</label>
             <select name="state" id="selectorState"className="selectStatus"  required 
             >
               <option value="" disabled>Selecciona</option>
@@ -124,27 +186,65 @@ const Products = () => {
        limit={1}
        />
       
-      <div className="searchContainer  marg-l">
-        <form>
+      <div className="searchContainer withupdatesection marg-l">
+        <form ref={formSearchProduct} onSubmit={submitSearchForm} >
           <span>Selecciona </span>
-          <select id="selectorSearchBy"className="selectRole"  required onChange={ (e)=>{
-             changePlaceholder(e);
-              console.log(e.target.value);
-            }}>
+          <select name= "searchSelect" className="selectRole" required >
+            <option value="" disabled> Buscar por</option>
             <option value="searchbyid">ID Producto</option>
-            <option value= "searchbydescrip">Descripción</option>
+            <option value= "searchbyDescrip">Descripción</option>
           </select>
-          <input type="text" className="toSearchInput" id="toSearchInput"placeholder="Digita el ID del producto" />
+          
+          <input type="text" className="toSearchInput" name="toSearchInput"placeholder="Digita la info" required/>
           <span>para </span>
           <button type="submit" className="btnGeneral btnSearchUser marg-l" id="submitProductSearchBtn">
           <img className="btnIcon"  src={search} alt="img"></img>  Buscar</button>
-          <button type="submit" className="btnGeneral btnSearchUser marg-l" id="updateProductSearchBtn">
+          <button type="button" className="btnGeneral btnSearchUser marg-l" id="updateProductSearchBtn"onClick={()=>setShowUpdateSection(!showUpdateSection)}>
           <img className="btnIcon"  src={editicon} alt="img"></img>  Actualizar</button>
-          <button type="submit" className="btnGeneral btnSearchUser marg-l" id="deleteProductSearchBtn">
+          <button type="reset" className="btnGeneral btnSearchUser marg-l" id="deleteProductSearchBtn">
           <img className="btnIcon"  src={deleteicon} alt="img"></img>     Eliminar</button>
         </form>
+        <button clasName="btnBack" onClick={()=>setReload(!reload)}>Volver a tabla</button>
       </div>
-      
+
+      <form ref={formEditProduct} onSubmit={submitFormEditProduct} >
+      {showUpdateSection && (
+            <div className="updateSection">
+              <ul className="updateProductUl">
+              <li> <label>Id</label>
+              <input  name="id"type="number" min="1" className="inputChange inputValue" placeholder="$" required></input>
+              </li>
+              <li>
+            <label>Descripción</label>
+            <input name="description" type="text" className="inputChange inputMedium"  placeholder="Descripción producto" required></input>
+            </li>
+              <li> <label>Precio Unitario</label>
+              <input  name="unitprice"type="number" min="1" className="inputChange inputValue" placeholder="$" required></input>
+              </li>
+             
+          <li>
+            <label>Estado</label>
+            <select name="state" id="selectorState"className="selectStatus"  required 
+            >
+              <option value="" disabled>Selecciona</option>
+              <option className="aproved" value="Disponible">Disponible</option>
+              <option className="denied" value="No disponible">No disponible</option>
+            </select>
+          </li>
+            <li className="btnFlex">
+            <label>Guardar</label>
+              <div className="">
+              <button type="submit"className="btnGeneral btnEdit">Ok</button>
+              <button type="reset"className="btnGeneral btnDelete">X</button>
+              </div>
+            </li>
+              </ul>
+             
+
+              <p>holaaaaaaa</p>
+            </div>
+          )}
+      </form>
     <ProductTable listpr={listProducts}/>
     
     </div>

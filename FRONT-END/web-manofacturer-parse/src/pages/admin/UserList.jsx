@@ -47,7 +47,7 @@ const UserList = () => {
         </form>
       </div>
       <div className="searchContainer">
-        <form>
+        <form >
           <span>Buscar Usuario por </span>
           <select className="selectRole selectSearchUser">
             <option>Nombre</option>
