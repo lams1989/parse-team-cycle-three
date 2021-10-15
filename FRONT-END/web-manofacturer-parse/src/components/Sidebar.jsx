@@ -7,9 +7,11 @@ import products from "media/inventory_white_48dp.svg"
 import logout from "media/exit_to_app_white_48dp.svg"
 import users from "media/people_white_48dp.svg"
 import shop from "media/home_white_48dp.svg"
+import { nanoid } from 'nanoid'
+
 const Sidebar = () => {
   return (
-    <div class="sidebar">
+    <div className="sidebar">
 
       <div className="logo-details">
         <Link to='/admin'>
@@ -31,7 +33,7 @@ const Sidebar = () => {
 
         <li>
           <Link to='/admin/ventas/listadoventas'>
-            <a >
+            <a>
               <img className="iconSidebar" src={sellList} id="btnlistOrders" alt="img"></img>
               <span className="links_name">Listado de Ventas</span>
             </a>

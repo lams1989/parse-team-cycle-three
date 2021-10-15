@@ -1,5 +1,6 @@
 import React from 'react'
 import products from 'mocks/products.json'
+import { nanoid } from 'nanoid'
 
 const ProductTable = () => {
     return (
@@ -18,7 +19,7 @@ const ProductTable = () => {
 
           {products.map((product) => {
               return (
-                <tr className="datarow">
+                <tr  key={nanoid()} className="datarow">
                 <td className="numberTD">{product.id}</td>
                 <td className="descripTD">{product.description}</td>
                 <td className="smallTD">$ {product.unitprice}</td>

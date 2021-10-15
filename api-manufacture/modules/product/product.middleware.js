@@ -64,7 +64,6 @@
 
     function getProductByDescription(req, res, next) {
         ProductService.fetchProductByDescription(req.params.productDescrip)
-      
             .then(success)
             .catch(failure);
 
