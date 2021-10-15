@@ -1,3 +1,5 @@
+const { findOneAndDelete } = require('./product.model');
+
 (function () {
     'use strict';
 
@@ -5,6 +7,8 @@
         createProduct: createProduct,
         fetchProducts: fetchProducts,
         fetchProductById: fetchProductById,
+        fetchProductByDescription:fetchProductByDescription,
+        updatePartOfProduct:updatePartOfProduct,
         updateProduct: updateProduct,
         deleteProduct: deleteProduct
     };
@@ -21,20 +25,40 @@
     }
 
     function fetchProductById(productId) {
-        return ProductModel.findById(productId)
+       
+        return ProductModel.find({id:productId})
+        .exec();
+    }
+
+    function fetchProductByDescription(productDescrip) {
+        const a= `/.*${productDescrip}.*/`
+      return ProductModel.find({description: a})
+        .exec();
+      
+    
+    }
+
+    function updatePartOfProduct(productId, product) {
+      return ProductModel.findByIdAndUpdate(productId, product,{new:true})
             .exec();
     }
 
     function updateProduct(productId, product) {
-        return ProductModel
-            .findByIdAndUpdate(productId, product, {new: true})
+        return ProductModel.findByIdAndUpdate(productId, product, {new: true})
             .exec();
     }
 
-    function deleteProduct(productId) {
+   /* function deleteProduct(productId) {
+        
         return ProductModel
-            .findByIdAndRemove(productId)
+            //.findByIdAndRemove(productId)
+            findOneAndDelete({id:productId})
             .exec();
+    }*/
+
+    function deleteProduct(productId) {
+        ProductModel.findOneAndDelete({id: productId })
+        .exec();
     }
 
 })();

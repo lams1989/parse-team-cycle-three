@@ -18,13 +18,13 @@
             res.status(200).json(req.response);
         });
 
-    router.get('/:OrderId',
+    router.get('/:orderId',
         OrderMiddleware.getOrderById,
         function (req, res) {
             res.status(200).json(req.response);
         });
 
-    router.put('/:OrderId',
+    router.put('/:orderId',
         OrderMiddleware.modifyOrder,
         function (req, res) {
             res.status(200).json(req.response);

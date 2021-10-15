@@ -4,6 +4,10 @@
     var Schema = mongoose.Schema;
 
     var UserSchema = new Schema({
+        idUser:{
+            type:Number,
+            required:true
+        },
         name: {
             type: String,
             required: true

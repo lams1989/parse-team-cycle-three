@@ -18,13 +18,24 @@
             res.status(200).json(req.response);
         });
 
-    router.get('/:ProductId',
+    router.get('/:productId',
         ProductMiddleware.getProductById,
         function (req, res) {
             res.status(200).json(req.response);
         });
 
-    router.put('/:ProductId',
+        router.get('/d/:productDescrip',
+        ProductMiddleware.getProductByDescription,
+        function (req, res) {
+            res.status(200).json(req.response);
+        });
+
+        router.patch('/:productId',
+        ProductMiddleware.modifyPartOfProduct,
+        function (req, res) {
+            res.status(200).json(req.response);
+        });
+    router.put('/:productId',
         ProductMiddleware.modifyProduct,
         function (req, res) {
             res.status(200).json(req.response);

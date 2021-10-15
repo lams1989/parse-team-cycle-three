@@ -5,7 +5,9 @@
         addProduct: addProduct,
         getProducts: getProducts,
         getProductById: getProductById,
+        getProductByDescription: getProductByDescription,
         modifyProduct: modifyProduct,
+        modifyPartOfProduct:modifyPartOfProduct,
         removeProduct: removeProduct
     };
 
@@ -46,13 +48,29 @@
     }
 
     function getProductById(req, res, next) {
-
         ProductService.fetchProductById(req.params.productId)
+        .then(success)
+        .catch(error);
+
+    function success(data) {
+        req.response = data;
+        next();
+    }
+
+    function error(err) {
+        next(err);
+    }
+    }
+
+    function getProductByDescription(req, res, next) {
+        ProductService.fetchProductByDescription(req.params.productDescrip)
+      
             .then(success)
             .catch(failure);
 
         function success(data) {
             req.response = data;
+            console.log(data)
             next();
         }
 
@@ -77,6 +95,20 @@
         }
     }
 
+    function modifyPartOfProduct(req, res, next) {
+        ProductService.updatePartOfProduct(req.params.productId, req.body)
+            .then(success)
+            .catch(error);
+
+        function success(data) {
+            req.response = data;
+            next();
+        }
+
+        function error(err) {
+            next(err);
+        }
+    }
     function removeProduct(req, res, next) {
 
         ProductService.deleteProduct(req.params.productId)

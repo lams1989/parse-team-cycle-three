@@ -5,6 +5,10 @@
         addUser: addUser,
         getUsers: getUsers,
         getUserById: getUserById,
+        getUserByName: getUserByName,
+        getUserByEmail: getUserByEmail,
+        getUserByRole: getUserByRole,
+        getUserByState: getUserByState,
         modifyUser: modifyUser,
         removeUser: removeUser
     };
@@ -62,6 +66,71 @@
 
     }
 
+    
+    function getUserByName(req, res, next) {
+
+        UserService.fetchUserByName(req.params.userName)
+            .then(success)
+            .catch(failure);
+
+        function success(data) {
+            req.response = data;
+            next();
+        }
+
+        function failure(err) {
+            next(err);
+        }
+
+    }
+    function getUserByEmail(req, res, next) {
+
+        UserService.fetchUserByEmail(req.params.userEmail)
+            .then(success)
+            .catch(failure);
+
+        function success(data) {
+            req.response = data;
+            next();
+        }
+
+        function failure(err) {
+            next(err);
+        }
+
+    }
+    function getUserByRole(req, res, next) {
+
+        UserService.fetchUserByRole(req.params.userRole)
+            .then(success)
+            .catch(failure);
+
+        function success(data) {
+            req.response = data;
+            next();
+        }
+
+        function failure(err) {
+            next(err);
+        }
+
+    }
+    function getUserByState(req, res, next) {
+
+        UserService.fetchUserByState(req.params.userState)
+            .then(success)
+            .catch(failure);
+
+        function success(data) {
+            req.response = data;
+            next();
+        }
+
+        function failure(err) {
+            next(err);
+        }
+
+    }
     function modifyUser(req, res, next) {
         UserService.updateUser(req.params.userId, req.body)
             .then(success)
@@ -83,8 +152,8 @@
             .then(success)
             .catch(error);
 
-        function success(data) {
-            req.response = data;
+        function success() {
+            req.response = "deleled user";
             next();
         }
 
