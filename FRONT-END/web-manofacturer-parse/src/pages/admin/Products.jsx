@@ -27,7 +27,7 @@ const Products = () => {
         console.log('la respuesta que se recibio fue', response);
         console.log(response.data);
         setListProducts(response.data);
-        //setProducts(response.data);
+       
       },
       (error) => {
         console.error('Salio un error:', error);
@@ -196,10 +196,10 @@ else if(searchby=="searchbyDescrip"){
           <span>para </span>
           <button type="submit" className="btnGeneral btnSearchUser marg-l" id="submitProductSearchBtn" >
           <img className="btnIcon"  src={search} alt="img"></img>  Buscar</button>
-          <button type="button" className="btnGeneral btnSearchUser marg-l" id="updateProductSearchBtn"onClick={()=>setShowUpdateSection(!showUpdateSection)}>
+          {/*<button type="button" className="btnGeneral btnSearchUser marg-l" id="updateProductSearchBtn"onClick={()=>setShowUpdateSection(!showUpdateSection)}>
           <img className="btnIcon"  src={editicon} alt="img"></img>  Actualizar</button>
           <button type="reset" className="btnGeneral btnSearchUser marg-l" id="deleteProductSearchBtn">
-          <img className="btnIcon"  src={deleteicon} alt="img"></img>     Eliminar</button>
+          <img className="btnIcon"  src={deleteicon} alt="img"></img>     Eliminar</button>*/}
         </form>
         <button clasName="btnBack" onClick={()=>setReload(!reload)}>Volver a tabla</button>
       </div>

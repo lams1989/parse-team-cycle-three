@@ -6,29 +6,12 @@ const ProductTable = ({listpr}) => {
   
   
   
-  
-{/*
-const formEditProduct= useRef(null);
-const submitFormEditProduct = (e) => {
-    e.preventDefault();
-    
-    const fd = new FormData(formEditProduct.current);
-    console.log(fd.id);
-    const editProduct = {};
-    fd.forEach((value, key) => {
-      editProduct[key] = value;
-    });
-    console.log(editProduct);
-    console.log("ok");
-  }
-*/}
-
   const RowProduct=({product})=>{
 
     const [editable, setEditable] = useState(false);
-    const [editState, setEditState] = useState("");
-    const [editUnitprice, setEditUnitprice] = useState(1);
-    const [editDescrip, setEditDescrip ]= useState("");
+    const [editState, setEditState] = useState(product.state);
+    const [editUnitprice, setEditUnitprice] = useState(product.unitprice);
+    const [editDescrip, setEditDescrip ]= useState(product.description);
 
     const updateProduct = (e) => {
       
@@ -94,7 +77,6 @@ const submitFormEditProduct = (e) => {
               
             </tr>
           </thead>
-          {/*All this data rows are examples. Later it will be implemented a function map that fills the rows*/}
           <tbody>
 
           {listpr.map((productObj) => {
