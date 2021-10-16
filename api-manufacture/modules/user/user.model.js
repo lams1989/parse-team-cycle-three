@@ -4,7 +4,7 @@
     var Schema = mongoose.Schema;
 
     var UserSchema = new Schema({
-        idUser:{
+        id:{
             type:Number,
             required:true
         },
@@ -17,8 +17,7 @@
             required: true
         },
         password: {
-            type: String,
-            required: true
+            type: String
         },
         role: {
             type: String,

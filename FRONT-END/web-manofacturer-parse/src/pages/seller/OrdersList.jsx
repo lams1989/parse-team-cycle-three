@@ -7,7 +7,7 @@ import OrdersTable from 'components/OrdersTable';
 const OrdersList = () => {
   return (
     <div className="MainSection">
-      <div classNameName="titlepage">
+      <div className="titlepage">
         <span className="title"> LISTA de Ventas</span>
         <Link to='/admin/ventas/agregarVenta'>
           <div className="divBtnChangePage">

@@ -7,7 +7,7 @@ import deleteicon from "media/backspace_black_48dp.svg"
 const AddOrder = () => {
   return (
     <div className="MainSection">
-      <div classNameName="titlepage">
+      <div className="titlepage">
         <span className="title"> Registro de Ventas</span>
         <Link to='/admin/ventas/listadoventas'>
         <div className="divBtnChangePage">

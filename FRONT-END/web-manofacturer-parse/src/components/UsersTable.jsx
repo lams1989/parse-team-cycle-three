@@ -1,9 +1,8 @@
-import listUsers from 'mocks/users.json'
 import deleteuser from "media/person_remove_black_48dp.svg"
 import edituser from "media/manage_accounts_white_24dp.svg"
 
 
-const UsersTable = () => {
+const UsersTable = ({listpr}) => {
     return (
         <div className="listSectionContainer divUsuariosList">
         <table className="ListTable">
@@ -20,7 +19,7 @@ const UsersTable = () => {
            
             <tbody>
           
-              {listUsers.map((user) => {
+              {listpr.map((user) => {
               return (
                 <tr className="datarow">
                 <td className="numberTD">{user.id}</td>
