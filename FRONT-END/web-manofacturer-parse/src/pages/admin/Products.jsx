@@ -13,12 +13,10 @@ import 'react-toastify/dist/ReactToastify.css';
 const Products = () => {
 
   const formAddProduct = useRef(null);
-  const formEditProduct= useRef(null);
   const formSearchProduct= useRef(null);
   const [listProducts, setListProducts]= useState([]);
   const [showUpdateSection, setShowUpdateSection] = useState(false);
   const [reload, setReload]= useState(false);
-  const [userFetchedbyId, setUserFetchedbyId]= useState(null);
 
    useEffect(() => {
     console.log(
@@ -76,14 +74,7 @@ const Products = () => {
 };
 
 
-const submitFormEditProduct = (e) => {
-  e.preventDefault();
-  
-  const fd = new FormData(formSearchProduct.current);
-  console.log(fd.id);
-  
-  console.log("ok");
-}
+
 
 const submitSearchForm = (e) => {
   e.preventDefault();
@@ -201,7 +192,7 @@ else if(searchby=="searchbyDescrip"){
             <option value= "searchbyDescrip">Descripción</option>
           </select>
           
-          <input type="text" className="toSearchInput" name="toSearchInput"  placeholder="Digita la info" required/>
+          <input type="text" className="toSearchInput" name="toSearchInput" placeholder="Digita la info" required/>
           <span>para </span>
           <button type="submit" className="btnGeneral btnSearchUser marg-l" id="submitProductSearchBtn" >
           <img className="btnIcon"  src={search} alt="img"></img>  Buscar</button>
@@ -213,14 +204,14 @@ else if(searchby=="searchbyDescrip"){
         <button clasName="btnBack" onClick={()=>setReload(!reload)}>Volver a tabla</button>
       </div>
 
-      <form ref={formEditProduct} onSubmit={submitFormEditProduct} >
+     {/**  <form ref={formEditProduct} onSubmit={submitFormEditProduct} >
       {
       showUpdateSection && (
             <div className="updateSection">
               <ul className="updateProductUl">
               <li>
               <label>ID</label>
-              <input  name="id"type="number" min="1" className="inputChange inputValue" placeholder="Id" ></input>
+              <input  name="id"type="number" min="1" className="inputChange inputValue" placeholder="Id" disabled></input>
               </li>
               <li>
                 
@@ -253,6 +244,7 @@ else if(searchby=="searchbyDescrip"){
             </div>
           )}
       </form>
+      */}
     <ProductTable listpr={listProducts}/>
     
     </div>
