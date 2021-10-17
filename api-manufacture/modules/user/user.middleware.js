@@ -26,7 +26,6 @@
         function failure(error) {
             next(error);
         }
-
     };
 
     function getUsers(req, res, next) {
@@ -40,7 +39,6 @@
         function failure(err) {
             next(err);
         }
-
     };
 
     function getUserById(req, res, next) {
@@ -54,7 +52,6 @@
         function error(err) {
             next(err);
         }
-
     };
 
     function getUserByName(req, res, next) {
@@ -68,7 +65,6 @@
         function failure(err) {
             next(err);
         }
-
     };
 
     function getUserByEmail(req, res, next) {
@@ -82,7 +78,6 @@
         function failure(err) {
             next(err);
         }
-
     };
 
     function getUserByRole(req, res, next) {
@@ -96,7 +91,6 @@
         function failure(err) {
             next(err);
         }
-
     };
 
     function getUserByState(req, res, next) {
@@ -110,11 +104,10 @@
         function failure(err) {
             next(err);
         }
-
     };
 
     function modifyUser(req, res, next) {
-        UserService.updateUser(req.params.id, req.body)
+        UserService.updateUser(req.params.userId, req.body)
             .then(success)
             .catch(error);
         function success(data) {

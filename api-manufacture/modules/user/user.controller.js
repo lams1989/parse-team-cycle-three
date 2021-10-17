@@ -47,7 +47,7 @@
             res.status(200).json(req.response);
         });
 
-    router.put('/:d',
+    router.patch('/upd/:userId',
         UserMiddleware.modifyUser,
         function (req, res) {
             res.status(200).json(req.response);
