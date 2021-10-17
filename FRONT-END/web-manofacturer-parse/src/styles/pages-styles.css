@@ -3,8 +3,9 @@
 :root{
   --colortitle:#1960c9;
   --colorbackground1:whitesmoke;
-  --btn_color:#3880ec;
+  --btn_color:#0d6efd;
   --black:#363b41;
+  --hover_blue: #3880ec;
 }
 
 /*main page container style*/
@@ -99,13 +100,13 @@
 }
 
 .btnCreateProduct:hover{
-  background:#0d6efd;
+  background:var(--hover_blue);
 }
 .btnCreateProduct{
   margin-bottom: 10px;
 }
 btnCreateUser,.btnCreateProduct:hover{
-  background:#0d6efd;
+  background:var(--hover_blue);
 }
 .btnCancel{
   font-size: 14px;
@@ -121,7 +122,7 @@ btnCreateUser,.btnCreateProduct:hover{
   margin-right: 10px;
 }
 .btnEdit:hover{
-  background:#0d6efd;
+  background:var(--hover_blue);
 }
 .btnEdit{
   font-size:small;
@@ -162,7 +163,7 @@ btnCreateUser,.btnCreateProduct:hover{
   
 }
 .btnAddOrder:hover{
-  background:#0d6efd;
+  background:var(--hover_blue);
 }
 .btnCancelOrder{
   background-color:lightgray;
@@ -216,9 +217,10 @@ btnCreateUser,.btnCreateProduct:hover{
   padding-top: 10px;
   padding-bottom: 5px;
   padding-left: 10px;
-  margin: 10px 45px 20px 30px;
+  margin: 10px 50px 20px 30px;
   border: 2px solid;
   border-color: lightslategray;
+  
 }
 
 /*Styles for html elements in the section of adding new  information*/
@@ -230,6 +232,7 @@ btnCreateUser,.btnCreateProduct:hover{
   border-radius: 6px;
   border: 1px solid;
   border-color: gray;
+  
 }
 
 /* ul  userlist section*/
@@ -282,8 +285,9 @@ margin-left: 30px;
 margin-right: 50px;
 position: relative;
 
-border:0.5px solid black;
+border:0.5px solid gray;
 
+box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
 }
 
 /*size for table in list products in new order section*/
@@ -342,7 +346,7 @@ border:0.5px solid black;
   color: white;
 }
 .datarow{
-  height: 40px;
+  height:50px;
   width: 100%;
   
   background-color: white;
@@ -374,8 +378,7 @@ border:0.5px solid black;
   
 }
 .descripTD{
-  width: 500px;
-  
+  width: 620px;
 }
 
 .xlargeTD{
@@ -429,12 +432,18 @@ border:0.5px solid black;
 }
 .inputMedium{
   width: 600px;
+ 
+  
+}
+.inputMedium text{
+  overflow-wrap: break-word;
 }
 .inputValue{
   width: 70px;
 }
 .inputLarge{
   width: 670px;
+
 } 
 
 
@@ -456,6 +465,8 @@ border:0.5px solid black;
   padding-top: 7px;
   margin-left: 30px;
   margin-right: 50px;
+  
+  
 }
 
 
@@ -530,13 +541,14 @@ border:0.5px solid black;
     justify-items: center;
     display: grid;
     padding: 20px;
-    height: 150px;
+    height: 200px;
     width: 500px;
-    font-size: 20px;
+    font-size: 16px;
+    border-radius: 8px;
   }
 
   .editBtnContainer {
-  
+    width: 120px;
     align-items: center;
     padding-left: 15px;
     
@@ -545,7 +557,7 @@ border:0.5px solid black;
   .editBtnContainer2 {
     display: flex;
     align-items: center;
-   margin:15px;
+   margin:5px;
 
   }
   
@@ -556,3 +568,34 @@ border:0.5px solid black;
     height: 40px;
     width: 45px;
   }
+
+  .dialogUpdate{
+   
+    justify-items: center;
+    display: grid;
+    padding: 20px;
+    height: 300px;
+    width: 500px;
+    font-size: 16px;
+  }
+  .infoToUpdateDiv{
+  
+  display: grid;
+  justify-items: center;
+  width: 300px;
+  
+  }
+  .pLarge{
+    width: 400px;
+    overflow-wrap: break-word;
+  }
+  .pRowLarge{
+    width: 500px;
+    overflow-wrap: break-word;
+  }
+
+  input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}

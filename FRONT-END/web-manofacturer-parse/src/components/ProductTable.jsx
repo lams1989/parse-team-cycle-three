@@ -15,6 +15,7 @@ const ProductTable = ({listpr}) => {
     const [editUnitprice, setEditUnitprice] = useState(product.unitprice);
     const [editDescrip, setEditDescrip ]= useState(product.description);
     const [confirmDeleteDialog, setConfirmDeleteDialog] = useState(false);
+    const [confirmUpdateDialog, setConfirmUpdateDialog] = useState(false);
     
     const updateProduct = async () => {
       console.log("id: ",product.id);
@@ -23,19 +24,17 @@ const ProductTable = ({listpr}) => {
       console.log("desc",editDescrip);
       console.log("unitpr",editUnitprice);
     
-      const dataToUpdate= {
-      "description":editDescrip,
-       "unitprice":editUnitprice,
-       "state":editState
-      }
-    
+      
+      setConfirmUpdateDialog(false);
       await updateProductInfo(
+        
         product._id, 
         {"description":editDescrip,
         "unitprice":editUnitprice,
         "state":editState},
         (response) => {
           console.log(response.data);
+          
           toast.success('Producto modificado con éxito');
           
         },
@@ -73,12 +72,13 @@ const ToDeleteProduct = async () => {
       <tr  className="datarow">
         {editable ? (
           <>
-       <td className="numberTD"><input  className="inputChange inputValue"  type="number" defaultValue={product.id} disabled ></input></td>
-      <td className="descripTD"><input className="inputChange inputMedium"  type="text" defaultValue={product.description} onChange={(e) => {
+          <td className="numberTD"><label  >{product.id}</label></td>
+       {/*<td className="numberTD"><input  className="inputChange inputValue"  type="number" defaultValue={product.id} disabled  ></input></td>*/}
+      <td className="descripTD"><input className="inputChange inputMedium "  type="text" maxlength="200" defaultValue={product.description} onChange={(e) => {
           setEditDescrip(e.target.value);
         }}></input></td>
       <td className="smallTD"><input className="inputChange inputValue" type="number" min="0"defaultValue={product.unitprice} onChange={(e)=>setEditUnitprice(e.target.value)}></input></td>
-      <td className="smallTD "><select  className="selectStatus"  defaultValue= {product.state} required onChange={(e)=>setEditState(e.target.value)}>
+      <td className="smallLargeTD "><select  className="selectStatus"  defaultValue= {product.state} required onChange={(e)=>setEditState(e.target.value)}>
               <option value="" disabled>Selecciona</option>
               <option className="aproved" value="Disponible">Disponible</option>
               <option className="denied" value="No disponible">No disponible</option>
@@ -87,9 +87,9 @@ const ToDeleteProduct = async () => {
         ):(
           <>
           <td className="numberTD">{product.id}</td>
-      <td className="descripTD">{product.description}</td>
+      <td className="descripTD"><p className="pRowLarge">{product.description}</p></td>
       <td className="smallTD">$ {product.unitprice}</td>
-      <td className="smallTD ">{product.state}</td> 
+      <td className="smallLargeTD ">{product.state}</td> 
       </>
         )
         }
@@ -99,7 +99,7 @@ const ToDeleteProduct = async () => {
                   {editable? 
                   <>
                   <Tooltip title='GUARDAR' arrow placement="left" >
-                  <button type="submit" className="btnGeneral btnEdit"   onClick={() => updateProduct()}><i className="fas fa-save"></i>  </button></Tooltip> 
+                  <button type="submit" className="btnGeneral btnEdit"   onClick={() => setConfirmUpdateDialog(true)}><i className="fas fa-save"></i>  </button></Tooltip> 
                   <Tooltip title='Cancelar' arrow placement="right">
                      <button type="reset" className="btnGeneral btnDelete"  onClick={() => setEditable(!editable)}>  <i class="fas fa-ban"></i></button></Tooltip> 
                   
@@ -114,15 +114,23 @@ const ToDeleteProduct = async () => {
                   
 
 
- <Dialog open={confirmDeleteDialog}>
-  <div className="dialogDelete">
+ <Dialog open={confirmUpdateDialog}>
+  <div className="dialogUpdate">
     
-<h5>¿Está seguro de eliminar este producto?</h5>
-<span> ID: {product.id} - {product.description}</span>
+<h5>Actualización del producto:</h5>
+
+<div className="infoUpdateDiv">
+<p align="center"> ID: {product.id}      --    Estado: {editState}</p>
+<p className="pLarge" align="center">Descripción: {editDescrip}</p>
+<p align="center"> Precio Unitario: {editUnitprice}   </p>
+
+</div>
+
 <div className="editBtnContainer2">
-  <button type="button" className="btnGeneral btnEdit"  onClick={() => ToDeleteProduct()} >Si</button>
-  <button type="reset" className="btnGeneral btnDelete" onClick={() => setConfirmDeleteDialog(false)} >No</button>
-</div> 
+  <button type="button" className="btnGeneral btnEdit"   onClick={() => updateProduct()} >Si</button>
+  <button type="reset" className="btnGeneral btnDelete" onClick={() => setConfirmUpdateDialog(false)} >No</button> 
+</div>
+
  </div>
 </Dialog>                  
 
@@ -130,7 +138,9 @@ const ToDeleteProduct = async () => {
   <div className="dialogDelete">
     
 <h5>¿Está seguro de eliminar este producto?</h5>
-<span> ID: {product.id} - {product.description}</span>
+<p align="center">Id: {product.id}  </p>
+<p className="pLarge" align="center"> {product.description}  </p>
+
 <div className="editBtnContainer2">
   <button type="button" className="btnGeneral btnEdit"  onClick={() => ToDeleteProduct()} >Si</button>
   <button type="reset" className="btnGeneral btnDelete" onClick={() => setConfirmDeleteDialog(false)} >No</button>

@@ -161,7 +161,7 @@ else if(searchby=="searchbyDescrip"){
           </li>
           <li>
             <label>Descripción</label>
-            <input name="description" type="text" className="inputChange inputLarge"  placeholder="Descripción producto" required></input>
+            <input name="description" type="text" className="inputChange inputLarge"  placeholder="Descripción producto" required maxLength="200"></input>
           </li>
         </ul>
         <div className="btnDiv">
@@ -193,7 +193,7 @@ else if(searchby=="searchbyDescrip"){
           <img className="btnIcon"  src={search} alt="img"></img>  Buscar</button>
         
         </form>
-        <button className="btnBack" onClick={()=>setReload(!reload)}>Volver a tabla</button>
+        <button className="btnBack btnDelete" onClick={()=>setReload(!reload)}>Volver a tabla</button>
       </div>
 
      
