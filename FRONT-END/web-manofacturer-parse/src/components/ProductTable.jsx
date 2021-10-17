@@ -1,7 +1,8 @@
 
 import { nanoid } from 'nanoid'
 import React, { useEffect, useState, useRef } from 'react';
-
+import { ToastContainer, toast,Zoom } from 'react-toastify';
+import { updateProductInfo ,deleteProduct} from 'utils/Api-connection';
 const ProductTable = ({listpr}) => {
   
   
@@ -14,11 +15,76 @@ const ProductTable = ({listpr}) => {
     const [editDescrip, setEditDescrip ]= useState(product.description);
 
     const updateProduct = (e) => {
-      
+      console.log("id: ",product.id);
+      console.log("_id: ",product._id);
       console.log("state",editState);
       console.log("desc",editDescrip);
       console.log("unitpr",editUnitprice);
+    
+      const dataToUpdate= {
+      "description":editDescrip,
+       "unitprice":editUnitprice,
+       "state":editState
+      }
+    
+      updateProductInfo(
+        product._id, 
+        {"description":editDescrip,
+        "unitprice":editUnitprice,
+        "state":editState},
+        (response) => {
+          console.log(response.data);
+          toast.success('Producto modificado con éxito');
+        },
+        (error) => {
+          console.error(error);
+          toast.error('Error modificando un producto');
+        }
+       
+      );
+      setEditable(false);
+    };
+
+    
+   {/* const ToDeleteProduct = async (e) => {
+
+      console.log("delete product, ",product._id);
+    
+  
+   await   deleteProduct(
+      product._id,
+      (response) => {
+        console.log(response.data);
+        toast.success('Producto eliminado con éxito');
+      
+      },
+      (error) => {
+        console.error(error);
+        toast.error('Error eliminando el producto');
+      }
+    );
+
+ 
+};
+*/}
+const ToDeleteProduct = async () => {
+
+  await deleteProduct(
+    product._id,
+    (response) => {
+      console.log(response.data);
+      toast.success('producto eliminado con éxito');
+      
+    },
+    (error) => {
+      console.error(error);
+      toast.error('Error eliminando el producto');
     }
+  );
+  
+}
+
+
     return (
       <tr  className="datarow">
         {editable ? (
@@ -27,7 +93,7 @@ const ProductTable = ({listpr}) => {
       <td className="descripTD"><input className="inputChange inputMedium"  type="text" defaultValue={product.description} onChange={(e) => {
           setEditDescrip(e.target.value);
         }}></input></td>
-      <td className="smallTD"><input className="inputChange inputValue" type="text" defaultValue={product.unitprice} onChange={(e)=>setEditUnitprice(e.target.value)}></input></td>
+      <td className="smallTD"><input className="inputChange inputValue" type="number" min="0"defaultValue={product.unitprice} onChange={(e)=>setEditUnitprice(e.target.value)}></input></td>
       <td className="smallTD "><select  className="selectStatus"  defaultValue= {product.state} required onChange={(e)=>setEditState(e.target.value)}>
               <option value="" disabled>Selecciona</option>
               <option className="aproved" value="Disponible">Disponible</option>
@@ -54,7 +120,7 @@ const ProductTable = ({listpr}) => {
                   :(
                     <>
                     <button type="button" className="btnGeneral btnEdit"   onClick={() => setEditable(!editable)}> <i className="fas fa-edit"></i> </button>
-                    <button type="reset" className="btnGeneral btnDelete">  <i className="fas fa-trash-alt"></i></button>
+                    <button type="reset" className="btnGeneral btnDelete" onClick={() => ToDeleteProduct()}>  <i className="fas fa-trash-alt"></i></button>
                   </>)}
                   </div>
                 </td>
@@ -89,6 +155,13 @@ const ProductTable = ({listpr}) => {
           </tbody>
         </table>
       
+        <ToastContainer rtl
+       position="top-center"
+       autoClose={2000}
+       transition={Zoom}
+       limit={1}
+       />
+
       </div>
 
      

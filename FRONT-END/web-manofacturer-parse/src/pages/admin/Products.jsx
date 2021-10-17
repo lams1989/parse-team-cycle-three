@@ -201,7 +201,7 @@ else if(searchby=="searchbyDescrip"){
           <button type="reset" className="btnGeneral btnSearchUser marg-l" id="deleteProductSearchBtn">
           <img className="btnIcon"  src={deleteicon} alt="img"></img>     Eliminar</button>*/}
         </form>
-        <button clasName="btnBack" onClick={()=>setReload(!reload)}>Volver a tabla</button>
+        <button className="btnBack" onClick={()=>setReload(!reload)}>Volver a tabla</button>
       </div>
 
      {/**  <form ref={formEditProduct} onSubmit={submitFormEditProduct} >
