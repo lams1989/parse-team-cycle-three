@@ -8,6 +8,7 @@ import { createProduct,obtainProducts,obtainProductById,obtainProductByDescrip} 
 import searchIcon from "media/zoom_in_white_48dp.svg"
 import { ToastContainer, toast,Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ReloadProductsContext } from 'context/ReloadProducts';
 
 const Products = () => {
 
@@ -107,6 +108,7 @@ else if(searchby=="searchbyDescrip"){
 }
   return (
     <div className="MainSection">
+      <ReloadProductsContext.Provider  value={{ reload, setReload }}>
       <div className="titlepage">
         <span className="title"> Lista de Productos</span>
       </div>
@@ -166,6 +168,7 @@ else if(searchby=="searchbyDescrip"){
         <button className="btnBack btnDelete" onClick={()=>setReload(!reload)}>Volver a tabla</button>
       </div>
     <ProductTable listpr={listProducts}/>
+    </ReloadProductsContext.Provider>
     </div>
   )
 }
