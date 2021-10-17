@@ -1,3 +1,4 @@
+const productModel = require('./product.model');
 const { findOneAndDelete } = require('./product.model');
 
 (function () {
@@ -47,14 +48,16 @@ const { findOneAndDelete } = require('./product.model');
     
     }
 
-    function updatePartOfProduct(productId, product) {
-      return ProductModel.findByIdAndUpdate(productId, product,{new:true})
+    function updatePartOfProduct(product_Id, product) {
+        console.log("productid:",product_Id);
+        console.log("product:",product);
+        return ProductModel.findByIdAndUpdate(product_Id, product, {new: true})
             .exec();
     }
 
-    function updateProduct(productId, product) {
-        return ProductModel.findByIdAndUpdate(productId, product, {new: true})
-            .exec();
+    function updateProduct(product_Id, product) {
+         return ProductModel.findByIdAndUpdate(product_Id, product, {new: true})
+         .exec();  
     }
 
    /* function deleteProduct(productId) {
@@ -65,9 +68,10 @@ const { findOneAndDelete } = require('./product.model');
             .exec();
     }*/
 
-    function deleteProduct(productId) {
-        ProductModel.findOneAndDelete({id: productId })
-        .exec();
+    function deleteProduct(product_Id) {
+      
+       return ProductModel.findByIdAndRemove(product_Id)
+       .exec();
     }
 
 })();

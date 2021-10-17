@@ -30,7 +30,7 @@
             res.status(200).json(req.response);
         });
 
-        router.patch('/:productId',
+        router.patch('/upd/:productId',
         ProductMiddleware.modifyPartOfProduct,
         function (req, res) {
             res.status(200).json(req.response);

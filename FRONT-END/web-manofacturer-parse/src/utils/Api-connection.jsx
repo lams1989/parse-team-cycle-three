@@ -26,6 +26,25 @@ export const obtainProductByDescrip = async (descrip, successCallback, errorCall
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
 
+
+
+export const updateProductInfo = async (id, dataToUpdate, successCallback, errorCallback) => {
+  var options = {
+    method: 'PATCH',
+    url: `http://localhost:3001/products/upd/${id}/`,
+    headers: {'Content-Type': 'application/json'},
+    data: dataToUpdate
+  };
+  console.log(options);
+  await axios.request(options).then(successCallback).catch(errorCallback);
+};
+
+
+export const deleteProduct = async (id, successCallback, errorCallback) => {
+  var options = { method: 'DELETE', url: `http://localhost:3001/products/${id}`, headers: { 'Content-Type': 'application/json' } };
+  await axios.request(options).then(successCallback).catch(errorCallback);
+};
+
 export const createUser = async (data, successCallback, errorCallback) => {
   var options = {
     method: 'POST',

@@ -15,14 +15,13 @@ const Products = () => {
   const formAddProduct = useRef(null);
   const formSearchProduct= useRef(null);
   const [listProducts, setListProducts]= useState([]);
-  const [showUpdateSection, setShowUpdateSection] = useState(false);
   const [reload, setReload]= useState(false);
 
-   useEffect(() => {
+   useEffect(async () => {
     console.log(
       'Hola, soy un use effect que se ejecuta solo una vez cuando la pagina se renderiza, para cargar la lista de productos inicial'
     );
-     obtainProducts(
+    await obtainProducts(
       (response) => {
         console.log('la respuesta que se recibio fue', response);
         console.log(response.data);
@@ -37,11 +36,8 @@ const Products = () => {
     setReload(false);
   }, [reload]);
 
-  const setProductToupdate=() =>{
-    
-  }
-
-  const submitCreateForm = (e) => {
+  
+  const submitCreateForm = async (e) => {
     e.preventDefault();
     
     const fd = new FormData(formAddProduct.current);
@@ -52,7 +48,7 @@ const Products = () => {
     });
     console.log(newProduct);
 
-     createProduct(
+  await   createProduct(
       {
       id: newProduct.id,
       description: newProduct.description,
@@ -76,7 +72,7 @@ const Products = () => {
 
 
 
-const submitSearchForm = (e) => {
+const submitSearchForm = async (e) => {
   e.preventDefault();
   
   const fd = new FormData(formSearchProduct.current);
@@ -96,7 +92,7 @@ const submitSearchForm = (e) => {
       });
     }else{
       console.log("serachbyid");
-      obtainProductById(info,
+     await obtainProductById(info,
         (response) => {
           console.log('la respuesta que se recibio fue', response);
           console.log(response.data);
@@ -117,7 +113,7 @@ const submitSearchForm = (e) => {
 } 
 else if(searchby=="searchbyDescrip"){
   console.log("serachbydescrip");
-  obtainProductByDescrip(info,
+  await obtainProductByDescrip(info,
     (response) => {
       console.log('la respuesta que se recibio fue', response);
       console.log(response.data);
@@ -135,7 +131,6 @@ else if(searchby=="searchbyDescrip"){
 
 } 
 }
-
 
   return (
     <div className="MainSection">
@@ -166,7 +161,7 @@ else if(searchby=="searchbyDescrip"){
           </li>
           <li>
             <label>Descripción</label>
-            <input name="description" type="text" className="inputChange inputLarge"  placeholder="Descripción producto" required></input>
+            <input name="description" type="text" className="inputChange inputLarge"  placeholder="Descripción producto" required maxLength="200"></input>
           </li>
         </ul>
         <div className="btnDiv">
@@ -196,55 +191,12 @@ else if(searchby=="searchbyDescrip"){
           <span>para </span>
           <button type="submit" className="btnGeneral btnSearchUser marg-l" id="submitProductSearchBtn" >
           <img className="btnIcon"  src={search} alt="img"></img>  Buscar</button>
-          {/*<button type="button" className="btnGeneral btnSearchUser marg-l" id="updateProductSearchBtn"onClick={()=>setShowUpdateSection(!showUpdateSection)}>
-          <img className="btnIcon"  src={editicon} alt="img"></img>  Actualizar</button>
-          <button type="reset" className="btnGeneral btnSearchUser marg-l" id="deleteProductSearchBtn">
-          <img className="btnIcon"  src={deleteicon} alt="img"></img>     Eliminar</button>*/}
+        
         </form>
-        <button clasName="btnBack" onClick={()=>setReload(!reload)}>Volver a tabla</button>
+        <button className="btnBack btnDelete" onClick={()=>setReload(!reload)}>Volver a tabla</button>
       </div>
 
-     {/**  <form ref={formEditProduct} onSubmit={submitFormEditProduct} >
-      {
-      showUpdateSection && (
-            <div className="updateSection">
-              <ul className="updateProductUl">
-              <li>
-              <label>ID</label>
-              <input  name="id"type="number" min="1" className="inputChange inputValue" placeholder="Id" disabled></input>
-              </li>
-              <li>
-                
-            <label>Descripción</label>
-            <input name="description" type="text" className="inputChange inputMedium"  placeholder="Descripción producto" required></input>
-            </li>
-              <li> <label>Precio Unitario</label>
-              <input  name="unitprice"type="number" min="1" className="inputChange inputValue" placeholder="$" required></input>
-              </li>
-             
-          <li>
-            <label>Estado</label>
-            <select name="state" id="selectorState"className="selectStatus"  required 
-            >
-              <option value="" disabled>Selecciona</option>
-              <option className="aproved" value="Disponible">Disponible</option>
-              <option className="denied" value="No disponible">No disponible</option>
-            </select>
-          </li>
-            <li className="btnFlex">
-            <label>Guardar</label>
-              <div className="">
-              <button type="submit"className="btnGeneral btnEdit">Ok</button>
-              <button type="reset"className="btnGeneral btnDelete">X</button>
-              </div>
-            </li>
-              </ul>
-             
-
-            </div>
-          )}
-      </form>
-      */}
+     
     <ProductTable listpr={listProducts}/>
     
     </div>
