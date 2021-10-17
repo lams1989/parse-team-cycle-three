@@ -7,5 +7,4 @@ const ProductManager = () => {
         </div>
     )
 }
-
 export default ProductManager

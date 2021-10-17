@@ -1,0 +1,8 @@
+{
+    "mongodb": {
+      "server": "cluster0.iqv6u.mongodb.net",
+      "database": "myFirstDatabase?retryWrites=true&w=majority",
+      "user": "userApp",
+      "password": "userApp"
+    }
+  }

@@ -6,7 +6,7 @@ const Loggin = () => {
 
 	const [userNameLog, setUserName] = React.useState('')
 	const [emailLog, setEmail] = React.useState('')
-	const [passwordLog, setPassword] = React.useState('')
+	const [passwordLog, setPassword] = React.useState('')S
 	const logginStart = (e) => {
 		e.preventDefault()
 
@@ -31,15 +31,12 @@ const Loggin = () => {
 			console.log('User logged')
 			if (userIn[0].roll === 'Admin') {
 				console.log('is Admin')
-
 			}
 			if (userIn[0].roll === 'Seller') {
 				console.log('is Seller')
 			}
-
 		}
 	}
-
 	return (
 		<div>
 			<form id="loginform" onSubmit={logginStart}>
@@ -88,5 +85,4 @@ const Loggin = () => {
 		</div>
 	)
 }
-
 export default Loggin

@@ -1,5 +1,6 @@
 /* Google Font Link */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200&family=Open+Sans+Condensed:ital,wght@0,300;0,700;1,300&display=swap');
 :root{
 --margin_sidebar:240px;
 }
@@ -8,10 +9,11 @@
   display: flex;
   height:100%;
   overflow-x: hidden;
+  overflow-y: hidden !important;
   padding:0px;
   width: calc(100% - var(--margin_sidebar));
   box-sizing: border-box;
-  font-family: "Poppins" , sans-serif;
+  font-family:  'Segoe UI', 'Open Sans', 'Helvetica Neue', sans-serif;
   margin-left: var(--margin_sidebar);
   
 }
@@ -30,7 +32,7 @@
     width: 100%;
     background-color: white;
     display:-moz-grid-group;
-    
+    overflow-y: hidden;
     align-content: center;
     justify-content: center;  
     
