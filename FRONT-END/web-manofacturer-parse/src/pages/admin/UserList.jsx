@@ -77,11 +77,11 @@ const UserList = () => {
         userSearch.id,
       (response) => {
         console.log(response.data);
-        toast.success('user was created SUCCESSFULLY');
+        toast.success('Usuario encontrado con exito');
       },
       (error) => {
         console.error(error);
-        toast.error('Create user ERROR');
+        toast.error('Error en busqueda');
       }
     );
 
