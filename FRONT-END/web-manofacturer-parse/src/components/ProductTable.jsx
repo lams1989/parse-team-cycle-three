@@ -1,20 +1,22 @@
 
 import { nanoid } from 'nanoid'
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ToastContainer, toast,Zoom } from 'react-toastify';
 import { updateProductInfo ,deleteProduct} from 'utils/Api-connection';
-const ProductTable = ({listpr}) => {
-  
-  
-  
-  const RowProduct=({product})=>{
+import { Dialog, Tooltip } from '@material-ui/core';
 
+
+const ProductTable = ({listpr}) => {
+ 
+
+  const RowProduct=({product})=>{
     const [editable, setEditable] = useState(false);
     const [editState, setEditState] = useState(product.state);
     const [editUnitprice, setEditUnitprice] = useState(product.unitprice);
     const [editDescrip, setEditDescrip ]= useState(product.description);
-
-    const updateProduct = (e) => {
+    const [confirmDeleteDialog, setConfirmDeleteDialog] = useState(false);
+    
+    const updateProduct = async () => {
       console.log("id: ",product.id);
       console.log("_id: ",product._id);
       console.log("state",editState);
@@ -27,7 +29,7 @@ const ProductTable = ({listpr}) => {
        "state":editState
       }
     
-      updateProductInfo(
+      await updateProductInfo(
         product._id, 
         {"description":editDescrip,
         "unitprice":editUnitprice,
@@ -35,6 +37,7 @@ const ProductTable = ({listpr}) => {
         (response) => {
           console.log(response.data);
           toast.success('Producto modificado con éxito');
+          
         },
         (error) => {
           console.error(error);
@@ -43,47 +46,28 @@ const ProductTable = ({listpr}) => {
        
       );
       setEditable(false);
+    
     };
 
     
-   {/* const ToDeleteProduct = async (e) => {
-
-      console.log("delete product, ",product._id);
-    
-  
-   await   deleteProduct(
-      product._id,
-      (response) => {
-        console.log(response.data);
-        toast.success('Producto eliminado con éxito');
-      
-      },
-      (error) => {
-        console.error(error);
-        toast.error('Error eliminando el producto');
-      }
-    );
-
- 
-};
-*/}
+   
 const ToDeleteProduct = async () => {
-
+  setConfirmDeleteDialog(false);
   await deleteProduct(
     product._id,
     (response) => {
       console.log(response.data);
+     
       toast.success('producto eliminado con éxito');
-      
+    
     },
     (error) => {
       console.error(error);
       toast.error('Error eliminando el producto');
     }
   );
-  
+ 
 }
-
 
     return (
       <tr  className="datarow">
@@ -114,19 +98,51 @@ const ToDeleteProduct = async () => {
                   <div className="editBtnContainer">
                   {editable? 
                   <>
-                  <button type="submit" className="btnGeneral btnEdit"   onClick={() => updateProduct()}><i className="fas fa-save"></i>  </button> 
-                  <button type="reset" className="btnGeneral btnDelete"  onClick={() => setEditable(!editable)}>  <i className="fas fa-trash-alt"></i></button>
+                  <Tooltip title='GUARDAR' arrow placement="left" >
+                  <button type="submit" className="btnGeneral btnEdit"   onClick={() => updateProduct()}><i className="fas fa-save"></i>  </button></Tooltip> 
+                  <Tooltip title='Cancelar' arrow placement="right">
+                     <button type="reset" className="btnGeneral btnDelete"  onClick={() => setEditable(!editable)}>  <i class="fas fa-ban"></i></button></Tooltip> 
+                  
                   </>
                   :(
-                    <>
-                    <button type="button" className="btnGeneral btnEdit"   onClick={() => setEditable(!editable)}> <i className="fas fa-edit"></i> </button>
-                    <button type="reset" className="btnGeneral btnDelete" onClick={() => ToDeleteProduct()}>  <i className="fas fa-trash-alt"></i></button>
-                  </>)}
+                    <><Tooltip title='Editar' arrow placement="left">
+                    <button type="button" className="btnGeneral btnEdit"   onClick={() => setEditable(!editable)}> <i className="fas fa-edit"></i> </button></Tooltip>
+                    <Tooltip title='Eliminar' arrow placement="right"> 
+                    <button type="reset" className="btnGeneral btnDelete" onClick={() => setConfirmDeleteDialog(true)}>  <i className="fas fa-trash-alt"></i></button></Tooltip>
+                  </>
+                  )}
+                  
+
+
+ <Dialog open={confirmDeleteDialog}>
+  <div className="dialogDelete">
+    
+<h5>¿Está seguro de eliminar este producto?</h5>
+<span> ID: {product.id} - {product.description}</span>
+<div className="editBtnContainer2">
+  <button type="button" className="btnGeneral btnEdit"  onClick={() => ToDeleteProduct()} >Si</button>
+  <button type="reset" className="btnGeneral btnDelete" onClick={() => setConfirmDeleteDialog(false)} >No</button>
+</div> 
+ </div>
+</Dialog>                  
+
+<Dialog open={confirmDeleteDialog}>
+  <div className="dialogDelete">
+    
+<h5>¿Está seguro de eliminar este producto?</h5>
+<span> ID: {product.id} - {product.description}</span>
+<div className="editBtnContainer2">
+  <button type="button" className="btnGeneral btnEdit"  onClick={() => ToDeleteProduct()} >Si</button>
+  <button type="reset" className="btnGeneral btnDelete" onClick={() => setConfirmDeleteDialog(false)} >No</button>
+</div> 
+ </div>
+</Dialog>
                   </div>
                 </td>
     </tr>
     
     )
+    
 }
     return (
       
@@ -147,7 +163,7 @@ const ToDeleteProduct = async () => {
 
           {listpr.map((productObj) => {
               return (
-                <RowProduct  key={nanoid()} product= {productObj}/>
+                <RowProduct  key={nanoid()} product= {productObj} />
               );
             })}
       
@@ -162,10 +178,12 @@ const ToDeleteProduct = async () => {
        limit={1}
        />
 
+
       </div>
 
-     
+
     )
+
 
     
 

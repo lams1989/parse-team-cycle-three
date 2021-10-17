@@ -97,8 +97,15 @@
   margin-right: 20px;
   color:white;
 }
+
+.btnCreateProduct:hover{
+  background:#0d6efd;
+}
 .btnCreateProduct{
   margin-bottom: 10px;
+}
+btnCreateUser,.btnCreateProduct:hover{
+  background:#0d6efd;
 }
 .btnCancel{
   font-size: 14px;
@@ -112,6 +119,9 @@
   color:white;
   background-color: var(--btn_color);
   margin-right: 10px;
+}
+.btnEdit:hover{
+  background:#0d6efd;
 }
 .btnEdit{
   font-size:small;
@@ -150,6 +160,9 @@
   color:white;
   background-color:var(--colortitle);
   
+}
+.btnAddOrder:hover{
+  background:#0d6efd;
 }
 .btnCancelOrder{
   background-color:lightgray;
@@ -511,4 +524,35 @@ border:0.5px solid black;
   }
   .btnFlex{
     display:flex;
+  }
+ 
+  .dialogDelete{
+    justify-items: center;
+    display: grid;
+    padding: 20px;
+    height: 150px;
+    width: 500px;
+    font-size: 20px;
+  }
+
+  .editBtnContainer {
+  
+    align-items: center;
+    padding-left: 15px;
+    
+  }
+  
+  .editBtnContainer2 {
+    display: flex;
+    align-items: center;
+   margin:15px;
+
+  }
+  
+  .editBtnContainer2 button {
+    display: flex;
+    margin-left:40px;
+    font-size: 20px;
+    height: 40px;
+    width: 45px;
   }
