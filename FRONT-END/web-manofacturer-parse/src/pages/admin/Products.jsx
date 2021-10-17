@@ -5,7 +5,7 @@ import editicon from "media/mode_edit_white_48dp.svg"
 import checkicon from "media/done_outline_white_48dp.svg"
 import ProductTable from 'components/ProductTable'
 import { createProduct,obtainProducts,obtainProductById,obtainProductByDescrip} from 'utils/Api-connection';
-
+import searchIcon from "media/zoom_in_white_48dp.svg"
 import { ToastContainer, toast,Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -13,7 +13,6 @@ import 'react-toastify/dist/ReactToastify.css';
 const Products = () => {
 
   const formAddProduct = useRef(null);
-  const formEditProduct= useRef(null);
   const formSearchProduct= useRef(null);
   const [listProducts, setListProducts]= useState([]);
   const [showUpdateSection, setShowUpdateSection] = useState(false);
@@ -28,7 +27,7 @@ const Products = () => {
         console.log('la respuesta que se recibio fue', response);
         console.log(response.data);
         setListProducts(response.data);
-        //setProducts(response.data);
+       
       },
       (error) => {
         console.error('Salio un error:', error);
@@ -38,7 +37,9 @@ const Products = () => {
     setReload(false);
   }, [reload]);
 
+  const setProductToupdate=() =>{
     
+  }
 
   const submitCreateForm = (e) => {
     e.preventDefault();
@@ -73,17 +74,13 @@ const Products = () => {
 };
 
 
-const submitFormEditProduct = (e) => {
-  e.preventDefault();
-  
-  console.log("ok");
-}
+
 
 const submitSearchForm = (e) => {
   e.preventDefault();
   
   const fd = new FormData(formSearchProduct.current);
-  console.log(fd);
+  console.log(fd.id);
   const searchOpt = {};
   fd.forEach((value, key) => {
     searchOpt[key] = value;
@@ -195,26 +192,29 @@ else if(searchby=="searchbyDescrip"){
             <option value= "searchbyDescrip">Descripción</option>
           </select>
           
-          <input type="text" className="toSearchInput" name="toSearchInput"placeholder="Digita la info" required/>
+          <input type="text" className="toSearchInput" name="toSearchInput" placeholder="Digita la info" required/>
           <span>para </span>
-          <button type="submit" className="btnGeneral btnSearchUser marg-l" id="submitProductSearchBtn">
+          <button type="submit" className="btnGeneral btnSearchUser marg-l" id="submitProductSearchBtn" >
           <img className="btnIcon"  src={search} alt="img"></img>  Buscar</button>
-          <button type="button" className="btnGeneral btnSearchUser marg-l" id="updateProductSearchBtn"onClick={()=>setShowUpdateSection(!showUpdateSection)}>
+          {/*<button type="button" className="btnGeneral btnSearchUser marg-l" id="updateProductSearchBtn"onClick={()=>setShowUpdateSection(!showUpdateSection)}>
           <img className="btnIcon"  src={editicon} alt="img"></img>  Actualizar</button>
           <button type="reset" className="btnGeneral btnSearchUser marg-l" id="deleteProductSearchBtn">
-          <img className="btnIcon"  src={deleteicon} alt="img"></img>     Eliminar</button>
+          <img className="btnIcon"  src={deleteicon} alt="img"></img>     Eliminar</button>*/}
         </form>
         <button clasName="btnBack" onClick={()=>setReload(!reload)}>Volver a tabla</button>
       </div>
 
-      <form ref={formEditProduct} onSubmit={submitFormEditProduct} >
-      {showUpdateSection && (
+     {/**  <form ref={formEditProduct} onSubmit={submitFormEditProduct} >
+      {
+      showUpdateSection && (
             <div className="updateSection">
               <ul className="updateProductUl">
-              <li> <label>Id</label>
-              <input  name="id"type="number" min="1" className="inputChange inputValue" placeholder="$" required></input>
+              <li>
+              <label>ID</label>
+              <input  name="id"type="number" min="1" className="inputChange inputValue" placeholder="Id" disabled></input>
               </li>
               <li>
+                
             <label>Descripción</label>
             <input name="description" type="text" className="inputChange inputMedium"  placeholder="Descripción producto" required></input>
             </li>
@@ -241,10 +241,10 @@ else if(searchby=="searchbyDescrip"){
               </ul>
              
 
-              <p>holaaaaaaa</p>
             </div>
           )}
       </form>
+      */}
     <ProductTable listpr={listProducts}/>
     
     </div>
