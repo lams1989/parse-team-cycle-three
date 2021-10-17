@@ -40,3 +40,17 @@ export const optainUsers = async (successCallback, errorCallback) => {
   var options = { method: 'GET', url: 'http://localhost:3001/users/' };
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
+
+export const updateUsers = async (id, data, successCallback, errorCallback) => {
+  var options = {
+    method: 'PUT',
+    url: `http://localhost:3001/users/${id} `,
+    data
+  }
+  await axios.request(options).then(successCallback).catch(errorCallback);
+};
+
+export const obtainUserById = async (id, successCallback, errorCallback) => {
+  var options = { method: 'GET', url: `http://localhost:3001/products/${id}/`, headers: { 'Content-Type': 'application/json' } };
+  await axios.request(options).then(successCallback).catch(errorCallback);
+};

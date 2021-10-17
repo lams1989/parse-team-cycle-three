@@ -18,42 +18,42 @@
             res.status(200).json(req.response);
         });
 
-    router.get('/:userId',
+    router.get('/:id',
         UserMiddleware.getUserById,
         function (req, res) {
             res.status(200).json(req.response);
         });
 
-        router.get('/n/:userName',
+    router.get('/n/:userName',
         UserMiddleware.getUserByName,
         function (req, res) {
             res.status(200).json(req.response);
         });
-        
-        router.get('/e/:userEmail',
+
+    router.get('/e/:userEmail',
         UserMiddleware.getUserByEmail,
         function (req, res) {
             res.status(200).json(req.response);
         });
-        router.get('/r/:userRole',
+    router.get('/r/:userRole',
         UserMiddleware.getUserByRole,
         function (req, res) {
             res.status(200).json(req.response);
         });
 
-        router.get('/s/:userState',
+    router.get('/s/:userState',
         UserMiddleware.getUserByState,
         function (req, res) {
             res.status(200).json(req.response);
         });
 
-    router.put('/:userId',
+    router.put('/:d',
         UserMiddleware.modifyUser,
         function (req, res) {
             res.status(200).json(req.response);
         });
-    
-    router.delete('/:userId',
+
+    router.delete('/:id',
         UserMiddleware.removeUser,
         function (req, res) {
             res.status(200).json(req.response);

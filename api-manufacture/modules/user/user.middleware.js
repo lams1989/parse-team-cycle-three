@@ -51,16 +51,16 @@
 
     function getUserById(req, res, next) {
 
-        UserService.fetchUserById(req.params.userId)
+        UserService.fetchUserById(req.params.id)
             .then(success)
-            .catch(failure);
+            .catch(error);
 
         function success(data) {
             req.response = data;
             next();
         }
 
-        function failure(err) {
+        function error(err) {
             next(err);
         }
 
@@ -132,7 +132,7 @@
 
     }
     function modifyUser(req, res, next) {
-        UserService.updateUser(req.params.userId, req.body)
+        UserService.updateUser(req.params.id, req.body)
             .then(success)
             .catch(error);
 
@@ -148,16 +148,16 @@
 
     function removeUser(req, res, next) {
 
-        UserService.deleteUser(req.params.userId)
+        UserService.deleteUser(req.params.id)
             .then(success)
-            .catch(error);
+            .catch(failure);
 
         function success() {
             req.response = "deleled user";
             next();
         }
 
-        function error(err) {
+        function failure(err) {
             next(err);
         }
 

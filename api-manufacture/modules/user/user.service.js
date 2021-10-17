@@ -25,7 +25,7 @@
     }
 
     function fetchUserById(userId) {
-        return UserModel.find({idUser:userId})
+        return UserModel.find({id:userId})
             .exec();
     }
 
@@ -56,27 +56,16 @@
             .exec();
     }
 
-    function updateUser(userId, user) {
+    function updateUser(id, user) {
         return UserModel
-            .findByIdAndUpdate(userId, user, {new: true})
+            .findOneAndUpdate(id, user, {new: true})
             .exec();
     }
 
-    /*function deleteUser(userId) {
+    function deleteUser(id) {
         return UserModel
-            .findByIdAndRemove(userId)
-            .exec();
-    }
-*/
-    function deleteUser(userId) {
-        UserModel.findOneAndDelete({idUser: userId}, function (err, docs) {
-            if (err){
-                console.log(err)
-            }
-            else{
-                console.log("Deleted  : ", docs);
-            }
-        });
+        .findOneAndDelete(id)
+        .exec();
     }
 
 })();

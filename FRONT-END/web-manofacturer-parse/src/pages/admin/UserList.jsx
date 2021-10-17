@@ -3,13 +3,14 @@ import React, { useEffect, useState, useRef } from 'react';
 import "styles/pages-styles.css"
 import useradd from "media/person_add_alt_white_48dp.svg"
 import searchuser from "media/zoom_in_white_48dp.svg"
-import { createUser, optainUsers } from "utils/Api-connection"
+import { createUser, optainUsers, obtainUserById } from "utils/Api-connection"
 import { ToastContainer, toast, Zoom } from 'react-toastify';
 
 
 const UserList = () => {
 
   const formAddUser = useRef(null);
+  const formSearchUser = useRef(null);
   const [reload, setReload] = useState(false);
   const [usersList, setUsersList] = useState([]);
 
@@ -62,6 +63,31 @@ const UserList = () => {
     setReload(true);
   };
 
+  const submitSearchUser = (e) => {
+    e.preventDefault();
+    const formData = new FormData(formSearchUser.current);
+
+    const userSearch = {};
+
+    formData.forEach((value, key) => {
+      userSearch[key] = value;
+    });
+
+    obtainUserById(
+        userSearch.id,
+      (response) => {
+        console.log(response.data);
+        toast.success('user was created SUCCESSFULLY');
+      },
+      (error) => {
+        console.error(error);
+        toast.error('Create user ERROR');
+      }
+    );
+
+    setReload(true);
+  }
+
 
 
 
@@ -91,16 +117,16 @@ const UserList = () => {
               <label> Rol </label>
               <select name="role" className="selectRole">
                 <option className="sellerRole" value="noRoleYet" disabled>Selecciona un rol</option>
-                <option className="sellerRole" value="sellerRole">Vendedor</option>
-                <option className="adminRole" value="adminRole">Administrador</option>
+                <option className="sellerRole" value="vendedor">Vendedor</option>
+                <option className="adminRole" value="administrador">Administrador</option>
               </select>
             </li>
             <li>
               <label> Estado </label>
               <select name="state" className="selectStatus">
-                <option className="aproved" value="aproved">Aprobado</option>
-                <option className="denied" value="denied">No Aprobado</option>
-                <option className="pending" value="pending">Pendiente</option>
+                <option className="aproved" value="aprobado">Aprobado</option>
+                <option className="denied" value="no aprobado">No Aprobado</option>
+                <option className="pending" value="pendiente">Pendiente</option>
               </select>
             </li>
           </ul>
@@ -117,7 +143,7 @@ const UserList = () => {
         limit={1}
       />
       <div className="searchContainer">
-        <form >
+        <form ref={formSearchUser} onSubmit={submitSearchUser}>
           <span>Buscar Usuario por </span>
           <select className="selectRole selectSearchUser">
             <option>Nombre</option>
