@@ -25,47 +25,47 @@
     }
 
     function fetchUserById(userId) {
-        return UserModel.find({id:userId})
+        return UserModel.find({ id: userId })
             .exec();
     }
 
     function fetchUserByName(userName) {
-        const nameContains = new RegExp("^"+ userName);
-        console.log("name: ",nameContains);
-        return UserModel.find({name:nameContains})
+        const nameContains = new RegExp("^" + userName);
+        console.log("name: ", nameContains);
+        return UserModel.find({ name: nameContains })
             .exec();
     }
-    
+
     function fetchUserByEmail(userEmail) {
-        const emailContains = new RegExp("^"+ userEmail);
-        console.log("name: ",userEmail);
-        return UserModel.find({email:emailContains})
+        const emailContains = new RegExp("^" + userEmail);
+        console.log("name: ", userEmail);
+        return UserModel.find({ email: emailContains })
             .exec();
     }
     function fetchUserByRole(userRole) {
-        const roleContains = new RegExp("^"+ userRole);
-        console.log("name: ",roleContains);
-        return UserModel.find({role:roleContains})
+        const roleContains = new RegExp("^" + userRole);
+        console.log("name: ", roleContains);
+        return UserModel.find({ role: roleContains })
             .exec();
     }
 
     function fetchUserByState(userState) {
-        const statusContains = new RegExp("^"+ userState);
-        console.log("state: ",statusContains);
-        return UserModel.find({state:statusContains})
+        const statusContains = new RegExp("^" + userState);
+        console.log("state: ", statusContains);
+        return UserModel.find({ state: statusContains })
             .exec();
     }
 
     function updateUser(id, user) {
         return UserModel
-            .findOneAndUpdate(id, user, {new: true})
+            .findOneAndUpdate(id, user, { new: true })
             .exec();
     }
 
     function deleteUser(id) {
         return UserModel
-        .findOneAndDelete(id)
-        .exec();
+            .findOneAndDelete(id)
+            .exec();
     }
 
 })();

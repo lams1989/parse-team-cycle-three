@@ -3,7 +3,6 @@
 
     var express = require('express');
     var router = express.Router();
-
     var ProductMiddleware = require('./product.module')().ProductMiddleware;
 
     router.post('/',
@@ -24,13 +23,13 @@
             res.status(200).json(req.response);
         });
 
-        router.get('/d/:productDescrip',
+    router.get('/d/:productDescrip',
         ProductMiddleware.getProductByDescription,
         function (req, res) {
             res.status(200).json(req.response);
         });
 
-        router.patch('/upd/:productId',
+    router.patch('/upd/:productId',
         ProductMiddleware.modifyPartOfProduct,
         function (req, res) {
             res.status(200).json(req.response);
@@ -40,7 +39,7 @@
         function (req, res) {
             res.status(200).json(req.response);
         });
-    
+
     router.delete('/:productId',
         ProductMiddleware.removeProduct,
         function (req, res) {

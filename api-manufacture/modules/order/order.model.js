@@ -1,6 +1,5 @@
 (function () {
     var mongoose = require('mongoose');
-
     var Schema = mongoose.Schema;
 
     var OrderSchema = new Schema({
@@ -10,7 +9,7 @@
         },
         date: {
             type: Date,
-            default: Date.now 
+            default: Date.now
         },
         seller_id: {
             type: Number,
@@ -20,9 +19,9 @@
             type: Number,
             required: true
         },
-        description:{
+        description: {
             type: Array,
-            required:true
+            required: true
         },
         state: {
             type: String,

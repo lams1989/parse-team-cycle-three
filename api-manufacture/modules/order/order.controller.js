@@ -29,7 +29,7 @@
         function (req, res) {
             res.status(200).json(req.response);
         });
-    
+
     router.delete('/:orderId',
         OrderMiddleware.removeOrder,
         function (req, res) {

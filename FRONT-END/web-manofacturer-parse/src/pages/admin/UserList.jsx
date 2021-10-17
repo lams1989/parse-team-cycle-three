@@ -6,7 +6,6 @@ import searchuser from "media/zoom_in_white_48dp.svg"
 import { createUser, optainUsers, obtainUserById } from "utils/Api-connection"
 import { ToastContainer, toast, Zoom } from 'react-toastify';
 
-
 const UserList = () => {
 
   const formAddUser = useRef(null);
@@ -26,7 +25,6 @@ const UserList = () => {
       },
       (error) => {
         console.error('Salio un error:', error);
-
       }
     );
     setReload(false);
@@ -34,11 +32,8 @@ const UserList = () => {
 
   const submitCreateUser = (e) => {
     e.preventDefault();
-
     const formData = new FormData(formAddUser.current);
-
     const newUser = {};
-
     formData.forEach((value, key) => {
       newUser[key] = value;
     });
@@ -84,12 +79,8 @@ const UserList = () => {
         toast.error('Error en busqueda');
       }
     );
-
     setReload(true);
   }
-
-
-
 
   return (
     <div className="MainSection">
@@ -160,9 +151,7 @@ const UserList = () => {
       <UsersTable listpr={usersList} />
 
     </div>
-
   )
 }
-
 
 export default UserList

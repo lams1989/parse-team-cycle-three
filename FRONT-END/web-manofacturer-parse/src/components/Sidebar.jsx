@@ -43,7 +43,7 @@ const Sidebar = () => {
         <li>
           <Link to='/admin/productos'>
             <a >
-              <img  className="iconSidebar" src={products} id="btnProducts" alt="img"></img>
+              <img className="iconSidebar" src={products} id="btnProducts" alt="img"></img>
               <span className="links_name">Productos</span>
             </a>
           </Link>

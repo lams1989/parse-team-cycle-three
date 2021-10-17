@@ -9,7 +9,6 @@ import searchIcon from "media/zoom_in_white_48dp.svg"
 import { ToastContainer, toast,Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
 const Products = () => {
 
   const formAddProduct = useRef(null);
@@ -26,28 +25,22 @@ const Products = () => {
         console.log('la respuesta que se recibio fue', response);
         console.log(response.data);
         setListProducts(response.data);
-       
       },
       (error) => {
         console.error('Salio un error:', error);
-      
       }
     );
     setReload(false);
   }, [reload]);
-
   
   const submitCreateForm = async (e) => {
     e.preventDefault();
-    
     const fd = new FormData(formAddProduct.current);
-    
     const newProduct = {};
     fd.forEach((value, key) => {
       newProduct[key] = value;
     });
     console.log(newProduct);
-
   await   createProduct(
       {
       id: newProduct.id,
@@ -64,17 +57,11 @@ const Products = () => {
         toast.error('Error creando un producto');
       }
     );
-    
       setReload(true);
-     
 };
-
-
-
 
 const submitSearchForm = async (e) => {
   e.preventDefault();
-  
   const fd = new FormData(formSearchProduct.current);
   console.log(fd.id);
   const searchOpt = {};
@@ -97,19 +84,12 @@ const submitSearchForm = async (e) => {
           console.log('la respuesta que se recibio fue', response);
           console.log(response.data);
           setListProducts(response.data);
-          
-          
-          //setProducts(response.data);
         },
         (error) => {
           console.error('Salio un error:', error);
-        
         }
       ); 
     }
-  
- 
-  
 } 
 else if(searchby=="searchbyDescrip"){
   console.log("serachbydescrip");
@@ -118,20 +98,13 @@ else if(searchby=="searchbyDescrip"){
       console.log('la respuesta que se recibio fue', response);
       console.log(response.data);
       setListProducts(response.data);
-      
-      //setProducts(response.data);
     },
     (error) => {
       console.error('Salio un error:', error);
-    
     }
   );
-   
- 
-
 } 
 }
-
   return (
     <div className="MainSection">
       <div className="titlepage">
@@ -177,7 +150,6 @@ else if(searchby=="searchbyDescrip"){
        transition={Zoom}
        limit={1}
        />
-      
       <div className="searchContainer withupdatesection marg-l">
         <form ref={formSearchProduct} onSubmit={submitSearchForm} >
           <span>Selecciona </span>
@@ -186,19 +158,14 @@ else if(searchby=="searchbyDescrip"){
             <option value="searchbyid">ID Producto</option>
             <option value= "searchbyDescrip">Descripción</option>
           </select>
-          
           <input type="text" className="toSearchInput" name="toSearchInput" placeholder="Digita la info" required/>
           <span>para </span>
           <button type="submit" className="btnGeneral btnSearchUser marg-l" id="submitProductSearchBtn" >
           <img className="btnIcon"  src={search} alt="img"></img>  Buscar</button>
-        
         </form>
         <button className="btnBack btnDelete" onClick={()=>setReload(!reload)}>Volver a tabla</button>
       </div>
-
-     
     <ProductTable listpr={listProducts}/>
-    
     </div>
   )
 }

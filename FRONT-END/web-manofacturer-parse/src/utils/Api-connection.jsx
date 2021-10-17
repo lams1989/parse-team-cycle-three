@@ -11,17 +11,28 @@ export const createProduct = async (data, successCallback, errorCallback) => {
 };
 
 export const obtainProducts = async (successCallback, errorCallback) => {
-  var options = { method: 'GET', url: 'http://localhost:3001/products/' };
+  var options = {
+    method: 'GET',
+    url: 'http://localhost:3001/products/'
+  };
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
 
 export const obtainProductById = async (id, successCallback, errorCallback) => {
-  var options = { method: 'GET', url: `http://localhost:3001/products/${id}/`, headers: { 'Content-Type': 'application/json' } };
+  var options = {
+    method: 'GET',
+    url: `http://localhost:3001/products/${id}/`,
+    headers: { 'Content-Type': 'application/json' }
+  };
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
 
 export const obtainProductByDescrip = async (descrip, successCallback, errorCallback) => {
-  var options = { method: 'GET', url: `http://localhost:3001/products/d/${descrip}/`, headers: { 'Content-Type': 'application/json' } };
+  var options = {
+    method: 'GET',
+    url: `http://localhost:3001/products/d/${descrip}/`,
+    headers: { 'Content-Type': 'application/json' }
+  };
   console.log(options);
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
@@ -32,7 +43,7 @@ export const updateProductInfo = async (id, dataToUpdate, successCallback, error
   var options = {
     method: 'PATCH',
     url: `http://localhost:3001/products/upd/${id}/`,
-    headers: {'Content-Type': 'application/json'},
+    headers: { 'Content-Type': 'application/json' },
     data: dataToUpdate
   };
   console.log(options);
@@ -41,7 +52,11 @@ export const updateProductInfo = async (id, dataToUpdate, successCallback, error
 
 
 export const deleteProduct = async (id, successCallback, errorCallback) => {
-  var options = { method: 'DELETE', url: `http://localhost:3001/products/${id}`, headers: { 'Content-Type': 'application/json' } };
+  var options = {
+    method: 'DELETE',
+    url: `http://localhost:3001/products/${id}`,
+    headers: { 'Content-Type': 'application/json' }
+  };
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
 
@@ -56,7 +71,10 @@ export const createUser = async (data, successCallback, errorCallback) => {
 };
 
 export const optainUsers = async (successCallback, errorCallback) => {
-  var options = { method: 'GET', url: 'http://localhost:3001/users/' };
+  var options = {
+    method: 'GET',
+    url: 'http://localhost:3001/users/'
+  };
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
 
@@ -70,6 +88,10 @@ export const updateUsers = async (id, data, successCallback, errorCallback) => {
 };
 
 export const obtainUserById = async (id, successCallback, errorCallback) => {
-  var options = { method: 'GET', url: `http://localhost:3001/products/${id}/`, headers: { 'Content-Type': 'application/json' } };
+  var options = {
+    method: 'GET',
+    url: `http://localhost:3001/products/${id}/`,
+    headers: { 'Content-Type': 'application/json' }
+  };
   await axios.request(options).then(successCallback).catch(errorCallback);
 };

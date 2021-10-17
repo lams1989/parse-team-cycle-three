@@ -4,9 +4,9 @@
     var Schema = mongoose.Schema;
 
     var UserSchema = new Schema({
-        id:{
-            type:Number,
-            required:true
+        id: {
+            type: Number,
+            required: true
         },
         name: {
             type: String,
@@ -27,7 +27,7 @@
             type: String,
             required: true
         }
-        
+
     });
 
     module.exports = mongoose.model('users', UserSchema);

@@ -4,6 +4,7 @@ import "styles/pages-styles.css"
 import search from "media/zoom_in_white_48dp.svg"
 import sellcart from "media/sell_white_48dp.svg"
 import OrdersTable from 'components/OrdersTable';
+
 const OrdersList = () => {
   return (
     <div className="MainSection">

@@ -9,7 +9,7 @@ import AdminLayout from 'layouts/AdminLayout';
 import SellerLayout from 'layouts/SellerLayout';
 import OrdersList from 'pages/seller/OrdersList';
 <script
-src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
+  src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
 ></script>
 
 
