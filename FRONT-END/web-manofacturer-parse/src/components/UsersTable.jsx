@@ -1,16 +1,19 @@
-import deleteuser from "media/person_remove_black_48dp.svg"
-import { updateUser } from 'utils/Api-connection';
+
+import { updateUser, deleteUser} from 'utils/Api-connection';
 import React, { useState } from 'react';
 import { ToastContainer, toast, Zoom } from 'react-toastify';
 import { Dialog, Tooltip } from '@material-ui/core';
 import { nanoid } from 'nanoid';
 
 const UsersTable = ({ listpr , setReload}) => {
+
   const RowUser = ({ user }) => {
     const [editable, setEditable] = useState(false);
     const [editState, setEditState] = useState(user.state);
     const [editRole, setEditRole] = useState(user.role);
     const [confirmUpdateDialog, setConfirmUpdateDialog] = useState(false);
+
+    const [confirmDeleteDialog, setConfirmDeleteDialog] = useState(false);
 
     const submitEditUser = async () => {
       console.log('role', editRole);
@@ -37,6 +40,23 @@ const UsersTable = ({ listpr , setReload}) => {
      setReload(true);
     };
 
+const ToDeleteUser = async () => {
+  setConfirmDeleteDialog(false);
+  await deleteUser(
+    user._id,
+    (response) => {
+      console.log(response.data);
+     
+      toast.success('usuario eliminado con éxito');
+    
+    },
+    (error) => {
+      console.error(error);
+      toast.error('Error eliminando el usuario');
+    }
+  );
+  setReload(true);
+}
     return (
       <tr className="datarow">
         {editable ? (
@@ -80,6 +100,8 @@ const UsersTable = ({ listpr , setReload}) => {
               : (
                 <><Tooltip title='Editar' arrow placement="left">
                   <button type="button" className="btnGeneral btnEdit" onClick={() => setEditable(!editable)}> <i className="fas fa-edit"></i> </button></Tooltip>
+                  <Tooltip title='Eliminar' arrow placement="right"> 
+                    <button type="reset" className="btnGeneral btnDelete" onClick={() => setConfirmDeleteDialog(true)}>  <i className="fas fa-trash-alt"></i></button></Tooltip>
                 </>
               )}
             <Dialog open={confirmUpdateDialog}>
@@ -91,12 +113,29 @@ const UsersTable = ({ listpr , setReload}) => {
                 </div>
                 <div className="editBtnContainer2">
                   <button type="button" className="btnGeneral btnEdit" onClick={() => submitEditUser()} >Si</button>
+                  <button type="reset" className="btnGeneral btnDelete" onClick={() => setConfirmUpdateDialog(false)} >No</button> 
                 </div>
               </div>
             </Dialog>
+      
+            <Dialog open={confirmDeleteDialog}>
+  <div className="dialogDelete">
+    
+<h5>¿Está seguro de eliminar este producto?</h5>
+<p align="center">Rol: {user.role}  </p>
+<p className="pLarge" align="center"> {user.name}  </p>
+
+<div className="editBtnContainer2">
+  <button type="button" className="btnGeneral btnEdit"  onClick={() => ToDeleteUser()} >Si</button>
+  <button type="reset" className="btnGeneral btnDelete" onClick={() => setConfirmDeleteDialog(false)} >No</button>
+</div> 
+ </div>
+</Dialog>
           </div>
         </td>
       </tr>
+
+
     )
   }
 

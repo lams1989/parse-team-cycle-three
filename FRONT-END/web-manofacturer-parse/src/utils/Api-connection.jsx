@@ -99,6 +99,16 @@ export const obtainUserById = async (id, successCallback, errorCallback) => {
 };
 
 
+export const deleteUser = async (id, successCallback, errorCallback) => {
+  var options = {
+    method: 'DELETE',
+    url: `http://localhost:3001/users/${id}`,
+    headers: { 'Content-Type': 'application/json' }
+  };
+  await axios.request(options).then(successCallback).catch(errorCallback);
+};
+
+
 export const  fetchUsersbyAnyMatch=(listaProductos,words)=>{
   
   return   listaProductos.filter((elemento) => {

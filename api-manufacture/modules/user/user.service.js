@@ -62,9 +62,14 @@
             .exec();
     }
 
-    function deleteUser(id) {
+    {/*function deleteUser(id) {
         return UserModel
             .findOneAndDelete(id)
+            .exec();
+    }*/}
+    
+    function deleteUser(user_Id) {
+        return UserModel.findByIdAndRemove(user_Id)
             .exec();
     }
 
