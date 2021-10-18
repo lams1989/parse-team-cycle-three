@@ -5,7 +5,7 @@ import { ToastContainer, toast, Zoom } from 'react-toastify';
 import { Dialog, Tooltip } from '@material-ui/core';
 import { nanoid } from 'nanoid';
 
-const UsersTable = ({ listpr }) => {
+const UsersTable = ({ listpr , setReload}) => {
   const RowUser = ({ user }) => {
     const [editable, setEditable] = useState(false);
     const [editState, setEditState] = useState(user.state);
@@ -26,14 +26,15 @@ const UsersTable = ({ listpr }) => {
         },
         (response) => {
           console.log(response.data);
-          toast.success('Usuario agregado con éxito');
+          toast.success('Usuario actualizado con éxito');
         },
         (error) => {
           console.error(error);
           toast.error('Error actualizando usuario');
         }
       );
-      // setEditable(false);
+     setEditable(false);
+     setReload(true);
     };
 
     return (
@@ -122,7 +123,7 @@ const UsersTable = ({ listpr }) => {
           <tbody>
             {listpr.map((productObj) => {
               return (
-                <RowUser key={nanoid()} user={productObj} />
+                <RowUser key={nanoid()} user={productObj} setReload={setReload} />
               );
             })}
           </tbody>

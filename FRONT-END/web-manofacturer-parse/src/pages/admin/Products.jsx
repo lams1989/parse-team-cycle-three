@@ -1,22 +1,22 @@
 import React, { useEffect, useState, useRef } from 'react';
 import search from "media/zoom_in_white_48dp.svg"
-import deleteicon from "media/backspace_white_48dp.svg"
-import editicon from "media/mode_edit_white_48dp.svg"
 import checkicon from "media/done_outline_white_48dp.svg"
 import ProductTable from 'components/ProductTable'
 import { createProduct,obtainProducts,obtainProductById,obtainProductByDescrip} from 'utils/Api-connection';
-import searchIcon from "media/zoom_in_white_48dp.svg"
+
 import { ToastContainer, toast,Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { ReloadProductsContext } from 'context/ReloadProducts';
 
 const Products = () => {
 
   const formAddProduct = useRef(null);
   const formSearchProduct= useRef(null);
   const [listProducts, setListProducts]= useState([]);
+  
+  const [backToTable, setbackToTable]= useState(false);
   const [reload, setReload]= useState(false);
 
+  
    useEffect(async () => {
     console.log(
       'Hola, soy un use effect que se ejecuta solo una vez cuando la pagina se renderiza, para cargar la lista de productos inicial'
@@ -33,7 +33,6 @@ const Products = () => {
     );
     setReload(false);
   }, [reload]);
-  
   const submitCreateForm = async (e) => {
     e.preventDefault();
     const fd = new FormData(formAddProduct.current);
@@ -108,7 +107,7 @@ else if(searchby=="searchbyDescrip"){
 }
   return (
     <div className="MainSection">
-      <ReloadProductsContext.Provider  value={{ reload, setReload }}>
+   
       <div className="titlepage">
         <span className="title"> Lista de Productos</span>
       </div>
@@ -165,10 +164,11 @@ else if(searchby=="searchbyDescrip"){
           <button type="submit" className="btnGeneral btnSearchUser marg-l" id="submitProductSearchBtn" >
           <img className="btnIcon"  src={search} alt="img"></img>  Buscar</button>
         </form>
-        <button className="btnBack btnDelete" onClick={()=>setReload(!reload)}>Volver a tabla</button>
+       
+        <button className="btnBack btnDelete" onClick={()=>setReload(!reload)}>Volver a tabla</button> 
       </div>
-    <ProductTable listpr={listProducts}/>
-    </ReloadProductsContext.Provider>
+    <ProductTable listpr={listProducts} setReload={setReload}/>
+  
     </div>
   )
 }

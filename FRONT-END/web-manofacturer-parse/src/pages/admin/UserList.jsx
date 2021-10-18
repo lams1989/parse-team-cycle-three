@@ -15,7 +15,7 @@ const UserList = () => {
 
   useEffect(() => {
     console.log(
-      'Hola, soy un use effect que se ejecuta solo una vez cuando la pagina se renderiza, para cargar la lista de productos inicial'
+      'Hola, soy un use effect que se ejecuta solo una vez cuando la pagina se renderiza, para cargar la lista de usuario inicial'
     );
     optainUsers(
       (response) => {
@@ -148,7 +148,7 @@ const UserList = () => {
         </form>
       </div>
 
-      <UsersTable listpr={usersList} />
+      <UsersTable listpr={usersList} setReload={setReload} />
 
     </div>
   )
