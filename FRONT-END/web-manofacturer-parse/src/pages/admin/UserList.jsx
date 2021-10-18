@@ -5,30 +5,33 @@ import useradd from "media/person_add_alt_white_48dp.svg"
 import searchuser from "media/zoom_in_white_48dp.svg"
 import { createUser, optainUsers, obtainUserById } from "utils/Api-connection"
 import { ToastContainer, toast, Zoom } from 'react-toastify';
+import { fetchUsersbyAnyMatch } from 'utils/Api-connection';
 
 const UserList = () => {
 
   const formAddUser = useRef(null);
-  const formSearchUser = useRef(null);
-  const [reload, setReload] = useState(false);
+  const [reload, setReload] = useState(true);
   const [usersList, setUsersList] = useState([]);
 
   useEffect(() => {
-    console.log(
-      'Hola, soy un use effect que se ejecuta solo una vez cuando la pagina se renderiza, para cargar la lista de productos inicial'
-    );
-    optainUsers(
+    const fetchUsers= async () => {
+    
+    await optainUsers(
       (response) => {
-        console.log('la respuesta que se recibio fue', response);
-        console.log(response.data);
         setUsersList(response.data);
+        setReload(false);
       },
       (error) => {
         console.error('Salio un error:', error);
       }
-    );
-    setReload(false);
+      );
+    };
+    console.log('consulta', reload);
+    if (reload) {
+      fetchUsers();
+    }
   }, [reload]);
+
 
   const submitCreateUser = (e) => {
     e.preventDefault();
@@ -41,47 +44,25 @@ const UserList = () => {
     createUser(
       {
         id: newUser.userId,
-        name: newUser.name,
-        email: newUser.email,
+        name: newUser.name.toUpperCase(),
+        email: newUser.email.toLowerCase(),
         role: newUser.role,
         state: newUser.state
       },
       (response) => {
         console.log(response.data);
         toast.success('user was created SUCCESSFULLY');
+        setReload(true);
       },
       (error) => {
         console.error(error);
         toast.error('Create user ERROR');
       }
     );
-    setReload(true);
+ 
   };
 
-  const submitSearchUser = (e) => {
-    e.preventDefault();
-    const formData = new FormData(formSearchUser.current);
-
-    const userSearch = {};
-
-    formData.forEach((value, key) => {
-      userSearch[key] = value;
-    });
-
-    obtainUserById(
-        userSearch.id,
-      (response) => {
-        console.log(response.data);
-        toast.success('Usuario encontrado con exito');
-      },
-      (error) => {
-        console.error(error);
-        toast.error('Error en busqueda');
-      }
-    );
-    setReload(true);
-  }
-
+  
   return (
     <div className="MainSection">
       <div className="titlepage">
@@ -93,8 +74,8 @@ const UserList = () => {
         <form ref={formAddUser} onSubmit={submitCreateUser}>
           <ul className="listFields">
             <li>
-              <label> Client ID</label>
-              <input name="userId" className="inputChange" type="text" required placeholder="ID"></input>
+              <label> ID Usuario</label>
+              <input name="userId" className="inputChange inputValue" type="text" required placeholder="ID"></input>
             </li>
             <li>
               <label> Nombre</label>
@@ -102,7 +83,7 @@ const UserList = () => {
             </li>
             <li>
               <label> Correo Electrónico</label>
-              <input name="email" className="inputChange" autoComplete="email" required placeholder="Correo electrónico"></input>
+              <input name="email" className="inputChange smallLargeTD" autoComplete="email" required placeholder="Correo electrónico"></input>
             </li>
             <li className="addDataRoleContainer">
               <label> Rol </label>
@@ -133,22 +114,9 @@ const UserList = () => {
         transition={Zoom}
         limit={1}
       />
-      <div className="searchContainer">
-        <form ref={formSearchUser} onSubmit={submitSearchUser}>
-          <span>Buscar Usuario por </span>
-          <select className="selectRole selectSearchUser">
-            <option>Nombre</option>
-            <option>Correo</option>
-            <option>Rol</option>
-            <option>Estado</option>
-          </select>
-          <input type="text" className="toSearchInput" placeholder="Nombre usuario" />
-          <button type="submit" className="btnGeneral btnSearchUser" id="submitUserSearchBtn">
-            <img className="btnIcon" src={searchuser} alt="img"></img> Buscar</button>
-        </form>
-      </div>
+     
 
-      <UsersTable listpr={usersList} />
+      <UsersTable listpr={usersList} setReload={setReload} />
 
     </div>
   )

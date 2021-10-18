@@ -78,20 +78,34 @@ export const optainUsers = async (successCallback, errorCallback) => {
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
 
-export const updateUsers = async (id, data, successCallback, errorCallback) => {
+export const updateUser = async (id, dataToUpdate, successCallback, errorCallback) => {
   var options = {
-    method: 'PUT',
-    url: `http://localhost:3001/users/${id} `,
-    data
-  }
+    method: 'PATCH',
+    url: `http://localhost:3001/users/upd/${id}/`,
+    headers: { 'Content-Type': 'application/json' },
+    data: dataToUpdate
+  };
+  console.log(options);
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
 
 export const obtainUserById = async (id, successCallback, errorCallback) => {
   var options = {
     method: 'GET',
-    url: `http://localhost:3001/products/${id}/`,
+    url: `http://localhost:3001/users/${id}/`,
     headers: { 'Content-Type': 'application/json' }
   };
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
+
+
+export const deleteUser = async (id, successCallback, errorCallback) => {
+  var options = {
+    method: 'DELETE',
+    url: `http://localhost:3001/users/${id}`,
+    headers: { 'Content-Type': 'application/json' }
+  };
+  await axios.request(options).then(successCallback).catch(errorCallback);
+};
+
+

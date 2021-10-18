@@ -35,7 +35,6 @@
         return UserModel.find({ name: nameContains })
             .exec();
     }
-
     function fetchUserByEmail(userEmail) {
         const emailContains = new RegExp("^" + userEmail);
         console.log("name: ", userEmail);
@@ -56,15 +55,21 @@
             .exec();
     }
 
-    function updateUser(id, user) {
-        return UserModel
-            .findOneAndUpdate(id, user, { new: true })
+    function updateUser(user_Id, user) {
+        console.log("userid:", user_Id);
+        console.log("user:", user);
+        return UserModel.findByIdAndUpdate(user_Id, user, { new: true })
             .exec();
     }
 
-    function deleteUser(id) {
+    {/*function deleteUser(id) {
         return UserModel
             .findOneAndDelete(id)
+            .exec();
+    }*/}
+    
+    function deleteUser(user_Id) {
+        return UserModel.findByIdAndRemove(user_Id)
             .exec();
     }
 
