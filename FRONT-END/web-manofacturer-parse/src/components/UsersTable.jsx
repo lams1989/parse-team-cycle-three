@@ -80,7 +80,7 @@ const ToDeleteUser = async () => {
         ) : (
           <>
             <td className="numberTD">{user.id}</td>
-            <td className="smallLargeTD"><p className="pRowLarge">{user.name}</p></td>
+            <td className="smallLargeTD">{user.name}</td>
             <td className="smallTD">{user.email}</td>
             <td className="smallLargeTD ">{user.role}</td>
             <td className="smallLargeTD ">{user.state}</td>
@@ -92,21 +92,21 @@ const ToDeleteUser = async () => {
             {editable ?
               <>
                 <Tooltip title='GUARDAR' arrow placement="left" >
-                  <button type="submit" className="btnGeneral btnEdit" onClick={() => setConfirmUpdateDialog(true)}><i className="fas fa-save"></i>  </button></Tooltip>
+                  <button type="submit" className="btnGeneral btnEdit" onClick={() => setConfirmUpdateDialog(true)}><i className="fas fa-user-check"></i> </button></Tooltip>
                 <Tooltip title='Cancelar' arrow placement="right">
                   <button type="reset" className="btnGeneral btnDelete" onClick={() => setEditable(!editable)}>  <i class="fas fa-ban"></i></button></Tooltip>
 
               </>
               : (
                 <><Tooltip title='Editar' arrow placement="left">
-                  <button type="button" className="btnGeneral btnEdit" onClick={() => setEditable(!editable)}> <i className="fas fa-edit"></i> </button></Tooltip>
-                  <Tooltip title='Eliminar' arrow placement="right"> 
-                    <button type="reset" className="btnGeneral btnDelete" onClick={() => setConfirmDeleteDialog(true)}>  <i className="fas fa-trash-alt"></i></button></Tooltip>
+                  <button type="button" className="btnGeneral btnEdit" onClick={() => setEditable(!editable)}> <i class="fas fa-user-cog"></i></button></Tooltip>
+                  <Tooltip title='Eliminar' arrow placement="botton"> 
+                    <button type="reset" className="btnGeneral btnDelete" onClick={() => setConfirmDeleteDialog(true)}>  <i class="fas fa-user-minus"></i></button></Tooltip>
                 </>
               )}
             <Dialog open={confirmUpdateDialog}>
               <div className="dialogUpdate">
-                <h5>Actualización del usero:</h5>
+                <h5>Actualización del usuario:</h5>
                 <div className="infoUpdateDiv">
                   <p align="center"> Nombre: {user.name}      --    Role: {editRole}</p>
                   <p className="pLarge" align="center">State: {editState}</p>
