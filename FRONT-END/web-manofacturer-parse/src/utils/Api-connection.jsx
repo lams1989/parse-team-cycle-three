@@ -97,3 +97,12 @@ export const obtainUserById = async (id, successCallback, errorCallback) => {
   };
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
+
+
+export const  fetchUsersbyAnyMatch=(listaProductos,words)=>{
+  
+  return   listaProductos.filter((elemento) => {
+      return JSON.stringify(elemento).toLowerCase().includes(words.toLowerCase());
+    })
+
+}

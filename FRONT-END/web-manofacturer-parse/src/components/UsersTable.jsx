@@ -42,8 +42,8 @@ const UsersTable = ({ listpr , setReload}) => {
         {editable ? (
           <>
             <td className="numberTD"><label  >{user.id}</label></td>
-            <td className="descripTD"><label>{user.name}</label></td>
-            <td className="emailTD"><label>{user.email}</label></td>
+            <td className="smallLargeTD"><label>{user.name}</label></td>
+            <td className="mediumTD"><label>{user.email}</label></td>
 
             <td className="smallLargeTD "><select className="selectStatus" defaultValue={user.role} required onChange={(e) => setEditRole(e.target.value)}>
               <option value="" disabled>Selecciona</option>
@@ -53,14 +53,14 @@ const UsersTable = ({ listpr , setReload}) => {
             <td className="smallLargeTD "><select className="selectStatus" defaultValue={user.state} required onChange={(e) => setEditState(e.target.value)}>
               <option value="" disabled>Selecciona</option>
               <option className="aproved" value="aprobado">Aprobado</option>
-              <option className="denied" value="no aprobado">No aprovado</option>
+              <option className="denied" value="no aprobado">No aprobado</option>
               <option className="denied" value="pendiente">Pendiente</option>
             </select></td>
           </>
         ) : (
           <>
             <td className="numberTD">{user.id}</td>
-            <td className="descripTD"><p className="pRowLarge">{user.name}</p></td>
+            <td className="smallLargeTD"><p className="pRowLarge">{user.name}</p></td>
             <td className="smallTD">{user.email}</td>
             <td className="smallLargeTD ">{user.role}</td>
             <td className="smallLargeTD ">{user.state}</td>
@@ -86,7 +86,7 @@ const UsersTable = ({ listpr , setReload}) => {
               <div className="dialogUpdate">
                 <h5>Actualización del usero:</h5>
                 <div className="infoUpdateDiv">
-                  <p align="center"> ID: {user.id}      --    Role: {editRole}</p>
+                  <p align="center"> Nombre: {user.name}      --    Role: {editRole}</p>
                   <p className="pLarge" align="center">State: {editState}</p>
                 </div>
                 <div className="editBtnContainer2">

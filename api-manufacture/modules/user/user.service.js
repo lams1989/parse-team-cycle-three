@@ -35,7 +35,6 @@
         return UserModel.find({ name: nameContains })
             .exec();
     }
-
     function fetchUserByEmail(userEmail) {
         const emailContains = new RegExp("^" + userEmail);
         console.log("name: ", userEmail);

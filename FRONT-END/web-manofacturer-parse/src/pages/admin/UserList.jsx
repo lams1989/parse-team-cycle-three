@@ -5,6 +5,7 @@ import useradd from "media/person_add_alt_white_48dp.svg"
 import searchuser from "media/zoom_in_white_48dp.svg"
 import { createUser, optainUsers, obtainUserById } from "utils/Api-connection"
 import { ToastContainer, toast, Zoom } from 'react-toastify';
+import { fetchUsersbyAnyMatch } from 'utils/Api-connection';
 
 const UserList = () => {
 
@@ -12,6 +13,8 @@ const UserList = () => {
   const formSearchUser = useRef(null);
   const [reload, setReload] = useState(false);
   const [usersList, setUsersList] = useState([]);
+  const [searchUser, setSearchuser] = useState('');
+
 
   useEffect(() => {
     console.log(
@@ -29,6 +32,7 @@ const UserList = () => {
     );
     setReload(false);
   }, [reload]);
+
 
   const submitCreateUser = (e) => {
     e.preventDefault();
@@ -93,8 +97,8 @@ const UserList = () => {
         <form ref={formAddUser} onSubmit={submitCreateUser}>
           <ul className="listFields">
             <li>
-              <label> Client ID</label>
-              <input name="userId" className="inputChange" type="text" required placeholder="ID"></input>
+              <label> ID Usuario</label>
+              <input name="userId" className="inputChange inputValue" type="text" required placeholder="ID"></input>
             </li>
             <li>
               <label> Nombre</label>
@@ -102,7 +106,7 @@ const UserList = () => {
             </li>
             <li>
               <label> Correo Electrónico</label>
-              <input name="email" className="inputChange" autoComplete="email" required placeholder="Correo electrónico"></input>
+              <input name="email" className="inputChange smallLargeTD" autoComplete="email" required placeholder="Correo electrónico"></input>
             </li>
             <li className="addDataRoleContainer">
               <label> Rol </label>
@@ -142,7 +146,7 @@ const UserList = () => {
             <option>Rol</option>
             <option>Estado</option>
           </select>
-          <input type="text" className="toSearchInput" placeholder="Nombre usuario" />
+          <input type="text" className="toSearchInput" placeholder="Nombre usuario" value={searchUser} />
           <button type="submit" className="btnGeneral btnSearchUser" id="submitUserSearchBtn">
             <img className="btnIcon" src={searchuser} alt="img"></img> Buscar</button>
         </form>
