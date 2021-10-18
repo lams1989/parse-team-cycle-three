@@ -22,7 +22,7 @@ const ProductTable = ({listpr, setReload}) => {
       console.log("id: ",product.id);
       console.log("_id: ",product._id);
       console.log("state",editState);
-      console.log("desc",editDescrip);
+      console.log("desc",editDescrip.toLowerCase());
       console.log("unitpr",editUnitprice);
     
       
@@ -30,7 +30,7 @@ const ProductTable = ({listpr, setReload}) => {
       await updateProductInfo(
         
         product._id, 
-        {"description":editDescrip,
+        {"description":editDescrip.toLowerCase(),
         "unitprice":editUnitprice,
         "state":editState},
         (response) => {

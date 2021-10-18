@@ -44,8 +44,8 @@ const UserList = () => {
     createUser(
       {
         id: newUser.userId,
-        name: newUser.name,
-        email: newUser.email,
+        name: newUser.name.toUpperCase(),
+        email: newUser.email.toLowerCase(),
         role: newUser.role,
         state: newUser.state
       },

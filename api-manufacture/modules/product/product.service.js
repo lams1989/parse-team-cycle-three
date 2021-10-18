@@ -34,13 +34,14 @@ const { findOneAndDelete } = require('./product.model');
         //const product= `/.*${productDescrip}.*/`
         //const roleContains = new RegExp(`/.*${productDescrip}.*/`);
         //const descripToSearch= `/.*${productDescrip}.*/`;
-
-        const descripToSearch = new RegExp("^" + productDescrip);
+        
+        const descripToSearch = new RegExp("^" + productDescrip.toLowerCase());
         console.log("desc: ", descripToSearch);
         return ProductModel.find({ description: descripToSearch })
             .exec();
-    }
+        }
 
+ 
     function updatePartOfProduct(product_Id, product) {
         console.log("productid:", product_Id);
         console.log("product:", product);

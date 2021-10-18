@@ -43,7 +43,7 @@ const Products = () => {
   await   createProduct(
       {
       id: newProduct.id,
-      description: newProduct.description,
+      description: newProduct.description.toLowerCase(),
       unitprice: newProduct.unitprice,
       state: newProduct.state
       },
