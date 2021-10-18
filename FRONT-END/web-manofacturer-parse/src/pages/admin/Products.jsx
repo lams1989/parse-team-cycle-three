@@ -13,7 +13,6 @@ const Products = () => {
   const formSearchProduct= useRef(null);
   const [listProducts, setListProducts]= useState([]);
   
-  const [backToTable, setbackToTable]= useState(false);
   const [reload, setReload]= useState(false);
 
   
@@ -51,12 +50,14 @@ const Products = () => {
       (response) => {
         console.log(response.data);
         toast.success('Producto agregado con éxito');
+ 
       },
       (error) => {
         console.error(error);
         toast.error('Error creando un producto');
       }
     );
+      
       setReload(true);
 };
 
@@ -161,11 +162,13 @@ else if(searchby=="searchbyDescrip"){
           </select>
           <input type="text" className="toSearchInput" name="toSearchInput" placeholder="Digita la info" required/>
           <span>para </span>
-          <button type="submit" className="btnGeneral btnSearchUser marg-l" id="submitProductSearchBtn" >
+          <button type="submit" className="btnGeneral btnSearchUser marg-l"  >
           <img className="btnIcon"  src={search} alt="img"></img>  Buscar</button>
+         
         </form>
-       
-        <button className="btnBack btnDelete" onClick={()=>setReload(!reload)}>Volver a tabla</button> 
+        
+        <button className="btnGeneral btnBack" onClick={()=>setReload(!reload)}><i className="fas fa-undo-alt"></i>Volver a tabla</button> 
+        
       </div>
     <ProductTable listpr={listProducts} setReload={setReload}/>
   

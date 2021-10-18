@@ -10,27 +10,26 @@ import { fetchUsersbyAnyMatch } from 'utils/Api-connection';
 const UserList = () => {
 
   const formAddUser = useRef(null);
-  const formSearchUser = useRef(null);
-  const [reload, setReload] = useState(false);
+  const [reload, setReload] = useState(true);
   const [usersList, setUsersList] = useState([]);
-  const [searchUser, setSearchuser] = useState('');
-
 
   useEffect(() => {
-    console.log(
-      'Hola, soy un use effect que se ejecuta solo una vez cuando la pagina se renderiza, para cargar la lista de usuario inicial'
-    );
-    optainUsers(
+    const fetchUsers= async () => {
+    
+    await optainUsers(
       (response) => {
-        console.log('la respuesta que se recibio fue', response);
-        console.log(response.data);
         setUsersList(response.data);
+        setReload(false);
       },
       (error) => {
         console.error('Salio un error:', error);
       }
-    );
-    setReload(false);
+      );
+    };
+    console.log('consulta', reload);
+    if (reload) {
+      fetchUsers();
+    }
   }, [reload]);
 
 
@@ -53,39 +52,17 @@ const UserList = () => {
       (response) => {
         console.log(response.data);
         toast.success('user was created SUCCESSFULLY');
+        setReload(true);
       },
       (error) => {
         console.error(error);
         toast.error('Create user ERROR');
       }
     );
-    setReload(true);
+ 
   };
 
-  const submitSearchUser = (e) => {
-    e.preventDefault();
-    const formData = new FormData(formSearchUser.current);
-
-    const userSearch = {};
-
-    formData.forEach((value, key) => {
-      userSearch[key] = value;
-    });
-
-    obtainUserById(
-        userSearch.id,
-      (response) => {
-        console.log(response.data);
-        toast.success('Usuario encontrado con exito');
-      },
-      (error) => {
-        console.error(error);
-        toast.error('Error en busqueda');
-      }
-    );
-    setReload(true);
-  }
-
+  
   return (
     <div className="MainSection">
       <div className="titlepage">
@@ -137,20 +114,7 @@ const UserList = () => {
         transition={Zoom}
         limit={1}
       />
-      <div className="searchContainer">
-        <form ref={formSearchUser} onSubmit={submitSearchUser}>
-          <span>Buscar Usuario por </span>
-          <select className="selectRole selectSearchUser">
-            <option>Nombre</option>
-            <option>Correo</option>
-            <option>Rol</option>
-            <option>Estado</option>
-          </select>
-          <input type="text" className="toSearchInput" placeholder="Nombre usuario" value={searchUser} />
-          <button type="submit" className="btnGeneral btnSearchUser" id="submitUserSearchBtn">
-            <img className="btnIcon" src={searchuser} alt="img"></img> Buscar</button>
-        </form>
-      </div>
+     
 
       <UsersTable listpr={usersList} setReload={setReload} />
 

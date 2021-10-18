@@ -109,10 +109,3 @@ export const deleteUser = async (id, successCallback, errorCallback) => {
 };
 
 
-export const  fetchUsersbyAnyMatch=(listaProductos,words)=>{
-  
-  return   listaProductos.filter((elemento) => {
-      return JSON.stringify(elemento).toLowerCase().includes(words.toLowerCase());
-    })
-
-}

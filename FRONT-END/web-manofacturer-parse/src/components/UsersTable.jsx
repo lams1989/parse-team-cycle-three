@@ -1,11 +1,24 @@
 
 import { updateUser, deleteUser} from 'utils/Api-connection';
-import React, { useState } from 'react';
+import React, { useState ,useEffect,useRef} from 'react';
 import { ToastContainer, toast, Zoom } from 'react-toastify';
 import { Dialog, Tooltip } from '@material-ui/core';
 import { nanoid } from 'nanoid';
 
 const UsersTable = ({ listpr , setReload}) => {
+  
+const [searching, setSearching] = useState('');
+const [usuariosFiltrados, setUsuariosFiltrados] = useState(listpr);
+ 
+  
+  useEffect(() => {
+    setUsuariosFiltrados(
+      listpr.filter((elemento) => {
+        return JSON.stringify(elemento).toLowerCase().includes(searching.toLowerCase());
+      })
+    );
+  }, [searching, listpr]);
+
 
   const RowUser = ({ user }) => {
     const [editable, setEditable] = useState(false);
@@ -147,6 +160,13 @@ const ToDeleteUser = async () => {
         transition={Zoom}
         limit={1}
       />
+     <div className="searchContainerUser">
+
+        <label>Buscar Usuario por </label>
+          <input type="text" className="toSearchInput"
+           placeholder="Buscar" value={searching}  
+          onChange={(e) => setSearching(e.target.value)}/>
+      </div>
       <div className="listSectionContainer divUsuariosList">
         <table className="ListTable">
           <thead className="thead">
@@ -160,7 +180,7 @@ const ToDeleteUser = async () => {
             </tr>
           </thead>
           <tbody>
-            {listpr.map((productObj) => {
+            {usuariosFiltrados.map((productObj) => {
               return (
                 <RowUser key={nanoid()} user={productObj} setReload={setReload} />
               );
