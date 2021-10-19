@@ -109,3 +109,22 @@ export const deleteUser = async (id, successCallback, errorCallback) => {
 };
 
 
+
+/**Obtain List of Orders */
+export const obtainOrders = async (successCallback, errorCallback) => {
+  var options = {
+    method: 'GET',
+    url: 'http://localhost:3001/orders/'
+  };
+  await axios.request(options).then(successCallback).catch(errorCallback);
+};
+
+export const deleteOrder = async (id, successCallback, errorCallback) => {
+  var options = {
+    method: 'DELETE',
+    url: `http://localhost:3001/orders/${id}`,
+    headers: { 'Content-Type': 'application/json' }
+  };
+  await axios.request(options).then(successCallback).catch(errorCallback);
+};
+

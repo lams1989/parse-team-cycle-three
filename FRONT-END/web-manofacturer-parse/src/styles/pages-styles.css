@@ -619,3 +619,44 @@ input[type=number]::-webkit-outer-spin-button {
   width: fit-content;
   padding:7px;
 }
+
+/**In module orders*/
+.dialogViewOrder{
+padding: 10px;
+height: 600px;
+width: 600px;
+display: grid;
+}
+.headerDialogView{
+  display: flex;
+  align-items: flex-start;
+  
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: 1px solid #e9ecef;
+  border-top-left-radius: .3rem;
+  border-top-right-radius: .3rem;
+}
+.spanClose{
+cursor: pointer;
+}
+btnCloseDialog span{
+ 
+    float: right;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .5;
+
+}
+.editBtnContainer3 {
+  width: 120px;
+  display: flex;
+  align-items: center;
+
+}
+.infoOrderheader{
+  display:grid;
+}
