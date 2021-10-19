@@ -30,7 +30,19 @@
             res.status(200).json(req.response);
         });
 
+        
+        /**optionals update and remove */
+    router.patch('/upd/:clientId',
+    ClientMiddleware.modifyClient,
+    function (req, res) {
+        res.status(200).json(req.response);
+    });
 
+router.delete('/:id',
+    ClientMiddleware.removeClient,
+    function (req, res) {
+        res.status(200).json(req.response);
+    });
 
     module.exports = router;
 

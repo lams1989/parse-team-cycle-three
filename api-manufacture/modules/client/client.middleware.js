@@ -5,8 +5,10 @@
         addClient: addClient,
         getClients: getClients,
         getClientById: getClientById,
-        getClientByName: getClientByName
+        getClientByName: getClientByName,
         
+        modifyClient: modifyClient,
+        removeClient: removeClient
     };
 
     var ClientService = require('./client.module')().ClientService;
@@ -63,7 +65,34 @@
         }
     };
 
-    
+       
+    /*optional*/
+    function modifyClient(req, res, next) {
+        ClientService.updateClient(req.params.clientId, req.body)
+            .then(success)
+            .catch(error);
+        function success(data) {
+            req.response = data;
+            next();
+        }
+        function error(err) {
+            next(err);
+        }
+    };
+
+    function removeClient(req, res, next) {
+        ClientService.deleteClient(req.params.id)
+            .then(success)
+            .catch(failure);
+        function success() {
+            req.response = "deleled client";
+            next();
+        }
+        function failure(err) {
+            next(err);
+        }
+
+    };
    
 
 })();

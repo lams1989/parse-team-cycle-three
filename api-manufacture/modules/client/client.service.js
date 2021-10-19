@@ -5,7 +5,9 @@
         createClient: createClient,
         fetchClients: fetchClients,
         fetchClientById: fetchClientById,
-        fetchClientByName: fetchClientByName
+        fetchClientByName: fetchClientByName,
+        updateClient: updateClient,
+        deleteClient: deleteClient
         
     };
 
@@ -33,6 +35,19 @@
     }
    
 
+    /*optional*/
+    function updateClient(client_Id, client) {
+        console.log("clientid:", client_Id);
+        console.log("client:", client);
+        return ClientModel.findByIdAndUpdate(client_Id, client, { new: true })
+            .exec();
+    }
+
     
+    function deleteClient(client_Id) {
+        return ClientModel.findByIdAndRemove(client_Id)
+            .exec();
+    }
+
  
 })();
