@@ -9,7 +9,7 @@
             unique:true
         },
         client: {
-            client_id: {
+            client_doc_id: {
                 type: Number,
                 required: true
             },

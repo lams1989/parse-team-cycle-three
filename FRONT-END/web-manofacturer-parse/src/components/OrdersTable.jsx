@@ -91,6 +91,7 @@ const OrdersTable = ({listOrders, setReload}) => {
  </div>
 </Dialog>
 
+
  <Dialog open={confirmDeleteDialog}>
   <div className="dialogDelete">
     
