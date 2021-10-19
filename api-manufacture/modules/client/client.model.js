@@ -4,7 +4,7 @@
     var Schema = mongoose.Schema;
 
     var ClientSchema = new Schema({
-        client_id: {
+        client_doc_id: {
             type: Number,
             required: true,
             unique:true
@@ -12,7 +12,7 @@
         client_name: {
             type: String,
             required: true,
-            unique:true
+            
         }
        
 
