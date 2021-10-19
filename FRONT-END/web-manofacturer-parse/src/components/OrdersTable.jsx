@@ -9,6 +9,8 @@ const OrdersTable = ({listOrders, setReload}) => {
   const RowOrder=({order,setReload})=>{
 
   const [confirmDeleteDialog, setConfirmDeleteDialog] = useState(false);
+  
+  const [viewInfoOrder, setViewInfoOrder] = useState(false);
 
   const ToDeleteOrder = async () => {
     setConfirmDeleteDialog(false);
@@ -33,19 +35,62 @@ const OrdersTable = ({listOrders, setReload}) => {
       <td className="numberTD">{order.id_order}</td>
       <td className="numberTD">{order.seller_id}</td>
       <td className="numberTD">{order.client.client_id}</td>
-      <td className="descripTD">{order.client.client_name}</td>
-      <td className="mediumTD">{order.date}</td>
+      <td className="mediumTD">{order.client.client_name}</td>
+      <td className="smallTD">{order.date}</td>
       <td className="smallTD">{order.total}</td>
       <td className="smallTD " >{order.state}</td>
       <td className="smallTD">
-                  <div className="editBtnContainer">
-      <Tooltip title='Editar' arrow placement="left">
-        <button type="button" className="btnGeneral btnEdit"> <i class="fas fa-user-cog"></i></button></Tooltip>
-        <Tooltip title='Eliminar' arrow placement="botton"> 
-          <button type="reset" className="btnGeneral btnDelete" onClick={() => setConfirmDeleteDialog(true)}>  <i class="fas fa-trash"></i></button></Tooltip>
+                  <div className="editBtnContainer3">
+        <Tooltip title='Ver' arrow placement="top">
+        <button type="button" className="btnGeneral btnDelete" onClick={() => setViewInfoOrder(true)}> <i className="fas fa-eye"></i></button></Tooltip>
+      <Tooltip title='Editar' arrow placement="top">
+        <button type="button" className="btnGeneral btnEdit"> <i className="fas fa-user-cog"></i></button></Tooltip>
+        <Tooltip title='Eliminar' arrow placement="top"> 
+          <button type="reset" className="btnGeneral btnDelete" onClick={() => setConfirmDeleteDialog(true)}>  
+          <i class="fas fa-trash"></i></button></Tooltip>
           </div>
                 </td>
     
+
+<Dialog open={viewInfoOrder}>
+  <div className="dialogViewOrder">
+    <div className="headerDialogView">
+    <h5>Venta # {order.id}</h5>
+    <span className="spanClose">
+    <i className="far fa-times-circle fa-2x" onClick={() => setViewInfoOrder(false)}></i> </span>
+    </div>
+  <div className="infoOrderheader"><span align="center">ID: {order.id_order}  </span>
+<span className="pLarge" align="center"> Cliente: ID {order.client.id} - {order.client.client_name} </span> 
+<span> Vendedor: {order.seller_id} </span>
+<span> Fecha: {order.date} </span>
+
+</div>
+    <div className="tableDialogView">
+      <table className= "tableorderinfo">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Total</th>
+        </tr>
+        <tbody>
+          const  productlist= {order.description}
+
+        </tbody>
+      </thead>
+
+
+      </table>
+    </div>
+
+
+<div className="editBtnContainer2">
+  <button type="button" className="btnGeneral btnEdit" onClick={() => setViewInfoOrder(false)} >OK</button>
+</div> 
+ </div>
+</Dialog>
+
  <Dialog open={confirmDeleteDialog}>
   <div className="dialogDelete">
     
