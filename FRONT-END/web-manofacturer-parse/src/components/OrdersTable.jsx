@@ -74,38 +74,46 @@ const OrdersTable = ({listOrders, setReload}) => {
       
       <table className= "tableorderinfo">
       <thead>
-        <tr className= "thead">
+        <tr className= "viewRow">
           <th>Id</th>
           <th>Producto</th>
           <th>Cantidad</th>
           <th>Precio Und</th>
-          <th>Total</th>
+          <th>Subtotal</th>
+       
         </tr>
       </thead>
 
       <tbody>
       {order.description.map((product) => {
             return (
-              <tr  key={nanoid()} className="datarow">
+              <tr  key={nanoid()} className="viewRow">
               <td className="numberTD">{product.id}</td>
-              <td className="descripTD">{product.description}</td>
-              <td className="smallTD">$ {product.unitprice}</td>
+              <td className="mediumTD">{product.description}</td>
               <td className="smallTD ">{product.quantity}</td>
+              <td className="smallTD">$ {product.unitprice}</td>
+             
+              <td className="smallTD">$ {product.unitprice * product.quantity} </td> 
             </tr>
+      
             
             );
             })}
 
-
-
          </tbody>
+         <tfoot>    <tr>
+          <td align="right"colspan="4">Total</td>
+          <td> {order.total}</td>
+        </tr></tfoot>
       </table>
     </div>
 
+    <div className="divtotalOrder">
+  
+<button type="button" className="btnGeneral btnEdit BtnOK" onClick={() => setViewInfoOrder(false)} >OK</button>
+ </div>
 
-<div className="editBtnOK">
-  <button type="button" className="btnGeneral btnEdit BtnOK" onClick={() => setViewInfoOrder(false)} >OK</button>
-</div> 
+
  </div>
 </Dialog>
 
