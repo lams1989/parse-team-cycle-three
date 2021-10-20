@@ -548,12 +548,13 @@ box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24
  
   .dialogDelete{
     justify-items: center;
-    display: grid;
+    
     padding: 20px;
-    height: 230px;
-    width: 500px;
+    height: 100%;
+    width: 100%;
     font-size: 16px;
     border-radius: 8px;
+    
   }
 
   .editBtnContainer {
@@ -566,13 +567,13 @@ box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24
   .editBtnContainer2 {
     display: flex;
     align-items: center;
-   margin:5px;
+    margin-left: 150px;
 
   }
   
   .editBtnContainer2 button {
     display: flex;
-    margin-left:40px;
+  
     font-size: 20px;
     height: 40px;
     width: 45px;
@@ -645,7 +646,7 @@ overflow-y: hidden;
 .spanClose{
 cursor: pointer;
 }
-btnCloseDialog span{
+.spanClose{
  
     float: right;
     font-size: 1.5rem;
@@ -687,6 +688,9 @@ btnCloseDialog span{
   font-size: 20px;
   height: 40px;
   width: 45px;
+  
+    
+  align-items: center;
 }
 .viewRow{
   font-size:small;

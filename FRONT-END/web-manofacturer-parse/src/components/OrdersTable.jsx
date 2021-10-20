@@ -120,16 +120,18 @@ const OrdersTable = ({listOrders, setReload}) => {
 
  <Dialog open={confirmDeleteDialog}>
   <div className="dialogDelete">
-    
+  <div className="headerDialogView">
 <h5>¿Está seguro de eliminar esta venta?</h5>
-<p align="center">ID: {order.id_order}   - Total: $ {order.total} </p>
+<span className="spanClose">
+    <i className="far fa-times-circle fa-2x" onClick={() => setConfirmDeleteDialog(false)}></i> </span></div>
 
+<p align="center">ID: {order.id_order}   - Total: $ {order.total} </p>
 <p className="pLarge" align="center"> Cliente: ID {order.client.client_doc_id} - {order.client.client_name} </p>
 <p className="pLarge" align="center"> Fecha: ID {order.date}</p>
 
 
-<div className="editBtnContainer2">
-  <button type="button" className="btnGeneral btnEdit"  onClick={() => ToDeleteOrder()} >Si</button>
+<div  className="editBtnContainer2">
+  <button type="button" className="btnGeneral btnEdit BtnOK"  onClick={() => ToDeleteOrder()} >Si</button>
   <button type="reset" className="btnGeneral btnDelete" onClick={() => setConfirmDeleteDialog(false)} >No</button>
 </div> 
  </div>
