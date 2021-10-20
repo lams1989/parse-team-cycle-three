@@ -12,14 +12,13 @@ const OrdersTable = ({listOrders, setReload}) => {
   
   const [viewInfoOrder, setViewInfoOrder] = useState(false);
 
-  const [arrayProducts, setArrayProducts]= useState([]);
   const ToDeleteOrder = async () => {
     setConfirmDeleteDialog(false);
     await deleteOrder(
       order._id,
       (response) => {
         console.log(response.data);
-       
+        
         toast.success('Venta eliminada con éxito');
       
       },
@@ -51,7 +50,7 @@ const OrdersTable = ({listOrders, setReload}) => {
         <button type="button" className="btnGeneral btnEdit"> <i className="fas fa-user-cog"></i></button></Tooltip>
         <Tooltip title='Eliminar' arrow placement="top"> 
           <button type="reset" className="btnGeneral btnDelete" onClick={() => setConfirmDeleteDialog(true)}>  
-          <i class="fas fa-trash"></i></button></Tooltip>
+          <i className="fas fa-trash"></i></button></Tooltip>
           </div>
                 </td>
               
