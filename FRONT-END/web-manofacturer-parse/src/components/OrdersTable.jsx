@@ -12,6 +12,7 @@ const OrdersTable = ({listOrders, setReload}) => {
   
   const [viewInfoOrder, setViewInfoOrder] = useState(false);
 
+  const [arrayProducts, setArrayProducts]= useState([]);
   const ToDeleteOrder = async () => {
     setConfirmDeleteDialog(false);
     await deleteOrder(
@@ -31,10 +32,13 @@ const OrdersTable = ({listOrders, setReload}) => {
   }
 
   return (
+
+    
+
     <tr className="datarow">
       <td className="numberTD">{order.id_order}</td>
-      <td className="numberTD">{order.seller_id}</td>
-      <td className="numberTD">{order.client.client_id}</td>
+      <td className="numberTD">{order.seller.seller_id}</td>
+      <td className="numberTD">{order.client.client_doc_id}</td>
       <td className="mediumTD">{order.client.client_name}</td>
       <td className="smallTD">{order.date}</td>
       <td className="smallTD">{order.total}</td>
@@ -50,43 +54,57 @@ const OrdersTable = ({listOrders, setReload}) => {
           <i class="fas fa-trash"></i></button></Tooltip>
           </div>
                 </td>
-    
+              
 
 <Dialog open={viewInfoOrder}>
+
   <div className="dialogViewOrder">
     <div className="headerDialogView">
-    <h5>Venta # {order.id}</h5>
+    <h5>Venta # {order.id_order}</h5>
     <span className="spanClose">
     <i className="far fa-times-circle fa-2x" onClick={() => setViewInfoOrder(false)}></i> </span>
     </div>
-  <div className="infoOrderheader"><span align="center">ID: {order.id_order}  </span>
-<span className="pLarge" align="center"> Cliente: ID {order.client.id} - {order.client.client_name} </span> 
+  <div className="infoOrderheader">
+<span className="pLarge" > Cliente: ID {order.client.id} - {order.client.client_name} </span> 
 <span> Vendedor: {order.seller_id} </span>
 <span> Fecha: {order.date} </span>
 
 </div>
     <div className="tableDialogView">
+      
       <table className= "tableorderinfo">
       <thead>
-        <tr>
+        <tr className= "thead">
           <th>Id</th>
           <th>Producto</th>
           <th>Cantidad</th>
+          <th>Precio Und</th>
           <th>Total</th>
         </tr>
-        <tbody>
-          const  productlist= {order.description}
-
-        </tbody>
       </thead>
 
+      <tbody>
+      {order.description.map((product) => {
+            return (
+              <tr  key={nanoid()} className="datarow">
+              <td className="numberTD">{product.id}</td>
+              <td className="descripTD">{product.description}</td>
+              <td className="smallTD">$ {product.unitprice}</td>
+              <td className="smallTD ">{product.quantity}</td>
+            </tr>
+            
+            );
+            })}
 
+
+
+         </tbody>
       </table>
     </div>
 
 
-<div className="editBtnContainer2">
-  <button type="button" className="btnGeneral btnEdit" onClick={() => setViewInfoOrder(false)} >OK</button>
+<div className="editBtnOK">
+  <button type="button" className="btnGeneral btnEdit BtnOK" onClick={() => setViewInfoOrder(false)} >OK</button>
 </div> 
  </div>
 </Dialog>
@@ -96,8 +114,11 @@ const OrdersTable = ({listOrders, setReload}) => {
   <div className="dialogDelete">
     
 <h5>¿Está seguro de eliminar esta venta?</h5>
-<p align="center">ID: {order.id_order}  </p>
-<p className="pLarge" align="center"> Cliente: ID {order.client.id} - {order.client.client_name} </p>
+<p align="center">ID: {order.id_order}   - Total: $ {order.total} </p>
+
+<p className="pLarge" align="center"> Cliente: ID {order.client.client_doc_id} - {order.client.client_name} </p>
+<p className="pLarge" align="center"> Fecha: ID {order.date}</p>
+
 
 <div className="editBtnContainer2">
   <button type="button" className="btnGeneral btnEdit"  onClick={() => ToDeleteOrder()} >Si</button>
@@ -132,8 +153,10 @@ const OrdersTable = ({listOrders, setReload}) => {
         {/*All this data rows are examples. Later it will be implemented a function map that fills the rows*/}
         <tbody>
           {listOrders.map((order) => {
+            console.log(order);
             return (
                 <RowOrder  key={nanoid()} order= {order} setReload= {setReload}/>
+                
               );
             })}
       
