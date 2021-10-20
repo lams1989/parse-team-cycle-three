@@ -23,7 +23,16 @@
         function (req, res) {
             res.status(200).json(req.response);
         });
-
+        router.get('/idclient/:idClient',
+        OrderMiddleware.getOrderByIdClient,
+        function (req, res) {
+            res.status(200).json(req.response);
+        });
+        router.get('/clientname/:clientName',
+        OrderMiddleware.getOrderByClientName,
+        function (req, res) {
+            res.status(200).json(req.response);
+        });
     router.put('/:orderId',
         OrderMiddleware.modifyOrder,
         function (req, res) {

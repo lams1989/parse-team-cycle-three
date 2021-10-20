@@ -119,6 +119,36 @@ export const obtainOrders = async (successCallback, errorCallback) => {
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
 
+export const obtainOrderById = async (id, successCallback, errorCallback) => {
+  var options = {
+    method: 'GET',
+    url: `http://localhost:3001/orders/${id}/`,
+    headers: { 'Content-Type': 'application/json' }
+  };
+  await axios.request(options).then(successCallback).catch(errorCallback);
+};
+
+export const obtainOrderByClientId = async (idclient, successCallback, errorCallback) => {
+  var options = {
+    method: 'GET',
+    url: `http://localhost:3001/orders/idclient/${idclient}/`,
+    headers: { 'Content-Type': 'application/json' }
+  };
+  console.log(options);
+  await axios.request(options).then(successCallback).catch(errorCallback);
+};
+
+export const obtainOrderByClientName = async (clientname, successCallback, errorCallback) => {
+  var options = {
+    method: 'GET',
+    url: `http://localhost:3001/orders/clientname/${clientname}/`,
+    headers: { 'Content-Type': 'application/json' }
+  };
+  console.log(options);
+  await axios.request(options).then(successCallback).catch(errorCallback);
+};
+
+
 export const deleteOrder = async (id, successCallback, errorCallback) => {
   var options = {
     method: 'DELETE',

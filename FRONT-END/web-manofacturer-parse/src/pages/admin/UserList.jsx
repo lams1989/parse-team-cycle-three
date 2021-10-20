@@ -30,6 +30,7 @@ const UserList = () => {
     if (reload) {
       fetchUsers();
     }
+    
   }, [reload]);
 
 
@@ -52,6 +53,8 @@ const UserList = () => {
       (response) => {
         console.log(response.data);
         toast.success('user was created SUCCESSFULLY');
+        
+    document.getElementById("formAddUser").reset();
         setReload(true);
       },
       (error) => {
@@ -71,7 +74,7 @@ const UserList = () => {
 
       <h3 className=" addNewSubt marg-l"> Agregar Usuario</h3>
       <div className="addContainer">
-        <form ref={formAddUser} onSubmit={submitCreateUser}>
+        <form id= "formAddUser"ref={formAddUser} onSubmit={submitCreateUser}>
           <ul className="listFields">
             <li>
               <label> ID Usuario</label>

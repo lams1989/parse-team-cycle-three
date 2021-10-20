@@ -548,12 +548,13 @@ box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24
  
   .dialogDelete{
     justify-items: center;
-    display: grid;
+    
     padding: 20px;
-    height: 200px;
-    width: 500px;
+    height: 100%;
+    width: 100%;
     font-size: 16px;
     border-radius: 8px;
+    
   }
 
   .editBtnContainer {
@@ -566,13 +567,13 @@ box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24
   .editBtnContainer2 {
     display: flex;
     align-items: center;
-   margin:5px;
+    margin-left: 150px;
 
   }
   
   .editBtnContainer2 button {
     display: flex;
-    margin-left:40px;
+  
     font-size: 20px;
     height: 40px;
     width: 45px;
@@ -621,26 +622,31 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 /**In module orders*/
+
 .dialogViewOrder{
-padding: 10px;
-height: 600px;
-width: 600px;
-display: grid;
+padding: 20px;
+height: 100%;
+width: 100%;
+
+overflow-x: hidden;
+overflow-y: hidden;
 }
 .headerDialogView{
   display: flex;
   align-items: flex-start;
-  
   justify-content: space-between;
-  padding: 1rem;
-  border-bottom: 1px solid #e9ecef;
+  padding: 10px;
+  border-bottom: 1px solid var(--btn_color);
   border-top-left-radius: .3rem;
   border-top-right-radius: .3rem;
+  color:var(--btn_color);
+  
 }
+
 .spanClose{
 cursor: pointer;
 }
-btnCloseDialog span{
+.spanClose{
  
     float: right;
     font-size: 1.5rem;
@@ -659,4 +665,44 @@ btnCloseDialog span{
 }
 .infoOrderheader{
   display:grid;
+  margin-bottom: 5px;
+  padding: 10px;
+}
+.tableDialogView{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  height: 250px;
+  
+  overflow-x: hidden;
+  overflow-y: scroll;
+ 
+  text-align: center; 
+}
+.editBtnOK{
+  margin-left: 200px;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.BtnOK{
+  font-size: 20px;
+  height: 40px;
+  width: 45px;
+  
+    
+  align-items: center;
+}
+.viewRow{
+  font-size:small;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  margin: 5px;
+ 
+}
+.viewRow td{
+  padding: 5px;
+}
+.divtotalOrder{
+  text-align: center;
+  align-items: center;
+  
 }

@@ -50,7 +50,7 @@ const Products = () => {
       (response) => {
         console.log(response.data);
         toast.success('Producto agregado con éxito');
- 
+        document.getElementById("formCreateProduct").reset();
       },
       (error) => {
         console.error(error);
@@ -115,11 +115,11 @@ else if(searchby=="searchbyDescrip"){
       <h2 className=" addNewSubt marg-l">Agregar Producto</h2>
       
       <div className="newOrderContainer">
-        <form ref={formAddProduct} onSubmit={submitCreateForm} >
+        <form id= "formCreateProduct" ref={formAddProduct} onSubmit={submitCreateForm} >
         <ul className="ulProduct">
           <li>
             <label>ID Producto</label>
-            <input  name="id" className="inputChange inputNumber " placeholder="ID"  required></input>
+            <input  name="id" className="inputChange inputNumber " type= "number" min="1"placeholder="ID"  required></input>
           </li>
           <li>
             <label>Precio Unitario</label>
