@@ -47,7 +47,7 @@ const OrdersTable = ({listOrders, setReload}) => {
         <Tooltip title='Ver' arrow placement="top">
         <button type="button" className="btnGeneral btnDelete" onClick={() => setViewInfoOrder(true)}> <i className="fas fa-eye"></i></button></Tooltip>
       <Tooltip title='Editar' arrow placement="top">
-        <button type="button" className="btnGeneral btnEdit"> <i className="fas fa-user-cog"></i></button></Tooltip>
+        <button type="button" className="btnGeneral btnEdit"> <i className="fas fa-edit"></i></button></Tooltip>
         <Tooltip title='Eliminar' arrow placement="top"> 
           <button type="reset" className="btnGeneral btnDelete" onClick={() => setConfirmDeleteDialog(true)}>  
           <i className="fas fa-trash"></i></button></Tooltip>
