@@ -8,6 +8,9 @@
   --hover_blue: #3880ec;
 }
 
+.tabscontainer{
+  margin-left: 20px;
+}
 /*main page container style*/
 .MainSection{
   margin-top: 300px;
@@ -19,10 +22,8 @@
 
 /*title page div style*/
 .titlepage{
-  
-  background-color: lavender;
+  margin-top: 10px;
   align-items: center;
-  margin-bottom:20px;
   margin-left: 10px;
   margin-right: 20px;
   
@@ -221,15 +222,15 @@ btnCreateUser,.btnCreateProduct:hover{
 .searchContainer{
   display:  flex;
   height: 70px;
-  background-color: var(--colorbackground1);
   justify-content: space-between;
   padding-top: 10px;
   padding-bottom: 5px;
   padding-left: 10px;
   margin: 10px 50px 20px 30px;
-  border: 2px solid;
+ /* border: 2px solid;
   border-color: lightslategray;
-  
+  background-color: var(--colorbackground1);
+  */
 }
 
 /*Styles for html elements in the section of adding new  information*/
@@ -297,6 +298,8 @@ position: relative;
 border:0.5px solid gray;
 
 box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+
+height: 100%;
 }
 
 /*size for table in list products in new order section*/
@@ -305,21 +308,21 @@ box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24
 }
 /*size for orders list*/
 .divOrderslist{
-  height: 600px;
+  height: 540px;
   
 }
 
 /*size for products list*/
 .divProducts{
-  height: 380px;
+  height: 510px;
   
 }
 
 
 /**size for user table*/
 .divUsuariosList{
-  
-  height:370px;
+  margin-top:20px;
+  height:540px;
 }
 
 
@@ -332,6 +335,7 @@ box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24
 .thead{
   background-color: black;
   color:white;
+ 
 }
 .thead tr th { 
   position: sticky;
@@ -346,13 +350,14 @@ box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24
   padding-inline: 10px;
   text-transform: uppercase;
   letter-spacing: 0.1rem;
-  font-weight: 900;
+  font-size: small;
   background-color: white;
 }
 
 .col-last{
  padding-left: 20px;
-  color: white;
+  color: white; 
+  font-size: small;
 }
 .datarow{
   height:50px;
@@ -617,6 +622,7 @@ input[type=number]::-webkit-outer-spin-button {
   align-self: center;
   height: 50px;
   margin-bottom: 10px;
+  margin-top: 10px;
   width: fit-content;
   padding:7px;
 }

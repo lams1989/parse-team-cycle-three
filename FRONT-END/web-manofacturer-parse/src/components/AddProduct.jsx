@@ -3,11 +3,12 @@ import search from "media/zoom_in_white_48dp.svg"
 import checkicon from "media/done_outline_white_48dp.svg"
 import ProductTable from 'components/ProductTable'
 import { createProduct,obtainProducts,obtainProductById,obtainProductByDescrip} from 'utils/Api-connection';
-
 import { ToastContainer, toast,Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const Products = () => {
+
+
+const ProductsManager = () => {
 
   const formAddProduct = useRef(null);
   const formSearchProduct= useRef(null);
@@ -16,22 +17,6 @@ const Products = () => {
   const [reload, setReload]= useState(false);
 
   
-   useEffect(async () => {
-    console.log(
-      'Hola, soy un use effect que se ejecuta solo una vez cuando la pagina se renderiza, para cargar la lista de productos inicial'
-    );
-    await obtainProducts(
-      (response) => {
-        console.log('la respuesta que se recibio fue', response);
-        console.log(response.data);
-        setListProducts(response.data);
-      },
-      (error) => {
-        console.error('Salio un error:', error);
-      }
-    );
-    setReload(false);
-  }, [reload]);
   const submitCreateForm = async (e) => {
     e.preventDefault();
     const fd = new FormData(formAddProduct.current);
@@ -58,7 +43,7 @@ const Products = () => {
       }
     );
       
-      setReload(true);
+     
 };
 
 const submitSearchForm = async (e) => {
@@ -107,11 +92,8 @@ else if(searchby=="searchbyDescrip"){
 } 
 }
   return (
-    <div className="MainSection">
-   
-      <div className="titlepage">
-        <span className="title"> Lista de Productos</span>
-      </div>
+    <div >
+  
       <h2 className=" addNewSubt marg-l">Agregar Producto</h2>
       
       <div className="newOrderContainer">
@@ -152,7 +134,8 @@ else if(searchby=="searchbyDescrip"){
        transition={Zoom}
        limit={1}
        />
-      <div className="searchContainer withupdatesection marg-l">
+
+    {/*  <div className="searchContainer withupdatesection marg-l">
         <form ref={formSearchProduct} onSubmit={submitSearchForm} >
           <span>Selecciona </span>
           <select name= "searchSelect" className="selectRole" required >
@@ -168,13 +151,13 @@ else if(searchby=="searchbyDescrip"){
         </form>
         
         <button className="btnGeneral btnBack" onClick={()=>setReload(!reload)}><i className="fas fa-undo-alt"></i>Volver a tabla</button> 
-        
+
       </div>
-    <ProductTable listpr={listProducts} setReload={setReload}/>
-  
+  <ProductTable listpr={listProducts} setReload={setReload}/>*/}
+    
     </div>
   )
 }
 
-export default Products;
+export default ProductsManager;
 

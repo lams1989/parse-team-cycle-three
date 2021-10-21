@@ -5,19 +5,42 @@ import { ToastContainer, toast, Zoom } from 'react-toastify';
 import { Dialog, Tooltip } from '@material-ui/core';
 import { nanoid } from 'nanoid';
 
-const UsersTable = ({ listpr , setReload}) => {
+import { optainUsers } from "utils/Api-connection"
+const UsersTable = ({ }) => {
   
 const [searching, setSearching] = useState('');
-const [usuariosFiltrados, setUsuariosFiltrados] = useState(listpr);
- 
+const [usuariosFiltrados, setUsuariosFiltrados] = useState([]);
+const [reload, setReload] = useState(true);
+const [usersList, setUsersList] = useState([]);
+
+useEffect(() => {
+  const fetchUsers= async () => {
+  
+  await optainUsers(
+    (response) => {
+      setUsersList(response.data);
+      setReload(false);
+    },
+    (error) => {
+      console.error('Salio un error:', error);
+    }
+    );
+  };
+  console.log('consulta', reload);
+  if (reload) {
+    fetchUsers();
+  }
+  
+}, [reload]);
+
   
   useEffect(() => {
     setUsuariosFiltrados(
-      listpr.filter((elemento) => {
+      usersList.filter((elemento) => {
         return JSON.stringify(elemento).toLowerCase().includes(searching.toLowerCase());
       })
     );
-  }, [searching, listpr]);
+  }, [searching, usersList]);
 
 
   const RowUser = ({ user }) => {
@@ -161,11 +184,11 @@ const ToDeleteUser = async () => {
         limit={1}
       />
      <div className="searchContainerUser">
-
         <label>Buscar Usuario por </label>
           <input type="text" className="toSearchInput"
            placeholder="Buscar" value={searching}  
-          onChange={(e) => setSearching(e.target.value)}/>
+          onChange={(e) => setSearching(e.target.value)} /> 
+            
       </div>
       <div className="listSectionContainer divUsuariosList">
         <table className="ListTable">

@@ -6,7 +6,7 @@ const Loggin = () => {
 
 	const [userNameLog, setUserName] = React.useState('')
 	const [emailLog, setEmail] = React.useState('')
-	const [passwordLog, setPassword] = React.useState('')S
+	const [passwordLog, setPassword] = React.useState('')
 	const logginStart = (e) => {
 		e.preventDefault()
 

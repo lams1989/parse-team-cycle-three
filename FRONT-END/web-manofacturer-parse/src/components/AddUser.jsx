@@ -2,37 +2,14 @@ import UsersTable from 'components/UsersTable';
 import React, { useEffect, useState, useRef } from 'react';
 import "styles/pages-styles.css"
 import useradd from "media/person_add_alt_white_48dp.svg"
-import searchuser from "media/zoom_in_white_48dp.svg"
+
 import { createUser, optainUsers, obtainUserById } from "utils/Api-connection"
 import { ToastContainer, toast, Zoom } from 'react-toastify';
 
 
-const UserList = () => {
+const AddUser = () => {
 
   const formAddUser = useRef(null);
-  const [reload, setReload] = useState(true);
-  const [usersList, setUsersList] = useState([]);
-
-  useEffect(() => {
-    const fetchUsers= async () => {
-    
-    await optainUsers(
-      (response) => {
-        setUsersList(response.data);
-        setReload(false);
-      },
-      (error) => {
-        console.error('Salio un error:', error);
-      }
-      );
-    };
-    console.log('consulta', reload);
-    if (reload) {
-      fetchUsers();
-    }
-    
-  }, [reload]);
-
 
   const submitCreateUser = (e) => {
     e.preventDefault();
@@ -55,7 +32,7 @@ const UserList = () => {
         toast.success('user was created SUCCESSFULLY');
         
     document.getElementById("formAddUser").reset();
-        setReload(true);
+       
       },
       (error) => {
         console.error(error);
@@ -68,10 +45,7 @@ const UserList = () => {
   
   return (
     <div className="MainSection">
-      <div className="titlepage">
-        <span className="title">   Lista de Usuarios</span>
-      </div>
-
+     
       <h3 className=" addNewSubt marg-l"> Agregar Usuario</h3>
       <div className="addContainer">
         <form id= "formAddUser"ref={formAddUser} onSubmit={submitCreateUser}>
@@ -119,10 +93,8 @@ const UserList = () => {
       />
      
 
-      <UsersTable listpr={usersList} setReload={setReload} />
-
     </div>
   )
 }
 
-export default UserList
+export default AddUser
