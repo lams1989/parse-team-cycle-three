@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import search from "media/zoom_in_white_48dp.svg"
-import checkicon from "media/done_outline_white_48dp.svg"
+
 
 import { createProduct} from 'utils/Api-connection';
 import { ToastContainer, toast,Zoom } from 'react-toastify';
@@ -45,10 +44,10 @@ const ProductsManager = () => {
 
   return (
     <div className="MainSection">
-  
+  <h2 align="center" className=" addNewSubt marg-l">Nuevo Producto </h2>
     
       <div className="newOrderContainer">
-      <h2 align="center" className=" addNewSubt marg-l">Nuevo Producto </h2>
+      
       
         <form id= "formCreateProduct" ref={formAddProduct} onSubmit={submitCreateForm} >
         <ul className="ulProduct">

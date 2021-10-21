@@ -50,7 +50,7 @@ const AddUser = () => {
       <div className="newOrderContainer">
      
         <form id= "formAddUser"ref={formAddUser} onSubmit={submitCreateUser}>
-          <ul className="listFields">
+          <ul className="ulProduct">
             <li>
               <label> ID Usuario</label>
               <input name="userId" className="inputChange inputValue" type="text" required placeholder="ID"></input>

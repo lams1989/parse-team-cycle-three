@@ -41,8 +41,14 @@ const AddOrder = () => {
        
         </div>
         </div>
-        <div className="btnOrdersDiv">
-          <button className="btnGeneral btnEdit">Añadir Producto</button>
+        <div className="divBtnTotalOrder">
+          
+          <button className="btnBig btnAddOrder">
+          <img className="btnIcon" src={checkicon}  alt="img"></img> Guardar
+          </button>
+          <button className=" btnBig btnCancelOrder">
+            Cancelar
+          </button>
         </div>
         </div>
       </form>
@@ -52,6 +58,16 @@ const AddOrder = () => {
  
      
       <div className="listSectionContainer divProductToAdd ">
+
+    <div className="productsToCart">
+    <h3 className="subt1">Añadir Producto:</h3>
+
+
+
+    </div>
+
+
+
       <h3 className="subt1">Lista de Productos Comprados:</h3>
         <table className="ListTable">
           <thead className="thead">
