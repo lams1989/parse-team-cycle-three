@@ -116,7 +116,7 @@ const ToDeleteUser = async () => {
         ) : (
           <>
             <td className="numberTD">{user.id}</td>
-            <td className="smallLargeTD">{user.name}</td>
+            <td className="mediumTD">{user.name}</td>
             <td className="smallTD">{user.email}</td>
             <td className="smallLargeTD ">{user.role}</td>
             <td className="smallLargeTD ">{user.state}</td>

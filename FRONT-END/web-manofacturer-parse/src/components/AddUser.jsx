@@ -47,7 +47,7 @@ const AddUser = () => {
     <div className="MainSection">
      
       <h3 className=" addNewSubt marg-l"> Agregar Usuario</h3>
-      <div className="addContainer">
+      <div className="newOrderContainer">
         <form id= "formAddUser"ref={formAddUser} onSubmit={submitCreateUser}>
           <ul className="listFields">
             <li>
@@ -56,12 +56,14 @@ const AddUser = () => {
             </li>
             <li>
               <label> Nombre</label>
-              <input name="name" className="inputChange" type="text" required placeholder="Nombre"></input>
+              <input name="name" className="inputChange mediumTD" type="text" required placeholder="Nombre"></input>
             </li>
+           
             <li>
               <label> Correo Electrónico</label>
               <input name="email" className="inputChange smallLargeTD" autoComplete="email" required placeholder="Correo electrónico"></input>
             </li>
+         
             <li className="addDataRoleContainer">
               <label> Rol </label>
               <select name="role" className="selectRole">
@@ -78,6 +80,7 @@ const AddUser = () => {
                 <option className="pending" value="pendiente">Pendiente</option>
               </select>
             </li>
+           
           </ul>
           <div className="btnOptionsContainer">
             <button type="submit" className="btnGeneral btnCreateUser"> <img className="btnIcon" src={useradd} alt="img"></img> Crear Usuario</button>

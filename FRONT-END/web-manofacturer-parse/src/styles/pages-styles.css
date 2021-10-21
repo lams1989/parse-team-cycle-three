@@ -9,14 +9,16 @@
 }
 
 .tabscontainer{
-  margin-left: 20px;
+  margin-left: 0px;
 }
 /*main page container style*/
 .MainSection{
-  margin-top: 300px;
- margin:0px;
+margin-top: 20px;
+ 
  margin-left: 10px;
- display:ms-grid;
+ display:grid;
+ justify-items: center;
+ justify-content: center;
  
  }
 
@@ -41,14 +43,8 @@
 
 .addNewSubt{
   font-size: 20px;
-  background-color: var(--black);
-  margin-left: 20px;
-  color:white;
-  height: 30px;
-  margin-right: 20px;
-  padding-left: 20px;
-  margin-bottom: 3px;
-  margin-top: 10px;
+  
+  color:var(--colortitle)
 }
 
 .subt1{
@@ -70,6 +66,9 @@
   margin-right: 2px;
 }
 
+i {
+  padding:2px;
+}
 /*buttons */
 .btnGeneral {
   
@@ -97,6 +96,7 @@
   background-color: var(--btn_color);
   margin-left: 500px;
   margin-right: 20px;
+  
   color:white;
 }
 
@@ -183,26 +183,31 @@ btnCreateUser,.btnCreateProduct:hover{
 
 
 /*selects */
-.selectRole{
+.selectRole, .selectStatus{
   margin-top:5px;
-  margin-left: 10px;
+  
   font-size: 16px;
-  padding: 8px;
-  width: 170px;
- 
+  padding: 4px;
+  width: 150px;
+ height: 35px;
   margin-left:0px;
   margin-bottom: 5px;
+  outline: none;
 }
+
+/*
 .selectStatus {
   font-size: 16px;
   background-color: white;
-  padding: 8px;
+  padding: 4px;
   width: 160px;
   margin-top:3px;
   margin-bottom: 5px;
-  margin-left: 5px;
+  
  
 }
+*/
+
 .aproved{
   color:green;
 }
@@ -263,9 +268,10 @@ btnCreateUser,.btnCreateProduct:hover{
 }
 
 .listFields label{
+  margin-top:20px;
   padding-inline: 2px;
   color: black;
-  font-style:italic;
+  color:var(--colortitle)
 }
 .addDataRoleContainer > select{
   margin-left: 10px;
@@ -274,11 +280,19 @@ btnCreateUser,.btnCreateProduct:hover{
 /*ul de product section*/
 .ulProduct{
   list-style: none;
-  display: flex;
+  align-items: center;
   
 }
 .ulProduct li{
   padding-right: 30px;
+  text-align: bottom;
+  margin: 5px;
+  color:var(--colortitle)
+ 
+}
+.ulProduct label{
+ margin-right: 20px;
+ 
 }
 
 
@@ -333,45 +347,43 @@ height: 100%;
   
 }
 .thead{
-  background-color: black;
-  color:white;
- 
-}
-.thead tr th { 
+  background-color: whitesmoke;
   position: sticky;
   top: 0;
   z-index: 10;
-  background-color: var(--black);
-
+  color:var(--colortitle);
+  
+  border-bottom:2px solid;
+  border-color: var(--colortitle);
+  
 }
 
 .col_title{
   padding: 5px;
   padding-inline: 10px;
-  text-transform: uppercase;
+  text-transform: capitalize;
   letter-spacing: 0.1rem;
-  font-size: small;
-  background-color: white;
+  font-size: 15px;
+  
 }
 
 .col-last{
  padding-left: 20px;
-  color: white; 
+ color:var(--colortitle);
   font-size: small;
+  
 }
 .datarow{
-  height:50px;
+  height:100%;
   width: 100%;
   
-  background-color: white;
 }
 
 .datarow td{
-  
-  padding-left: 20px;
-  border:1px solid;
+  padding:6px;
+  border-bottom:1px solid;
   border-color: gray;
-  padding-left:10px;
+  
 }
 .pad-b{
   padding-bottom: 5px;
@@ -416,7 +428,7 @@ height: 100%;
   padding: 4px;
   border-radius: 8px;
  
-  height: 30px;
+  height: 40px;
   margin-top:8px;
  margin-left: 10px;
  margin-right: 10px;
@@ -429,20 +441,21 @@ height: 100%;
   
   background-color: white;
   border: 1px solid gray;
-  padding: 4px;
-  border-radius: 8px;
   
-  height: 30px;
+  padding: 4px;
+  border-radius: 6px;
+  
+  height: 35px;
   margin-top:8px;
 
   outline: none;
-  display: flex;
+  
   
 }
 .inputNumber{
  margin-left: 20px;
  margin-right: 10px;
- width: 40px;
+ width: 80px;
 }
 .inputMedium{
   width: 600px;
@@ -453,7 +466,7 @@ height: 100%;
   overflow-wrap: break-word;
 }
 .inputValue{
-  width: 70px;
+  width: 100px;
 }
 .inputLarge{
   width: 670px;
@@ -472,6 +485,8 @@ height: 100%;
 /**Sección para estilos de modulo ventas**/
 .newOrderContainer{
   display: grid;
+  align-items: center;
+  justify-items: center;
   background-color: var(--colorbackground1);
   border:1px solid;
   border-color: lightslategray;
