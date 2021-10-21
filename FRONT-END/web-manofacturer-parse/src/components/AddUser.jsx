@@ -46,8 +46,9 @@ const AddUser = () => {
   return (
     <div className="MainSection">
      
-      <h3 className=" addNewSubt marg-l"> Agregar Usuario</h3>
+     <h3 align="center"className=" addNewSubt marg-l"> Nuevo Usuario</h3>
       <div className="newOrderContainer">
+     
         <form id= "formAddUser"ref={formAddUser} onSubmit={submitCreateUser}>
           <ul className="listFields">
             <li>

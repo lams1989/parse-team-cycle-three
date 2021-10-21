@@ -247,31 +247,32 @@ btnCreateUser,.btnCreateProduct:hover{
   border-radius: 6px;
   border: 1px solid;
   border-color: gray;
-  
+  align-self: left;
 }
 
 /* ul  userlist section*/
 .listFields{ 
   display: flex;
-  list-style: none;  
+  list-style: none;
+  justify-content: space-between;  
  
 }
 
 .listFields >li{
-  
-  justify-content: space-between;
+
   border-radius: 4px;
   margin-left: 20px;
   margin-top: 0px;
   border:white ;
- 
 }
+
 
 .listFields label{
   margin-top:20px;
   padding-inline: 2px;
   color: black;
   color:var(--colortitle)
+  
 }
 .addDataRoleContainer > select{
   margin-left: 10px;
@@ -318,7 +319,8 @@ height: 100%;
 
 /*size for table in list products in new order section*/
 .divProductToAdd{
-  height: 300px;
+  width: 100%;
+  height: 100%;
 }
 /*size for orders list*/
 .divOrderslist{
@@ -484,9 +486,7 @@ height: 100%;
 
 /**Sección para estilos de modulo ventas**/
 .newOrderContainer{
-  display: grid;
-  align-items: center;
-  justify-items: center;
+  display: flex;
   background-color: var(--colorbackground1);
   border:1px solid;
   border-color: lightslategray;
@@ -496,20 +496,6 @@ height: 100%;
   margin-right: 50px;
   
   
-}
-
-
-.stateDiv{
-  margin-left: 150px;
-}
-.listFields .totalLi{
-
-  margin-left: 300px;
-}
-
-.listFields .stateDiv{
-
-  margin-left: 200px;
 }
 
 /*div containers de btn*/
@@ -725,5 +711,51 @@ cursor: pointer;
 .divtotalOrder{
   text-align: center;
   align-items: center;
+  
+}
+.orderSplit{
+  display: flex;
+  margin-left: 0px;
+  grid-gap: 10px;
+  height: 100%;
+  width: 100%;
+  
+}
+
+
+.formNewOrder input{
+  display: inline-flex;
+  width: 200px;
+}
+
+.newOrderCont{
+  margin-top: 20px;
+}
+
+.labelsOrders{
+  display: grid;
+  padding: 4px;
+  
+}
+.labelsOrders label{
+  display: grid;
+  padding: 4px;
+  height: 35px;
+  margin-top: 10px;
+  width: 120px;
+}
+.inputsOrders{
+  display: grid;
+  padding: 4px;
+}
+.sectionOrder{
+  display: grid;
+}
+.newOrderCont{
+  display: flex;
+  grid-template-rows: repeat(2, 1fr);
+}
+.btnOrdersDiv{
+  margin-top: 30px;
   
 }

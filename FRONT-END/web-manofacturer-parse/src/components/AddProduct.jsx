@@ -46,9 +46,10 @@ const ProductsManager = () => {
   return (
     <div className="MainSection">
   
-      <h2 className=" addNewSubt marg-l">Nuevo Producto </h2>
-      
+    
       <div className="newOrderContainer">
+      <h2 align="center" className=" addNewSubt marg-l">Nuevo Producto </h2>
+      
         <form id= "formCreateProduct" ref={formAddProduct} onSubmit={submitCreateForm} >
         <ul className="ulProduct">
           <li>
