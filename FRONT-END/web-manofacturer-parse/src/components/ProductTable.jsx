@@ -5,7 +5,7 @@ import { ToastContainer, toast,Zoom } from 'react-toastify';
 import { updateProductInfo ,deleteProduct} from 'utils/Api-connection';
 import { Dialog, Tooltip } from '@material-ui/core';
 
-import { createProduct,obtainProducts,obtainProductById,obtainProductByDescrip} from 'utils/Api-connection';
+import { obtainProducts,obtainProductById,obtainProductByDescrip} from 'utils/Api-connection';
 
 const ProductTable = () => {
   

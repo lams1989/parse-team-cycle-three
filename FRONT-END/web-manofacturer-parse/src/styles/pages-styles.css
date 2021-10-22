@@ -9,7 +9,7 @@
 }
 
 .tabscontainer{
-  margin-left: 0px;
+  margin-left: 20px;
 }
 /*main page container style*/
 .MainSection{
@@ -43,7 +43,7 @@ margin-top: 20px;
 
 .addNewSubt{
   font-size: 20px;
-  margin-top: 20px;
+  margin-top: 10px;
   color:var(--colortitle)
 }
 
@@ -312,15 +312,15 @@ position: relative;
 
 border:0.5px solid gray;
 
-box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
 
 height: 100%;
 }
 
 /*size for table in list products in new order section*/
 .divProductToAdd{
-  width: 100%;
-  height: 600px;
+  border:none;
+  overflow-y: hidden;
+  
 }
 /*size for orders list*/
 .divOrderslist{
@@ -456,7 +456,7 @@ height: 100%;
   
 }
 .inputNumber{
- margin-left: 20px;
+ 
  margin-right: 10px;
  width: 80px;
 }
@@ -480,7 +480,7 @@ height: 100%;
 .inputTotal{
   background-color: lightgray;
   height: 40px;
-  width: 300px;
+  width: 200px;
 }
 
 /*other styles for specific section*/
@@ -521,17 +521,18 @@ height: 100%;
 }
 /*in add order section*/
 .divBtnTotalOrder{
-  margin-top:40px;
-align-items: center;
-justify-self: center;
-border-top: 1px solid var(--colortitle);
+ 
+align-items: right;
+margin-left: 200px;
+padding-inline: 10px;
+}
+.divClientOpt{
+align-items: left;
+justify-self: left;
 padding-top: 10px;
 padding-inline: 2px;
 }
 
-.btnBigG{
-  margin-left: 200px;
-}
 /**adding update section for products module*/
 
 .withupdatesection{
@@ -720,16 +721,25 @@ cursor: pointer;
   align-items: center;
   
 }
+
 .orderSplit{
-  display: flex;
+  display: grid;
+  grid-template-columns: 0.2fr 1fr;
   margin-left: 10px;
+  margin-right: 10px;
   grid-gap: 10px;
   height: 100%;
   width: 100%;
+  flex-wrap: wrap;
   overflow-x: hidden;
 }
-
-
+.sectionOrder{
+  width: 360px;
+  
+  padding:10px;
+  margin-left: 20px;
+  
+}
 .formNewOrder input{
   display: inline-flex;
   width: 200px;
@@ -757,6 +767,7 @@ cursor: pointer;
 }
 .sectionOrder{
   display: grid;
+  margin-right: 0px;
 }
 .newOrderCont{
   display: flex;
@@ -767,18 +778,28 @@ cursor: pointer;
   
 }
 .productsToCart{
-  display: grid;
+  display: flex;
   margin-top:20px;
   margin-left: 10px;
-  align-items: center;
-  align-self: center;
+  width: 100%;
+ 
   
 }
-.productdetails{
-  margin-top:20px;
-  justify-content: space-between;
-  display: grid;
+.productsOptions{
+  margin-top:15px;
+}
+.viewRowMedium{
+  font-size:medium;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  margin: 5px;
+  
+}
+.viewRowMedium td{
+  padding: 5px;
+}
+.divCartOpt{
   margin-left: 10px;
+  display:grid;
 }
 .divClient{
   margin:5px;
@@ -794,11 +815,44 @@ cursor: pointer;
   margin-top: 20px;
   align-content: center;
 }
-.clientDiv{
+.divCenter{
   display: grid;
   justify-items: center;
   justify-self: center;
 }
+
 .spanCloseClient{
   margin-left: 100px;
+}
+.btn2div{
+  margin-top: 35px;
+  margin-left: 10px;
+}
+.textfSeller{
+ 
+  margin-top:20px;
+  width: 250px;
+}
+.divCartTable{
+  height: 390px;
+}
+.tableorderinfo{
+  width: 100%;
+  margin:10px 10px 10px 10px;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+}
+
+.infoFin{
+  padding:10px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  display: flex;
+  margin-bottom: 5px;
+}
+.infoFin label{
+  margin-top:10px;
+  font-size: medium;
+}
+.infoFin input{
+  margin-left: 10px;
+  
 }

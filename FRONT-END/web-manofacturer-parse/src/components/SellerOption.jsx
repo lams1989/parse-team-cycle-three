@@ -2,16 +2,17 @@
 import TextField from '@mui/material/TextField';
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 
-import { obtainClients } from 'utils/Api-connection'
+import { obtainSellers } from 'utils/Api-connection'
 import React, { useEffect, useState, useRef } from 'react';
+import { obtainUserByRole } from 'utils/Api-connection';
 const filter = createFilterOptions();
 
 
 
-export default function ClientsOption({setClient}) {
+export default function SellersOption() {
   const [value, setValue] = React.useState(null);
-  const [listClients, setListClients] = useState([]);
-  
+  const [listSellers, setListSellers] = useState([]);
+ 
   const [newClientData, setNewClient] = useState(false);
   const [reload, setReload] = useState(false);
 
@@ -19,22 +20,22 @@ export default function ClientsOption({setClient}) {
 
   useEffect(async () => {
     console.log(
-      'Hola, soy un use effect que se ejecuta cuando usan el client input, para cargar la lista de clientes'
+      'Hola, soy un use effect que se ejecuta cuando usan el client input, para cargar la lista de vendedores'
     );
-    await obtainClients(
+    await obtainUserByRole("vendedor",
       (response) => {
         console.log('la respuesta que se recibio fue', response);
         console.log(response.data);
         const json = response.data;
-        const clients = [];
+        const sellers = [];
         for (var i in json) {
-          var row = (json[i].client_doc_id + "-" + json[i].client_name);
-          var data = { "dataclient": row, "client_name": json[i].client_name, "client_doc_id": json[i].client_doc_id };
-          clients.push(data);
+          var row = (json[i].id + "-" + json[i].name);
+          var data = { "dataseller": row, "id": json[i].id, "name": json[i].name };
+          sellers.push(data);
           console.log(data);
         }
-        console.log("datos: ", clients);
-        setListClients(clients);
+        console.log("datos: ", sellers);
+        setListSellers(sellers);
 
 
       },
@@ -48,7 +49,7 @@ export default function ClientsOption({setClient}) {
 
   return (
     <>
-      <h5>Cliente</h5>
+     
       <Autocomplete
         value={value}
         onChange={(event, newValue) => {
@@ -59,8 +60,8 @@ export default function ClientsOption({setClient}) {
             });
           } else if (newValue && newValue.inputValue) {
 
-            setValue("Añadir Cliente Nuevo");
-            setNewClient(true);
+           // setValue("Añadir Cliente Nuevo");
+            //setNewClient(true);
           } else {
             setValue(newValue);
           }
@@ -70,11 +71,11 @@ export default function ClientsOption({setClient}) {
 
           const { inputValue } = params;
           // Suggest the creation of a new value
-          const isExisting = options.some((option) => inputValue === option.title);
+          const isExisting = options.some((option) => inputValue === option.name);
           if (inputValue !== '' && !isExisting) {
             filtered.push({
               inputValue,
-              dataclient: `Add "${inputValue}"`,
+              dataseller: `Add "${inputValue}"`,
             });
           }
 
@@ -84,7 +85,7 @@ export default function ClientsOption({setClient}) {
         clearOnBlur
         handleHomeEndKeys
         id="free-solo-with-text-demo"
-        options={listClients}
+        options={listSellers}
         getOptionLabel={(option) => {
           // Value selected with enter, right from the input
           if (typeof option === 'string') {
@@ -95,41 +96,21 @@ export default function ClientsOption({setClient}) {
             return option.inputValue;
           }
           // Regular option
-          return option.dataclient;
+          return option.dataseller;
         }}
-        renderOption={(props, option) => <li {...props}>{option.dataclient}</li>}
+        renderOption={(props, option) => <li {...props}>{option.dataseller}</li>}
         sx={{ width: 300 }}
         freeSolo
         renderInput={(params) => (
-          <TextField {...params} label="Buscar Cliente" />
+          <div className=" textfSeller">
+          <TextField {...params} label="Buscar Vendedor"  
+          hiddenLabel
+          id="filled-hidden-label-small"
+          defaultValue="Small"
+          size="small"/> </div>
         )}
       />
-      {
-        newClientData && (
-          <div className="divCenter">
-            <div className="closeNewClient">
-              <button className="btnGeneral spanCloseClient">
-                <i className="far fa-times-circle fa-1x" onClick={() => setNewClient(false)}></i> Cerrar </button>
-            </div>
-            <div className="divClient" >
-              <div>
-
-                <label>ID cliente </label>
-                <label>Nombre cliente</label>
-
-              </div>
-              <div>
-
-                <input className="inputChange " placeholder="ID Cliente" ></input>
-                <input className="inputChange " placeholder="Nombre Cliente"></input></div>
-
-            </div>
-
-          </div>
-
-        )
-
-      }
+      
 
     </>
   );

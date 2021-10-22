@@ -97,6 +97,14 @@ export const obtainUserById = async (id, successCallback, errorCallback) => {
   };
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
+export const obtainUserByRole = async (role, successCallback, errorCallback) => {
+  var options = {
+    method: 'GET',
+    url: `http://localhost:3001/users/r/${role}/`,
+    headers: { 'Content-Type': 'application/json' }
+  };
+  await axios.request(options).then(successCallback).catch(errorCallback);
+};
 
 
 export const deleteUser = async (id, successCallback, errorCallback) => {
