@@ -1,12 +1,16 @@
 
 import { nanoid } from 'nanoid'
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState ,useRef} from 'react';
 import { ToastContainer, toast,Zoom } from 'react-toastify';
 import { updateProductInfo ,deleteProduct} from 'utils/Api-connection';
 import { Dialog, Tooltip } from '@material-ui/core';
+import search from "media/zoom_in_white_48dp.svg"
 
-const ProductTable = ({listpr, setReload}) => {
+import { createProduct,obtainProducts,obtainProductById,obtainProductByDescrip} from 'utils/Api-connection';
+
+const ProductTable = () => {
   
+
   const RowProduct=({product,setReload})=>{
 
     const [editable, setEditable] = useState(false);
@@ -16,8 +20,11 @@ const ProductTable = ({listpr, setReload}) => {
     const [confirmDeleteDialog, setConfirmDeleteDialog] = useState(false);
     const [confirmUpdateDialog, setConfirmUpdateDialog] = useState(false);
 
+  
 
 
+
+    
     const updateProduct = async () => {
       console.log("id: ",product.id);
       console.log("_id: ",product._id);
@@ -27,6 +34,9 @@ const ProductTable = ({listpr, setReload}) => {
     
       
       setConfirmUpdateDialog(false);
+
+
+      
       await updateProductInfo(
         
         product._id, 
@@ -155,8 +165,95 @@ const ToDeleteProduct = async () => {
     )
     
 }
+
+
+/**Table fetch data  and search*/
+const [reload, setReload]= useState(false);
+
+useEffect(async () => {
+  console.log(
+    'Hola, soy un use effect que se ejecuta solo una vez cuando la pagina se renderiza, para cargar la lista de productos inicial'
+  );
+  await obtainProducts(
+    (response) => {
+      console.log('la respuesta que se recibio fue', response);
+      console.log(response.data);
+      setListProducts(response.data);
+    },
+    (error) => {
+      console.error('Salio un error:', error);
+    }
+  );
+  setReload(false);
+}, [reload]);
+
+const formSearchProduct= useRef(null);
+  const [listProducts, setListProducts]= useState([]);
+
+const submitSearchForm = async (e) => {
+  e.preventDefault();
+  const fd = new FormData(formSearchProduct.current);
+  console.log(fd.id);
+  const searchOpt = {};
+  fd.forEach((value, key) => {
+    searchOpt[key] = value;
+  });
+  const searchby= searchOpt.searchSelect;
+  console.log("s: ",searchby);
+  const info= searchOpt.toSearchInput;
+ 
+  if(searchby=="searchbyid"){
+    if (!Number(info)){
+      toast.error("digite un ID numérico",{
+        position: "bottom-center"
+      });
+    }else{
+      console.log("serachbyid");
+     await obtainProductById(info,
+        (response) => {
+          console.log('la respuesta que se recibio fue', response);
+          console.log(response.data);
+          setListProducts(response.data);
+        },
+        (error) => {
+          console.error('Salio un error:', error);
+        }
+      ); 
+    }
+} 
+else if(searchby=="searchbyDescrip"){
+  console.log("serachbydescrip");
+  await obtainProductByDescrip(info,
+    (response) => {
+      console.log('la respuesta que se recibio fue', response);
+      console.log(response.data);
+      setListProducts(response.data);
+    },
+    (error) => {
+      console.error('Salio un error:', error);
+    }
+  );
+} 
+}
+
     return (
-      
+      <>
+       <div className="searchContainer  marg-l">
+        <form ref={formSearchProduct} onSubmit={submitSearchForm} >
+          <span>Buscar producto  por </span>
+          <select name= "searchSelect" className="selectRole" required >
+            <option value="" disabled> Buscar por</option>
+            <option value="searchbyid">ID Producto</option>
+            <option value= "searchbyDescrip">Descripción</option>
+          </select>
+          <input type="text" className="toSearchInput" name="toSearchInput" placeholder="Digita la info" required/>
+          <span>para </span>
+          <button type="submit" className="btnGeneral btnSearchUser marg-l"  >
+          <i className="fas fa-search-plus"></i>Buscar</button>
+          </form>
+          <>
+        <button className="btnGeneral btnBack" onClick={()=>setReload(true)}><i className="fas fa-undo-alt"></i>Volver a tabla</button> </>
+      </div>
         <div className="listSectionContainer divProducts">
           
         <table className="ListTable">
@@ -172,7 +269,7 @@ const ToDeleteProduct = async () => {
           </thead>
           <tbody>
 
-          {listpr.map((productObj) => {
+          {listProducts.map((productObj) => {
               return (
                 <RowProduct  key={nanoid()} product= {productObj} setReload= {setReload}/>
               );
@@ -192,7 +289,7 @@ const ToDeleteProduct = async () => {
 
       </div>
 
-
+</>
     )
 
 

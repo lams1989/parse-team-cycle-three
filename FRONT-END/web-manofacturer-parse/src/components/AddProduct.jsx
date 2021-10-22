@@ -1,37 +1,17 @@
 import React, { useEffect, useState, useRef } from 'react';
-import search from "media/zoom_in_white_48dp.svg"
-import checkicon from "media/done_outline_white_48dp.svg"
-import ProductTable from 'components/ProductTable'
-import { createProduct,obtainProducts,obtainProductById,obtainProductByDescrip} from 'utils/Api-connection';
 
+
+import { createProduct} from 'utils/Api-connection';
 import { ToastContainer, toast,Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const Products = () => {
+
+
+const ProductsManager = () => {
 
   const formAddProduct = useRef(null);
-  const formSearchProduct= useRef(null);
-  const [listProducts, setListProducts]= useState([]);
-  
-  const [reload, setReload]= useState(false);
 
   
-   useEffect(async () => {
-    console.log(
-      'Hola, soy un use effect que se ejecuta solo una vez cuando la pagina se renderiza, para cargar la lista de productos inicial'
-    );
-    await obtainProducts(
-      (response) => {
-        console.log('la respuesta que se recibio fue', response);
-        console.log(response.data);
-        setListProducts(response.data);
-      },
-      (error) => {
-        console.error('Salio un error:', error);
-      }
-    );
-    setReload(false);
-  }, [reload]);
   const submitCreateForm = async (e) => {
     e.preventDefault();
     const fd = new FormData(formAddProduct.current);
@@ -58,63 +38,17 @@ const Products = () => {
       }
     );
       
-      setReload(true);
+     
 };
 
-const submitSearchForm = async (e) => {
-  e.preventDefault();
-  const fd = new FormData(formSearchProduct.current);
-  console.log(fd.id);
-  const searchOpt = {};
-  fd.forEach((value, key) => {
-    searchOpt[key] = value;
-  });
-  const searchby= searchOpt.searchSelect;
-  console.log("s: ",searchby);
-  const info= searchOpt.toSearchInput;
- 
-  if(searchby=="searchbyid"){
-    if (!Number(info)){
-      toast.error("digite un ID numérico",{
-        position: "bottom-center"
-      });
-    }else{
-      console.log("serachbyid");
-     await obtainProductById(info,
-        (response) => {
-          console.log('la respuesta que se recibio fue', response);
-          console.log(response.data);
-          setListProducts(response.data);
-        },
-        (error) => {
-          console.error('Salio un error:', error);
-        }
-      ); 
-    }
-} 
-else if(searchby=="searchbyDescrip"){
-  console.log("serachbydescrip");
-  await obtainProductByDescrip(info,
-    (response) => {
-      console.log('la respuesta que se recibio fue', response);
-      console.log(response.data);
-      setListProducts(response.data);
-    },
-    (error) => {
-      console.error('Salio un error:', error);
-    }
-  );
-} 
-}
+
   return (
     <div className="MainSection">
-   
-      <div className="titlepage">
-        <span className="title"> Lista de Productos</span>
-      </div>
-      <h2 className=" addNewSubt marg-l">Agregar Producto</h2>
-      
+  <h2 align="center" className=" addNewSubt marg-l">Nuevo Producto </h2>
+    
       <div className="newOrderContainer">
+      
+      
         <form id= "formCreateProduct" ref={formAddProduct} onSubmit={submitCreateForm} >
         <ul className="ulProduct">
           <li>
@@ -122,7 +56,7 @@ else if(searchby=="searchbyDescrip"){
             <input  name="id" className="inputChange inputNumber " type= "number" min="1"placeholder="ID"  required></input>
           </li>
           <li>
-            <label>Precio Unitario</label>
+            <label >Precio Unitario</label>
             <input  name="unitprice"type="number" min="1" className="inputChange inputValue" placeholder="$" required></input>
           </li>
           <li>
@@ -141,7 +75,7 @@ else if(searchby=="searchbyDescrip"){
         </ul>
         <div className="btnDiv">
           <button type="submit"  className="btnGeneral btnCreateProduct">
-          <img className="btnIcon" src={checkicon}  alt="img"></img>Registrar Producto</button>
+          <i class="far fa-check-circle"></i>Añadir Producto</button>
           <button type="reset" className="btnGeneral btnCancel">Cancelar</button>
         </div>
         </form>
@@ -152,7 +86,8 @@ else if(searchby=="searchbyDescrip"){
        transition={Zoom}
        limit={1}
        />
-      <div className="searchContainer withupdatesection marg-l">
+
+    {/*  <div className="searchContainer withupdatesection marg-l">
         <form ref={formSearchProduct} onSubmit={submitSearchForm} >
           <span>Selecciona </span>
           <select name= "searchSelect" className="selectRole" required >
@@ -168,13 +103,13 @@ else if(searchby=="searchbyDescrip"){
         </form>
         
         <button className="btnGeneral btnBack" onClick={()=>setReload(!reload)}><i className="fas fa-undo-alt"></i>Volver a tabla</button> 
-        
+
       </div>
-    <ProductTable listpr={listProducts} setReload={setReload}/>
-  
+  <ProductTable listpr={listProducts} setReload={setReload}/>*/}
+    
     </div>
   )
 }
 
-export default Products;
+export default ProductsManager;
 

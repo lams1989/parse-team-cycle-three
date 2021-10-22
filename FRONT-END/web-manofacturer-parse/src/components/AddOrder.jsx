@@ -6,63 +6,69 @@ import checkicon from "media/done_outline_white_48dp.svg"
 import deleteicon from "media/backspace_black_48dp.svg"
 const AddOrder = () => {
   return (
-    <div className="MainSection">
-      <div className="titlepage">
-        <span className="title"> Registro de Ventas</span>
-        <Link to='/admin/ventas/listadoventas'>
-        <div className="divBtnChangePage">
-          <button className="btnGeneral btnListaVentas">
-              <img className="btnIcon" src={sellList} alt="img"></img>
-              Ver Listado Ventas</button>
-          </div>
-        </Link>
-      </div>
-      <h2 className=" addNewSubt  marg-l">Agregar Nueva Venta</h2>
+    <div className=" orderSplit">
+  
       <form className=" formNewOrder">
-        <div className="newOrderContainer">
-          <ul className="listFields">
-            <li>
-              <label>ID Venta</label>
-              <input className="inputChange inputNumber" placeholder="001" disabled></input>
-            </li>
-            <li>
-              <label>Fecha</label>
-              <input className="inputChange" placeholder="5/10/2021" ></input>
-            </li>
-            <li>
-              <label>Vendedor</label>
-              <input className="inputChange" placeholder="Nombre Vendedor"></input>
-            </li>
-            <li className="stateDiv">
-              <label>Estado Venta</label>
-              <select className="selectStatus">
+      <h2 className=" addNewSubt  marg-l">Ingrese la información: </h2>
+      <div className="sectionOrder">
+
+        <div className="newOrderCont">
+
+        <div className="labelsOrders">
+      
+        <label>ID Venta</label>
+        <label>Fecha</label>
+        <label>Vendedor</label>
+        <label>ID Cliente</label>
+        <label >Nombre Cliente</label>
+        <label>Estado Venta</label>
+        <label>Total Venta</label>
+       
+        </div>
+
+        <div className="inputsOrders">
+        <input className="inputChange inputValue" placeholder="001" disabled></input>
+        <input className="inputChange" placeholder="5/10/2021" ></input>
+        <input className="inputChange" placeholder="Nombre Vendedor"></input>
+        <input className="inputChange " placeholder="ID Cliente" ></input>
+        <input className="inputChange " placeholder="Nombre Cliente"></input>
+        <select className="selectStatus smallLargeTD">
                 <option className="pending" value="processing">En proceso</option>
                 <option className="aproved" value="delivered">Entregada</option>
                 <option className="denied" value="canceled">Cancelada</option>
               </select>
-            </li>
-          </ul>
-          <ul className="listFields">
-            <li>
-              <label>ID Cliente</label>
-              <input className="inputChange " placeholder="ID Cliente" ></input>
-            </li>
-            <li>
-              <label htmlFor="">Nombre Cliente</label>
-              <input className="inputChange " placeholder="Nombre Cliente"></input>
-            </li>
-            <li className="totalLi">
-              <label>Total Venta</label>
-
-              <input className="inputChange inputTotal " placeholder="$ Total"></input>
-            </li>
-          </ul>
+        <input className="inputChange inputTotal " placeholder="$ Total"></input>
+       
+        </div>
+        </div>
+        <div className="divBtnTotalOrder">
+          
+          <button className="btnBig btnAddOrder">
+          <img className="btnIcon" src={checkicon}  alt="img"></img> Guardar
+          </button>
+          <button className=" btnBig btnCancelOrder">
+            Cancelar
+          </button>
+        </div>
         </div>
       </form>
-      <div >
-        <h3 className="subt1">Lista de Productos Comprados:</h3>
-      </div>
-      <div className="listSectionContainer divProductToAdd">
+      
+      
+      
+ 
+     
+      <div className="listSectionContainer divProductToAdd ">
+
+    <div className="productsToCart">
+    <h3 className="subt1">Añadir Producto:</h3>
+
+
+
+    </div>
+
+
+
+      <h3 className="subt1">Lista de Productos Comprados:</h3>
         <table className="ListTable">
           <thead className="thead">
             <tr>
@@ -110,8 +116,8 @@ const AddOrder = () => {
             </tr>
           </tbody>
         </table>
-      </div>
-      <div className="infoFin">
+
+          <div className="infoFin">
         <div className="divBtnTotalOrder">
           <span className="totaltext">Total $142.000</span>
           <button className="btnBig btnAddOrder">
@@ -122,6 +128,8 @@ const AddOrder = () => {
           </button>
         </div>
       </div>
+      </div>
+    
     </div>
   )
 }

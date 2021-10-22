@@ -1,10 +1,12 @@
 import { nanoid } from 'nanoid'
-import React, { useEffect, useState } from 'react';
 import { Dialog, Tooltip } from '@material-ui/core';
 import { ToastContainer, toast, Zoom } from 'react-toastify';
-import { deleteOrder } from 'utils/Api-connection';
 
-const OrdersTable = ({listOrders, setReload}) => {
+import React, { useState ,useEffect,useRef} from 'react';
+import { obtainOrders ,obtainOrderById,obtainOrderByClientName,deleteOrder} from 'utils/Api-connection';
+import { obtainOrderByClientId } from 'utils/Api-connection';
+
+const OrdersTable = ({ }) => {
 
   const RowOrder=({order,setReload})=>{
 
@@ -47,7 +49,7 @@ const OrdersTable = ({listOrders, setReload}) => {
         <Tooltip title='Ver' arrow placement="top">
         <button type="button" className="btnGeneral btnDelete" onClick={() => setViewInfoOrder(true)}> <i className="fas fa-eye"></i></button></Tooltip>
       <Tooltip title='Editar' arrow placement="top">
-        <button type="button" className="btnGeneral btnEdit"> <i className="fas fa-user-cog"></i></button></Tooltip>
+        <button type="button" className="btnGeneral btnEdit"> <i className="fas fa-edit"></i></button></Tooltip>
         <Tooltip title='Eliminar' arrow placement="top"> 
           <button type="reset" className="btnGeneral btnDelete" onClick={() => setConfirmDeleteDialog(true)}>  
           <i className="fas fa-trash"></i></button></Tooltip>
@@ -144,8 +146,126 @@ const OrdersTable = ({listOrders, setReload}) => {
 
 
 
-  return (
+
+/**table section fetch data and search methods */
+const formSearchOrder= useRef(null);
+
+const [reload, setReload]= useState(false);
+const [listOrders, setListOrders]= useState([]);
+
+const submitSearchOrderForm = async (e) => {
+  e.preventDefault();
+  const fd = new FormData(formSearchOrder.current);
+  console.log(fd.id);
+  const searchOpt = {};
+  fd.forEach((value, key) => {
+    searchOpt[key] = value;
+  });
+  const searchby= searchOpt.searchSelect;
+  console.log("s: ",searchby);
+  const info= searchOpt.toSearchInput;
+ 
+  if(searchby=="searchbyIdOrder"){
+    if (!Number(info)){
+      toast.error("digite un ID numérico",{
+        position: "bottom-center"
+      });
+    }else{
+      console.log("searchbyIdOrder");
+     await obtainOrderById(info,
+        (response) => {
+          console.log('la respuesta que se recibio fue', response);
+          console.log(response.data);
+          setListOrders(response.data);
+        },
+        (error) => {
+          console.error('Salio un error:', error);
+        }
+      ); 
+    
+    }
+} 
+else if(searchby=="searchbyIdClient"){
+  if (!Number(info)){
+    toast.error("digite un ID numérico",{
+      position: "bottom-center"
+    });
+  }else{
+    console.log("serachbyidClient");
+   await obtainOrderByClientId(info,
+      (response) => {
+        console.log('la respuesta que se recibio fue', response);
+        console.log(response.data);
+        setListOrders(response.data);
+      },
+      (error) => {
+        console.error('Salio un error:', error);
+      }
+    ); 
+  }
+} 
+else if(searchby=="searchbyClientName"){
+  console.log("clientename");
+  await obtainOrderByClientName(info,
+    (response) => {
+      console.log('la respuesta que se recibio fue', response);
+      console.log(response.data);
+      setListOrders(response.data);
+      
+    },
+    (error) => {
+      console.error('Salio un error:', error);
+    }
+  );
+}
+
+
+}
+
+  useEffect(async () => {
+    console.log(
+      'Hola, soy un use effect que se ejecuta cuando la pagina se renderiza, para cargar la lista inicial o para recargar tabla :)'
+    );
+    await obtainOrders(
+      (response) => {
+        console.log('the orders response was', response);
+        console.log(response.data);
+        setListOrders(response.data);
+      },
+      (error) => {
+        console.error(' An error:', error);
+      }
+    );
+    
+    document.getElementById("formSearchingOrder").reset();
+    setReload(false);
+  }, [reload]);
+
+
+  return (<>
+<div className="searchContainer  marg-l">  
+      <form id="formSearchingOrder" ref={formSearchOrder} onSubmit={submitSearchOrderForm} >
+          <span>Buscar Venta por </span>
+          <select name="searchSelect" className="selectRole ">
+             <option value="" disabled>Buscar por</option>
+             <option value="searchbyIdOrder">ID Venta</option>
+          
+             <option value="searchbyIdClient">ID Cliente</option>
+            <option value= "searchbyClientName">Nombre Cliente</option>
+        
+            
+          </select>
+          <input type="text" name="toSearchInput" className="toSearchInput" placeholder="Buscar" />
+          <button type="submit" className="btnGeneral btnSearchUser" >
+          <i className="fas fa-search-plus"></i>
+            Buscar</button>
+        </form>
+        <button className="btnGeneral btnBack" onClick={()=>setReload(!reload)}><i className="fas fa-undo-alt"></i>Volver a tabla</button> 
+      </div>
+
     <div className="listSectionContainer divOrders">
+
+ 
       <table className="ListTable">
         <thead className="thead ">
           <tr>
@@ -183,6 +303,7 @@ const OrdersTable = ({listOrders, setReload}) => {
         limit={1}
       />
     </div>
+    </>
   )
 }
 export default OrdersTable
