@@ -67,7 +67,7 @@ const OrdersTable = ({ }) => {
     </div>
   <div className="infoOrderheader">
 <span className="pLarge" > Cliente: ID {order.client.id} - {order.client.client_name} </span> 
-<span> Vendedor: {order.seller_id} </span>
+<span> Vendedor: {order.seller.seller_id} - {order.seller.seller_name} </span>
 <span> Fecha: {order.date} </span>
 
 </div>

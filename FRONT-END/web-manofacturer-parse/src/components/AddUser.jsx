@@ -30,26 +30,26 @@ const AddUser = () => {
       (response) => {
         console.log(response.data);
         toast.success('user was created SUCCESSFULLY');
-        
-    document.getElementById("formAddUser").reset();
-       
+
+        document.getElementById("formAddUser").reset();
+
       },
       (error) => {
         console.error(error);
         toast.error('Create user ERROR');
       }
     );
- 
+
   };
 
-  
+
   return (
     <div className="MainSection">
-     
-     <h3 align="center"className=" addNewSubt marg-l"> Nuevo Usuario</h3>
+
+      <h3 align="center" className=" addNewSubt marg-l"> Nuevo Usuario</h3>
       <div className="newOrderContainer">
-     
-        <form id= "formAddUser"ref={formAddUser} onSubmit={submitCreateUser}>
+
+        <form id="formAddUser" ref={formAddUser} onSubmit={submitCreateUser}>
           <ul className="ulProduct">
             <li>
               <label> ID Usuario</label>
@@ -59,12 +59,12 @@ const AddUser = () => {
               <label> Nombre</label>
               <input name="name" className="inputChange mediumTD" type="text" required placeholder="Nombre"></input>
             </li>
-           
+
             <li>
               <label> Correo Electrónico</label>
               <input name="email" className="inputChange smallLargeTD" autoComplete="email" required placeholder="Correo electrónico"></input>
             </li>
-         
+
             <li className="addDataRoleContainer">
               <label> Rol </label>
               <select name="role" className="selectRole">
@@ -81,7 +81,7 @@ const AddUser = () => {
                 <option className="pending" value="pendiente">Pendiente</option>
               </select>
             </li>
-           
+
           </ul>
           <div className="btnOptionsContainer">
             <button type="submit" className="btnGeneral btnCreateUser"> <img className="btnIcon" src={useradd} alt="img"></img> Crear Usuario</button>
@@ -95,7 +95,7 @@ const AddUser = () => {
         transition={Zoom}
         limit={1}
       />
-     
+
 
     </div>
   )
