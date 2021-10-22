@@ -4,7 +4,6 @@ import React, { useEffect, useState ,useRef} from 'react';
 import { ToastContainer, toast,Zoom } from 'react-toastify';
 import { updateProductInfo ,deleteProduct} from 'utils/Api-connection';
 import { Dialog, Tooltip } from '@material-ui/core';
-import search from "media/zoom_in_white_48dp.svg"
 
 import { createProduct,obtainProducts,obtainProductById,obtainProductByDescrip} from 'utils/Api-connection';
 
@@ -100,7 +99,7 @@ const ToDeleteProduct = async () => {
           <td className="numberTD">{product.id}</td>
       <td className="descripTD"><p className="pRowLarge">{product.description}</p></td>
       <td className="smallTD">$ {product.unitprice}</td>
-      <td className="smallLargeTD ">{product.state}</td> 
+      <td className="smallTD ">{product.state}</td> 
       </>
         )
         }
@@ -247,7 +246,7 @@ else if(searchby=="searchbyDescrip"){
             <option value= "searchbyDescrip">Descripción</option>
           </select>
           <input type="text" className="toSearchInput" name="toSearchInput" placeholder="Digita la info" required/>
-          <span>para </span>
+        
           <button type="submit" className="btnGeneral btnSearchUser marg-l"  >
           <i className="fas fa-search-plus"></i>Buscar</button>
           </form>

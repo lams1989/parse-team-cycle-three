@@ -144,7 +144,7 @@ btnCreateUser,.btnCreateProduct:hover{
   font-size:small;
   margin-top: 10px;
   margin-right: 20px;
-  
+  height: 40px;
   background-color:lightgrey;
   padding:5px;
   
@@ -320,7 +320,7 @@ height: 100%;
 /*size for table in list products in new order section*/
 .divProductToAdd{
   width: 100%;
-  height: 100%;
+  height: 600px;
 }
 /*size for orders list*/
 .divOrderslist{
@@ -331,6 +331,7 @@ height: 100%;
 /*size for products list*/
 .divProducts{
   height: 510px;
+  overflow-x: scroll;
   
 }
 
@@ -520,12 +521,17 @@ height: 100%;
 }
 /*in add order section*/
 .divBtnTotalOrder{
-  margin-top:70px;
+  margin-top:40px;
 align-items: center;
 justify-self: center;
+border-top: 1px solid var(--colortitle);
+padding-top: 10px;
+padding-inline: 2px;
 }
 
-
+.btnBigG{
+  margin-left: 200px;
+}
 /**adding update section for products module*/
 
 .withupdatesection{
@@ -716,11 +722,11 @@ cursor: pointer;
 }
 .orderSplit{
   display: flex;
-  margin-left: 0px;
+  margin-left: 10px;
   grid-gap: 10px;
   height: 100%;
   width: 100%;
-  
+  overflow-x: hidden;
 }
 
 
@@ -761,5 +767,38 @@ cursor: pointer;
   
 }
 .productsToCart{
-  box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+  display: grid;
+  margin-top:20px;
+  margin-left: 10px;
+  align-items: center;
+  align-self: center;
+  
+}
+.productdetails{
+  margin-top:20px;
+  justify-content: space-between;
+  display: grid;
+  margin-left: 10px;
+}
+.divClient{
+  margin:5px;
+  padding: 10px;
+  display: flex;
+  
+}
+.divClient label{
+  font-size: 16px;
+  margin-top: 15px;
+}
+.closeNewClient{
+  margin-top: 20px;
+  align-content: center;
+}
+.clientDiv{
+  display: grid;
+  justify-items: center;
+  justify-self: center;
+}
+.spanCloseClient{
+  margin-left: 100px;
 }
