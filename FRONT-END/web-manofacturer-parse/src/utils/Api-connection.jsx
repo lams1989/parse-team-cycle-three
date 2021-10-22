@@ -158,3 +158,10 @@ export const deleteOrder = async (id, successCallback, errorCallback) => {
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
 
+export const obtainClients = async (successCallback, errorCallback) => {
+  var options = {
+    method: 'GET',
+    url: 'http://localhost:3001/clients/'
+  };
+  await axios.request(options).then(successCallback).catch(errorCallback);
+};
