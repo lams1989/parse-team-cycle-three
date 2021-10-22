@@ -37,6 +37,15 @@ export const obtainProductByDescrip = async (descrip, successCallback, errorCall
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
 
+export const obtainProductByState = async (state, successCallback, errorCallback) => {
+  var options = {
+    method: 'GET',
+    url: `http://localhost:3001/products/s/${state}/`,
+    headers: { 'Content-Type': 'application/json' }
+  };
+  console.log(options);
+  await axios.request(options).then(successCallback).catch(errorCallback);
+};
 
 
 export const updateProductInfo = async (id, dataToUpdate, successCallback, errorCallback) => {
@@ -173,3 +182,4 @@ export const obtainClients = async (successCallback, errorCallback) => {
   };
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
+

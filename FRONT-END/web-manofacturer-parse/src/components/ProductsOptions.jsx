@@ -55,10 +55,6 @@ export default function ProductsOptions() {
             setValue({
               title: newValue,
             });
-          } else if (newValue && newValue.inputValue) {
-
-            //setValue("Añadir Producte Nuevo");
-            //setNewProduct(true);
           } else {
             setValue(newValue);
           }
@@ -69,13 +65,7 @@ export default function ProductsOptions() {
           const { inputValue } = params;
           // Suggest the creation of a new value
           const isExisting = options.some((option) => inputValue === option.description);
-          {/*} if (inputValue !== '' && !isExisting) {
-          filtered.push({
-            inputValue,
-            dataproduct: `Add "${inputValue}"`,
-          });
-        }*/}
-
+      
           return filtered;
         }}
         selectOnFocus

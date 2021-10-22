@@ -9,98 +9,13 @@ import ClientsOption from "./ClientsOption"
 import ProductsOptions from "./ProductsOptions";
 import SellersOption from "./SellerOption";
 import SelectDate from "./SelectDate";
-import { obtainProductByState } from "utils/Api-connection";
-import { obtainUserByRole } from "utils/Api-connection";
-import { obtainClients } from "utils/Api-connection";
-import InputOptions from "./InputOptions";
 const AddOrder = () => {
 
-  /**Selected info for the order */
   const [client, setClient] = useState(null);
-  const [productSelected,setProductSelected]= useState([]);
+  
   const [seller, setSeller] = useState(null);
+  
   const [productsToBuy, setProductsToBuy] = useState([]);
-  const [reload, setReload] = useState(false);
-
-
-/**List of  */
-  const [optionSellers, setOptionSellers] = useState([]);
-  const [optionClients, setOptionClients] = useState([]);
-  const [availableProducts, setAvailableProducts] = useState(null);
-  
- 
-  useEffect(async () => {
-    console.log(
-      'Hola, soy un use effect que se ejecuta cuando usas el input, para cargar la lista de opciones :)'
-    );
-    await obtainClients(
-      (response) => {
-        console.log('la respuesta que se recibio fue', response);
-        console.log(response.data);
-        const jsonClients = response.data;
-        const options = [];
-        for (var i in jsonClients) {
-          var row = (jsonClients[i].client_doc_id + "-" + jsonClients[i].client_name);
-          var data= {"data":row}
-          options.push(data);
-        //  console.log(data);
-        }
-        console.log("datos: ", options);
-        setOptionClients(options);
-
-
-      },
-      (error) => {
-        console.error('Salio un error:', error);
-      }
-    );
-    await obtainUserByRole("vendedor",
-    (response) => {
-      console.log('la respuesta que se recibio fue', response);
-      console.log(response.data);
-      const json = response.data;
-      const options = [];
-      for (var i in json) {
-        var row = (json[i].id + "-" + json[i].name);
-        var data = { "data": row};
-        options.push(data);
-        console.log(data);
-      }
-      console.log("datos: ", options);
-      setOptionSellers(options);
-
-
-    },
-    (error) => {
-      console.error('Salio un error:', error);
-    }
-  );
-  
-  await obtainProductByState("Disponible",
-    (response) => {
-      console.log('la respuesta que se recibio fue', response);
-      console.log(response.data);
-      const jsonProd = response.data;
-      const optionsProd = [];
-
-      for (var i in jsonProd) {
-        var row = (jsonProd[i].id + "-" + jsonProd[i].description) +" $"+ jsonProd[i].unitprice;
-        var data = { "data": row };
-        optionsProd.push(data);
-    
-      }
-      console.log("datos: ", optionsProd);
-      setAvailableProducts(optionsProd);
-
-
-    },
-    (error) => {
-      console.error('Salio un error:', error);
-    }
-  );
-    setReload(false);
-  }, []);
-
   const order= [
     {
       "id": 215,
@@ -160,7 +75,7 @@ const AddOrder = () => {
           </div>
           <div className="divClientOpt">
             <label >Vendedor</label>
-            <InputOptions  listOptions={optionSellers} setOptionSelected= {setSeller} labelOf= "Buscar Vendedor"/>
+            <SellersOption />
 
           </div>
           <div className="divClientOpt">
@@ -181,7 +96,7 @@ const AddOrder = () => {
 
         </div>
         <div className="productsToCart">
-        <InputOptions  listOptions={availableProducts} setOptionSelected= {setProductSelected} labelOf= "Buscar Producto"/>
+          <ProductsOptions></ProductsOptions>
           <div className= "divCartOpt"><label>Cantidad </label>
           <input className="inputChange inputNumber" type="number" placeholder="1" min="1"></input></div>
           <div className= "divCartOpt"><label>x Precio Unitario</label>
