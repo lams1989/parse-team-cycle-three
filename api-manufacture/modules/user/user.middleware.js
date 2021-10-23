@@ -9,7 +9,6 @@
         getUserByEmail: getUserByEmail,
         getUserByRole: getUserByRole,
         getUserByState: getUserByState,
-     
         modifyUser: modifyUser,
         removeUser: removeUser
     };

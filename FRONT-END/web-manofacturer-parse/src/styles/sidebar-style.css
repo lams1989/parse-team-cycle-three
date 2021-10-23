@@ -18,7 +18,7 @@
     left: 0;
     top: 0;
     height: 100%;
-    width: var(margin_separar);
+    width: 240px;
     
     background:#212529;
     padding: 6px 14px;

@@ -28,11 +28,7 @@
         function (req, res) {
             res.status(200).json(req.response);
         });
-        router.get('/s/:productState',
-        ProductMiddleware.getProductByState,
-        function (req, res) {
-            res.status(200).json(req.response);
-        });
+
     router.patch('/upd/:productId',
         ProductMiddleware.modifyPartOfProduct,
         function (req, res) {
@@ -49,10 +45,6 @@
         function (req, res) {
             res.status(200).json(req.response);
         });
-
-
-      
     module.exports = router;
 
-})
-();
+})();

@@ -1,0 +1,43 @@
+[{"id":"20", 
+    "client":"Gabriela Marin",
+    "products":[
+        "Productos: 1-173 ,  2-170"
+    ],
+    "total":"$190000",
+    "date": "5/10/2021",
+    "idseller": "7",
+    "state": "Entregada"
+},
+
+{"id":"19", 
+    "client":"Fabio López",
+    "products":[
+        "Productos: 1-173 ,  2-171"
+    ],
+    "total":"89000",
+    "date": "4/10/2021",
+    "idseller": "8",
+    "state": "Pendiente"
+},
+{"id":"18", 
+    "client":"Hina López",
+    "products":[
+        "Productos: 1-173 ,  2-171"
+    ],
+    "total":"89000",
+    "date": "5/10/2021",
+    "idseller": "8",
+    "state": "Entregada"
+},
+
+{"id":"17", 
+    "client":"Carlos Gutierrez",
+    "products":[
+        "Productos: 1-173 ,  2-171"
+    ],
+    "total":"89000",
+    "date": "5/10/2021",
+    "idseller": "8",
+    "state": "Cancelada"
+}
+]

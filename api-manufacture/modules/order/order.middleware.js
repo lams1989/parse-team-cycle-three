@@ -6,9 +6,7 @@
         getOrders: getOrders,
         getOrderById: getOrderById,
         modifyOrder: modifyOrder,
-        removeOrder: removeOrder,
-        getOrderByClientName:getOrderByClientName,
-        getOrderByIdClient:getOrderByIdClient
+        removeOrder: removeOrder
     };
 
     var OrderService = require('./order.module')().OrderService;
@@ -54,32 +52,6 @@
 
     };
 
-    function getOrderByIdClient(req, res, next) {
-        OrderService.fetchOrderByIdClient(req.params.idClient)
-            .then(success)
-            .catch(failure);
-        function success(data) {
-            req.response = data;
-            next();
-        }
-        function failure(err) {
-            next(err);
-        }
-
-    };
-    function getOrderByClientName(req, res, next) {
-        OrderService.fetchOrderByClientName(req.params.clientName)
-            .then(success)
-            .catch(failure);
-        function success(data) {
-            req.response = data;
-            next();
-        }
-        function failure(err) {
-            next(err);
-        }
-
-    };
     function modifyOrder(req, res, next) {
         OrderService.updateOrder(req.params.orderId, req.body)
             .then(success)

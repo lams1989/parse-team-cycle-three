@@ -5,42 +5,19 @@ import { ToastContainer, toast, Zoom } from 'react-toastify';
 import { Dialog, Tooltip } from '@material-ui/core';
 import { nanoid } from 'nanoid';
 
-import { optainUsers } from "utils/Api-connection"
-const UsersTable = ({ }) => {
+const UsersTable = ({ listpr , setReload}) => {
   
 const [searching, setSearching] = useState('');
-const [usuariosFiltrados, setUsuariosFiltrados] = useState([]);
-const [reload, setReload] = useState(true);
-const [usersList, setUsersList] = useState([]);
-
-useEffect(() => {
-  const fetchUsers= async () => {
-  
-  await optainUsers(
-    (response) => {
-      setUsersList(response.data);
-      setReload(false);
-    },
-    (error) => {
-      console.error('Salio un error:', error);
-    }
-    );
-  };
-  console.log('consulta', reload);
-  if (reload) {
-    fetchUsers();
-  }
-  
-}, [reload]);
-
+const [usuariosFiltrados, setUsuariosFiltrados] = useState(listpr);
+ 
   
   useEffect(() => {
     setUsuariosFiltrados(
-      usersList.filter((elemento) => {
+      listpr.filter((elemento) => {
         return JSON.stringify(elemento).toLowerCase().includes(searching.toLowerCase());
       })
     );
-  }, [searching, usersList]);
+  }, [searching, listpr]);
 
 
   const RowUser = ({ user }) => {
@@ -116,7 +93,7 @@ const ToDeleteUser = async () => {
         ) : (
           <>
             <td className="numberTD">{user.id}</td>
-            <td className="mediumTD">{user.name}</td>
+            <td className="smallLargeTD">{user.name}</td>
             <td className="smallTD">{user.email}</td>
             <td className="smallLargeTD ">{user.role}</td>
             <td className="smallLargeTD ">{user.state}</td>
@@ -184,11 +161,11 @@ const ToDeleteUser = async () => {
         limit={1}
       />
      <div className="searchContainerUser">
+
         <label>Buscar Usuario por </label>
           <input type="text" className="toSearchInput"
            placeholder="Buscar" value={searching}  
-          onChange={(e) => setSearching(e.target.value)} /> 
-            
+          onChange={(e) => setSearching(e.target.value)}/>
       </div>
       <div className="listSectionContainer divUsuariosList">
         <table className="ListTable">

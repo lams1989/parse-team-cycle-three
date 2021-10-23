@@ -22,13 +22,20 @@ const Sidebar = () => {
           Manufacturas</div>
       </div>
       <ul className="nav-list">
-     
+        <li>
+          <Link to='/admin/ventas/agregarventa'>
+            <a >
+              <img className="iconSidebar" src={sellcart} id="btnSell" alt="img"></img>
+              <span className="links_name">Agregar Ventas</span>
+            </a>
+          </Link>
+        </li>
 
         <li>
-          <Link to='/admin/ventas'>
+          <Link to='/admin/ventas/listadoventas'>
             <a>
               <img className="iconSidebar" src={sellList} id="btnlistOrders" alt="img"></img>
-              <span className="links_name">  Ventas</span>
+              <span className="links_name">Listado de Ventas</span>
             </a>
           </Link>
         </li>

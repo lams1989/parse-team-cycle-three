@@ -6,7 +6,6 @@ const AdminLayout = ({ children }) => {
     return (
         <div className="adminLayoutContainer">
             <Sidebar />
-          
             <main className="mainPage">
                 {children}
             </main>

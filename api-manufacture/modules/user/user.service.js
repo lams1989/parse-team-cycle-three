@@ -10,7 +10,6 @@
         fetchUserByRole: fetchUserByRole,
         fetchUserByState: fetchUserByState,
         updateUser: updateUser,
-       
         deleteUser: deleteUser
     };
 
@@ -24,7 +23,7 @@
         return UserModel.find({})
             .exec();
     }
-    
+
     function fetchUserById(userId) {
         return UserModel.find({ id: userId })
             .exec();

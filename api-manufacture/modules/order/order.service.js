@@ -5,13 +5,8 @@
         createOrder: createOrder,
         fetchOrders: fetchOrders,
         fetchOrderById: fetchOrderById,
-        
-        fetchOrderByIdClient: fetchOrderByIdClient,
-        
-        fetchOrderByClientName: fetchOrderByClientName,
         updateOrder: updateOrder,
         deleteOrder: deleteOrder
-        
     };
 
     var OrderModel = require('./order.module')().OrderModel;
@@ -26,19 +21,10 @@
     };
 
     function fetchOrderById(orderId) {
-        return OrderModel.find({id_order:orderId})
+        return OrderModel.findById(orderId)
             .exec();
     };
-    function fetchOrderByIdClient(idClient) {
-        console.log("idClient: ",idClient)
-        return OrderModel.find({"client.client_doc_id": idClient})
-            .exec();
-    };
-    function fetchOrderByClientName(clientName) {
-        const nameToSearch = new RegExp("^" + clientName);
-        return OrderModel.find({"client.client_name":nameToSearch})
-            .exec();
-    };
+
     function updateOrder(orderId, order) {
         return OrderModel
             .findByIdAndUpdate(orderId, order, { new: true })

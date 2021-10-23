@@ -6,9 +6,7 @@
     var UserSchema = new Schema({
         id: {
             type: Number,
-            required: true, 
-            unique:true
-            
+            required: true
         },
         name: {
             type: String,

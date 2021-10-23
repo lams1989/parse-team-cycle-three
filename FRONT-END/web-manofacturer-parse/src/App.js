@@ -1,12 +1,13 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import UsersManager from 'pages/admin/UsersManager';
-import ProductsManager from 'pages/admin/ProductsManager';
+import AddOrder from 'pages/seller/AddOrder';
+import UserList from 'pages/admin/UserList';
+import Products from 'pages/admin/Products';
 
 import AuthLayout from 'layouts/AuthLayout';
 import AdminLayout from 'layouts/AdminLayout';
 import SellerLayout from 'layouts/SellerLayout';
-import OrdersManager from 'pages/seller/OrdersManager';
+import OrdersList from 'pages/seller/OrdersList';
 <script
   src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
 ></script>
@@ -21,13 +22,16 @@ function App() {
           <AdminLayout>
             <Switch>
               <Route path='/admin/productos'>
-                <ProductsManager />
+                <Products />
               </Route>
-              <Route path='/admin/ventas'>
-                <OrdersManager />
+              <Route path='/admin/ventas/agregarventa'>
+                <AddOrder />
+              </Route>
+              <Route path='/admin/ventas/listadoventas'>
+                <OrdersList />
               </Route>
               <Route path='/admin/usuarios'>
-                <UsersManager />
+                <UserList />
               </Route>
               <Route path='/admin'>
               </Route>
@@ -38,9 +42,11 @@ function App() {
         <Route path={['/vendedor', 'vendedor/ventas']}>
           <SellerLayout>
             <Switch>
-             
+              <Route path='/vendedor/ventas/agregarventa'>
+                <AddOrder />
+              </Route>
               <Route path='/vendedor/ventas/listadoventas'>
-                <OrdersManager />
+                <OrdersList />
               </Route>
               <Route path='/vendedor'>
               </Route>
