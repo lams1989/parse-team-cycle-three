@@ -429,7 +429,7 @@ useEffect(async () => {
            <tr  key={nanoid()} className="viewRowMedium">
            <td className="numberTD">{product.id}</td>
            <td className="mediumTD">{product.description}</td>
-           <td className="smallTD ">  <input className="inputChange inputNumber" type ="number" defaultValue={product.quantity} min="1"></input></td>
+           <td className="smallTD ">  <label>{product.quantity}</label></td>
            <td className="smallTD">$ {product.unitprice}</td>
            <td className="smallTD">$ {product.unitprice * product.quantity} </td>
                
