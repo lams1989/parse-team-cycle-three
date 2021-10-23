@@ -5,6 +5,7 @@
         addProduct: addProduct,
         getProducts: getProducts,
         getProductById: getProductById,
+        getProductByState:getProductByState,
         getProductByDescription: getProductByDescription,
         modifyProduct: modifyProduct,
         modifyPartOfProduct: modifyPartOfProduct,
@@ -60,6 +61,21 @@
 
     function getProductByDescription(req, res, next) {
         ProductService.fetchProductByDescription(req.params.productDescrip)
+            .then(success)
+            .catch(failure);
+
+        function success(data) {
+            req.response = data;
+            console.log(data)
+            next();
+        }
+
+        function failure(err) {
+            next(err);
+        }
+    };
+    function getProductByState(req, res, next) {
+        ProductService.fetchProductByState(req.params.productState)
             .then(success)
             .catch(failure);
 
