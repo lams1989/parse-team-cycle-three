@@ -27,6 +27,11 @@
   
 }
 
+.spinerClass {
+  display: flex;
+  justify-content: center;
+  margin-top: 200px;
+}
 
 .mainPage{
     height: 100%;
