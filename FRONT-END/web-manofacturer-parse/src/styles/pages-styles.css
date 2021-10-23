@@ -318,7 +318,7 @@ height: 100%;
 
 /*size for table in list products in new order section*/
 .divProductToAdd{
-  border:none;
+ 
   overflow-y: hidden;
   
 }
@@ -812,6 +812,7 @@ cursor: pointer;
   align-content: center;
 }
 .divCenter{
+  
   display: grid;
   justify-items: center;
   justify-self: center;
@@ -830,7 +831,8 @@ cursor: pointer;
   width: 250px;
 }
 .divCartTable{
-  height: 390px;
+  height: 340px;
+  
 }
 .tableorderinfo{
   width: 100%;
@@ -859,4 +861,15 @@ cursor: pointer;
 .labeldescr{
   border: 1px solid black;
   background-color: black;
+ }
+ 
+ .btnMedium{
+   margin-top:10px;
+  font-size:medium;
+ 
+  height: 50px;
+  margin-right: 5px;
+  color:white;
+  background-color: var(--btn_color);
+  margin-right: 10px;
  }

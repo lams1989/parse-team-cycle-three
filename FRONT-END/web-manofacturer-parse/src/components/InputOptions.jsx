@@ -21,7 +21,7 @@ export default function InputOptions({ listOptions, setOptionSelected, labelOf }
       'Hola, soy un use effect que se ejecuta cuando usas el input, para cargar la lista de opciones :)'
     );
     setOptionSelected(value);
-    console.log("value:",value);
+    console.log("value:", value);
     setReload(false);
   }, [value]);
 
@@ -32,14 +32,14 @@ export default function InputOptions({ listOptions, setOptionSelected, labelOf }
       <Autocomplete
         value={value}
         onChange={(event, newValue) => {
-         
-          
-            setValue(newValue);
-          
+
+
+          setValue(newValue);
+
         }}
         filterOptions={(options, params) => {
           const filtered = filter(options, params);
-
+          
           const { inputValue } = params;
 
           return filtered;
@@ -65,11 +65,11 @@ export default function InputOptions({ listOptions, setOptionSelected, labelOf }
         sx={{ width: 300 }}
         freeSolo
         renderInput={(params) => (
-         
-          <TextField {...params} label= {labelOf} />
+
+          <TextField {...params} label={labelOf} />
         )}
       />
-      
+
 
     </>
   );

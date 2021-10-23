@@ -183,3 +183,21 @@ export const obtainClients = async (successCallback, errorCallback) => {
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
 
+export const createClient = async (data, successCallback, errorCallback) => {
+  var options = {
+    method: 'POST',
+    url: 'http://localhost:3001/clients/',
+    headers: { 'Content-Type': 'application/json' },
+    data
+  };
+  await axios.request(options).then(successCallback).catch(errorCallback);
+};
+export const createOrder = async (data, successCallback, errorCallback) => {
+  var options = {
+    method: 'POST',
+    url: 'http://localhost:3001/orders/',
+    headers: { 'Content-Type': 'application/json' },
+    data
+  };
+  await axios.request(options).then(successCallback).catch(errorCallback);
+};
