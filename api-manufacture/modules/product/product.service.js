@@ -9,6 +9,7 @@ const { findOneAndDelete } = require('./product.model');
         fetchProducts: fetchProducts,
         fetchProductById: fetchProductById,
         fetchProductByDescription: fetchProductByDescription,
+        fetchProductByState: fetchProductByState,
         updatePartOfProduct: updatePartOfProduct,
         updateProduct: updateProduct,
         deleteProduct: deleteProduct,
@@ -28,6 +29,12 @@ const { findOneAndDelete } = require('./product.model');
 
     function fetchProductById(productId) {
         return ProductModel.find({ id: productId })
+            .exec();
+    }
+    function fetchProductByState(productState) {
+        const ToSearch = new RegExp("^" + productState);
+        
+        return ProductModel.find({ state: ToSearch })
             .exec();
     }
 

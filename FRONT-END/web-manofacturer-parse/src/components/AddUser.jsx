@@ -7,11 +7,11 @@ import { createUser, optainUsers, obtainUserById } from "utils/Api-connection"
 import { ToastContainer, toast, Zoom } from 'react-toastify';
 
 
-const AddUser = () => {
+const AddUser =  ()  => {
 
   const formAddUser = useRef(null);
 
-  const submitCreateUser = (e) => {
+  const submitCreateUser = async (e) => {
     e.preventDefault();
     const formData = new FormData(formAddUser.current);
     const newUser = {};
@@ -19,7 +19,7 @@ const AddUser = () => {
       newUser[key] = value;
     });
 
-    createUser(
+   await createUser(
       {
         id: newUser.userId,
         name: newUser.name.toUpperCase(),

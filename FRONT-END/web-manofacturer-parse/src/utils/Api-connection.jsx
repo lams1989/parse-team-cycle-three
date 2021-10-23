@@ -37,6 +37,15 @@ export const obtainProductByDescrip = async (descrip, successCallback, errorCall
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
 
+export const obtainProductByState = async (state, successCallback, errorCallback) => {
+  var options = {
+    method: 'GET',
+    url: `http://localhost:3001/products/s/${state}/`,
+    headers: { 'Content-Type': 'application/json' }
+  };
+  console.log(options);
+  await axios.request(options).then(successCallback).catch(errorCallback);
+};
 
 
 export const updateProductInfo = async (id, dataToUpdate, successCallback, errorCallback) => {
@@ -170,6 +179,25 @@ export const obtainClients = async (successCallback, errorCallback) => {
   var options = {
     method: 'GET',
     url: 'http://localhost:3001/clients/'
+  };
+  await axios.request(options).then(successCallback).catch(errorCallback);
+};
+
+export const createClient = async (data, successCallback, errorCallback) => {
+  var options = {
+    method: 'POST',
+    url: 'http://localhost:3001/clients/',
+    headers: { 'Content-Type': 'application/json' },
+    data
+  };
+  await axios.request(options).then(successCallback).catch(errorCallback);
+};
+export const createOrder = async (data, successCallback, errorCallback) => {
+  var options = {
+    method: 'POST',
+    url: 'http://localhost:3001/orders/',
+    headers: { 'Content-Type': 'application/json' },
+    data
   };
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
