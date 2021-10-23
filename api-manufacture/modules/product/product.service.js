@@ -9,9 +9,11 @@ const { findOneAndDelete } = require('./product.model');
         fetchProducts: fetchProducts,
         fetchProductById: fetchProductById,
         fetchProductByDescription: fetchProductByDescription,
+        fetchProductByState: fetchProductByState,
         updatePartOfProduct: updatePartOfProduct,
         updateProduct: updateProduct,
-        deleteProduct: deleteProduct
+        deleteProduct: deleteProduct,
+        getExistId:getExistId
     };
 
     var ProductModel = require('./product.module')().ProductModel;
@@ -27,6 +29,12 @@ const { findOneAndDelete } = require('./product.model');
 
     function fetchProductById(productId) {
         return ProductModel.find({ id: productId })
+            .exec();
+    }
+    function fetchProductByState(productState) {
+        const ToSearch = new RegExp("^" + productState);
+        
+        return ProductModel.find({ state: ToSearch })
             .exec();
     }
 
@@ -54,17 +62,20 @@ const { findOneAndDelete } = require('./product.model');
             .exec();
     }
 
-    /* function deleteProduct(productId) {
-         
-         return ProductModel
-             //.findByIdAndRemove(productId)
-             findOneAndDelete({id:productId})
-             .exec();
-     }*/
 
     function deleteProduct(product_Id) {
         return ProductModel.findByIdAndRemove(product_Id)
             .exec();
     }
 
+    function getExistId(productId) {
+        const exist= ProductModel.find({ id: productId }) .exec();
+        if(exist!=[]){
+            console.log("existe");
+            return true;
+        }else 
+        console.log("no existe");
+        return false;
+
+    }
 })();

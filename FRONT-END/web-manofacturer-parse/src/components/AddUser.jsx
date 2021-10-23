@@ -2,38 +2,16 @@ import UsersTable from 'components/UsersTable';
 import React, { useEffect, useState, useRef } from 'react';
 import "styles/pages-styles.css"
 import useradd from "media/person_add_alt_white_48dp.svg"
-import searchuser from "media/zoom_in_white_48dp.svg"
+
 import { createUser, optainUsers, obtainUserById } from "utils/Api-connection"
 import { ToastContainer, toast, Zoom } from 'react-toastify';
-import { fetchUsersbyAnyMatch } from 'utils/Api-connection';
 
-const UserList = () => {
+
+const AddUser =  ()  => {
 
   const formAddUser = useRef(null);
-  const [reload, setReload] = useState(true);
-  const [usersList, setUsersList] = useState([]);
 
-  useEffect(() => {
-    const fetchUsers= async () => {
-    
-    await optainUsers(
-      (response) => {
-        setUsersList(response.data);
-        setReload(false);
-      },
-      (error) => {
-        console.error('Salio un error:', error);
-      }
-      );
-    };
-    console.log('consulta', reload);
-    if (reload) {
-      fetchUsers();
-    }
-  }, [reload]);
-
-
-  const submitCreateUser = (e) => {
+  const submitCreateUser = async (e) => {
     e.preventDefault();
     const formData = new FormData(formAddUser.current);
     const newUser = {};
@@ -41,7 +19,7 @@ const UserList = () => {
       newUser[key] = value;
     });
 
-    createUser(
+   await createUser(
       {
         id: newUser.userId,
         name: newUser.name.toUpperCase(),
@@ -52,39 +30,41 @@ const UserList = () => {
       (response) => {
         console.log(response.data);
         toast.success('user was created SUCCESSFULLY');
-        setReload(true);
+
+        document.getElementById("formAddUser").reset();
+
       },
       (error) => {
         console.error(error);
         toast.error('Create user ERROR');
       }
     );
- 
+
   };
 
-  
+
   return (
     <div className="MainSection">
-      <div className="titlepage">
-        <span className="title">   Lista de Usuarios</span>
-      </div>
 
-      <h3 className=" addNewSubt marg-l"> Agregar Usuario</h3>
-      <div className="addContainer">
-        <form ref={formAddUser} onSubmit={submitCreateUser}>
-          <ul className="listFields">
+      <h3 align="center" className=" addNewSubt marg-l"> Nuevo Usuario</h3>
+      <div className="newOrderContainer">
+
+        <form id="formAddUser" ref={formAddUser} onSubmit={submitCreateUser}>
+          <ul className="ulProduct">
             <li>
               <label> ID Usuario</label>
               <input name="userId" className="inputChange inputValue" type="text" required placeholder="ID"></input>
             </li>
             <li>
               <label> Nombre</label>
-              <input name="name" className="inputChange" type="text" required placeholder="Nombre"></input>
+              <input name="name" className="inputChange mediumTD" type="text" required placeholder="Nombre"></input>
             </li>
+
             <li>
               <label> Correo Electrónico</label>
               <input name="email" className="inputChange smallLargeTD" autoComplete="email" required placeholder="Correo electrónico"></input>
             </li>
+
             <li className="addDataRoleContainer">
               <label> Rol </label>
               <select name="role" className="selectRole">
@@ -101,6 +81,7 @@ const UserList = () => {
                 <option className="pending" value="pendiente">Pendiente</option>
               </select>
             </li>
+
           </ul>
           <div className="btnOptionsContainer">
             <button type="submit" className="btnGeneral btnCreateUser"> <img className="btnIcon" src={useradd} alt="img"></img> Crear Usuario</button>
@@ -114,12 +95,10 @@ const UserList = () => {
         transition={Zoom}
         limit={1}
       />
-     
 
-      <UsersTable listpr={usersList} setReload={setReload} />
 
     </div>
   )
 }
 
-export default UserList
+export default AddUser

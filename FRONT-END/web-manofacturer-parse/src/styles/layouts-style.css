@@ -2,14 +2,14 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200&family=Open+Sans+Condensed:ital,wght@0,300;0,700;1,300&display=swap');
 :root{
---margin_sidebar:240px;
+--margin_sidebar:200px;
 }
 
 .adminLayoutContainer,.sellerLayoutContainer{
   display: flex;
   height:100%;
   overflow-x: hidden;
-  overflow-y: hidden !important;
+  overflow-y: hidden ;
   padding:0px;
   width: calc(100% - var(--margin_sidebar));
   box-sizing: border-box;
@@ -21,7 +21,8 @@
 
 .sidebarSection{
   
-  width: 20rem;
+ /*width: 20rem;*/
+ width: var(--margin_sidebar);
  
   
 }
@@ -30,11 +31,13 @@
 .mainPage{
     height: 100%;
     width: 100%;
+    margin-left: 20px;
     background-color: white;
     display:-moz-grid-group;
     overflow-y: hidden;
     align-content: center;
     justify-content: center;  
+    overflow-x:hidden;
     
   }
 

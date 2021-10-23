@@ -6,7 +6,8 @@
     var ProductSchema = new Schema({
         id: {
             type: Number,
-            required: true
+            required: true,
+            unique:true
         },
         description: {
             type: String,

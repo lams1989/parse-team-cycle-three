@@ -8,21 +8,24 @@
   --hover_blue: #3880ec;
 }
 
+.tabscontainer{
+  margin-left: 20px;
+}
 /*main page container style*/
 .MainSection{
-  margin-top: 300px;
- margin:0px;
+margin-top: 20px;
+ 
  margin-left: 10px;
- display:ms-grid;
+ display:grid;
+ justify-items: center;
+ justify-content: center;
  
  }
 
 /*title page div style*/
 .titlepage{
-  
-  background-color: lavender;
+  margin-top: 10px;
   align-items: center;
-  margin-bottom:20px;
   margin-left: 10px;
   margin-right: 20px;
   
@@ -40,14 +43,8 @@
 
 .addNewSubt{
   font-size: 20px;
-  background-color: var(--black);
-  margin-left: 20px;
-  color:white;
-  height: 30px;
-  margin-right: 20px;
-  padding-left: 20px;
-  margin-bottom: 3px;
   margin-top: 10px;
+  color:var(--colortitle)
 }
 
 .subt1{
@@ -69,6 +66,9 @@
   margin-right: 2px;
 }
 
+i {
+  padding:2px;
+}
 /*buttons */
 .btnGeneral {
   
@@ -96,6 +96,7 @@
   background-color: var(--btn_color);
   margin-left: 500px;
   margin-right: 20px;
+  
   color:white;
 }
 
@@ -143,7 +144,7 @@ btnCreateUser,.btnCreateProduct:hover{
   font-size:small;
   margin-top: 10px;
   margin-right: 20px;
-  
+  height: 40px;
   background-color:lightgrey;
   padding:5px;
   
@@ -182,26 +183,31 @@ btnCreateUser,.btnCreateProduct:hover{
 
 
 /*selects */
-.selectRole{
+.selectRole, .selectStatus{
   margin-top:5px;
-  margin-left: 10px;
+  
   font-size: 16px;
-  padding: 8px;
-  width: 170px;
- 
+  padding: 4px;
+  width: 150px;
+ height: 35px;
   margin-left:0px;
   margin-bottom: 5px;
+  outline: none;
 }
+
+/*
 .selectStatus {
   font-size: 16px;
   background-color: white;
-  padding: 8px;
+  padding: 4px;
   width: 160px;
   margin-top:3px;
   margin-bottom: 5px;
-  margin-left: 5px;
+  
  
 }
+*/
+
 .aproved{
   color:green;
 }
@@ -221,15 +227,15 @@ btnCreateUser,.btnCreateProduct:hover{
 .searchContainer{
   display:  flex;
   height: 70px;
-  background-color: var(--colorbackground1);
   justify-content: space-between;
   padding-top: 10px;
   padding-bottom: 5px;
   padding-left: 10px;
   margin: 10px 50px 20px 30px;
-  border: 2px solid;
+ /* border: 2px solid;
   border-color: lightslategray;
-  
+  background-color: var(--colorbackground1);
+  */
 }
 
 /*Styles for html elements in the section of adding new  information*/
@@ -241,30 +247,32 @@ btnCreateUser,.btnCreateProduct:hover{
   border-radius: 6px;
   border: 1px solid;
   border-color: gray;
-  
+  align-self: left;
 }
 
 /* ul  userlist section*/
 .listFields{ 
-  display: flex;
-  list-style: none;  
+  display: grid;
+  list-style: none;
+  justify-content: space-between;  
  
 }
 
 .listFields >li{
-  
-  justify-content: space-between;
+
   border-radius: 4px;
   margin-left: 20px;
   margin-top: 0px;
   border:white ;
- 
 }
 
+
 .listFields label{
+  margin-top:20px;
   padding-inline: 2px;
   color: black;
-  font-style:italic;
+  color:var(--colortitle)
+  
 }
 .addDataRoleContainer > select{
   margin-left: 10px;
@@ -273,11 +281,19 @@ btnCreateUser,.btnCreateProduct:hover{
 /*ul de product section*/
 .ulProduct{
   list-style: none;
-  display: flex;
+  align-items: center;
   
 }
 .ulProduct li{
   padding-right: 30px;
+  text-align: bottom;
+  margin: 5px;
+  color:var(--colortitle)
+ 
+}
+.ulProduct label{
+ margin-right: 20px;
+ 
 }
 
 
@@ -296,30 +312,34 @@ position: relative;
 
 border:0.5px solid gray;
 
-box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+
+height: 100%;
 }
 
 /*size for table in list products in new order section*/
 .divProductToAdd{
-  height: 300px;
+ 
+  overflow-y: hidden;
+  
 }
 /*size for orders list*/
 .divOrderslist{
-  height: 600px;
+  height: 540px;
   
 }
 
 /*size for products list*/
 .divProducts{
-  height: 380px;
+  height: 510px;
+  overflow-x: scroll;
   
 }
 
 
 /**size for user table*/
 .divUsuariosList{
-  
-  height:370px;
+  margin-top:20px;
+  height:540px;
 }
 
 
@@ -330,43 +350,43 @@ box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24
   
 }
 .thead{
-  background-color: black;
-  color:white;
-}
-.thead tr th { 
+  background-color: whitesmoke;
   position: sticky;
   top: 0;
   z-index: 10;
-  background-color: var(--black);
-
+  color:var(--colortitle);
+  
+  border-bottom:2px solid;
+  border-color: var(--colortitle);
+  
 }
 
 .col_title{
   padding: 5px;
   padding-inline: 10px;
-  text-transform: uppercase;
+  text-transform: capitalize;
   letter-spacing: 0.1rem;
-  font-weight: 900;
-  background-color: white;
+  font-size: 15px;
+  
 }
 
 .col-last{
  padding-left: 20px;
-  color: white;
+ color:var(--colortitle);
+  font-size: small;
+  
 }
 .datarow{
-  height:50px;
+  height:100%;
   width: 100%;
   
-  background-color: white;
 }
 
 .datarow td{
-  
-  padding-left: 20px;
-  border:1px solid;
+  padding:6px;
+  border-bottom:1px solid;
   border-color: gray;
-  padding-left:10px;
+  
 }
 .pad-b{
   padding-bottom: 5px;
@@ -411,7 +431,7 @@ box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24
   padding: 4px;
   border-radius: 8px;
  
-  height: 30px;
+  height: 40px;
   margin-top:8px;
  margin-left: 10px;
  margin-right: 10px;
@@ -424,20 +444,21 @@ box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24
   
   background-color: white;
   border: 1px solid gray;
-  padding: 4px;
-  border-radius: 8px;
   
-  height: 30px;
+  padding: 4px;
+  border-radius: 6px;
+  
+  height: 35px;
   margin-top:8px;
 
   outline: none;
-  display: flex;
+  
   
 }
 .inputNumber{
- margin-left: 20px;
+ 
  margin-right: 10px;
- width: 40px;
+ width: 80px;
 }
 .inputMedium{
   width: 600px;
@@ -448,7 +469,7 @@ box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24
   overflow-wrap: break-word;
 }
 .inputValue{
-  width: 70px;
+  width: 100px;
 }
 .inputLarge{
   width: 670px;
@@ -459,14 +480,14 @@ box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24
 .inputTotal{
   background-color: lightgray;
   height: 40px;
-  width: 300px;
+  width: 200px;
 }
 
 /*other styles for specific section*/
 
 /**Sección para estilos de modulo ventas**/
 .newOrderContainer{
-  display: grid;
+  display: flex;
   background-color: var(--colorbackground1);
   border:1px solid;
   border-color: lightslategray;
@@ -476,20 +497,6 @@ box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24
   margin-right: 50px;
   
   
-}
-
-
-.stateDiv{
-  margin-left: 150px;
-}
-.listFields .totalLi{
-
-  margin-left: 300px;
-}
-
-.listFields .stateDiv{
-
-  margin-left: 200px;
 }
 
 /*div containers de btn*/
@@ -514,10 +521,17 @@ box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24
 }
 /*in add order section*/
 .divBtnTotalOrder{
-  margin-top:20px;
-  margin-left: 700px;
+ 
+align-items: right;
+margin-left: 200px;
+padding-inline: 10px;
 }
-
+.divClientOpt{
+align-items: left;
+justify-self: left;
+padding-top: 10px;
+padding-inline: 2px;
+}
 
 /**adding update section for products module*/
 
@@ -548,12 +562,13 @@ box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24
  
   .dialogDelete{
     justify-items: center;
-    display: grid;
+    
     padding: 20px;
-    height: 200px;
-    width: 500px;
+    height: 100%;
+    width: 100%;
     font-size: 16px;
     border-radius: 8px;
+    
   }
 
   .editBtnContainer {
@@ -566,13 +581,13 @@ box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24
   .editBtnContainer2 {
     display: flex;
     align-items: center;
-   margin:5px;
+    margin-left: 150px;
 
   }
   
   .editBtnContainer2 button {
     display: flex;
-    margin-left:40px;
+  
     font-size: 20px;
     height: 40px;
     width: 45px;
@@ -616,6 +631,245 @@ input[type=number]::-webkit-outer-spin-button {
   align-self: center;
   height: 50px;
   margin-bottom: 10px;
+  margin-top: 10px;
   width: fit-content;
   padding:7px;
 }
+
+/**In module orders*/
+
+.dialogViewOrder{
+padding: 20px;
+height: 100%;
+width: 100%;
+
+overflow-x: hidden;
+overflow-y: hidden;
+}
+.headerDialogView{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid var(--btn_color);
+  border-top-left-radius: .3rem;
+  border-top-right-radius: .3rem;
+  color:var(--btn_color);
+  
+}
+
+.spanClose{
+cursor: pointer;
+}
+.spanClose{
+ 
+    float: right;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .5;
+
+}
+.editBtnContainer3 {
+  width: 120px;
+  display: flex;
+  align-items: center;
+
+}
+.infoOrderheader{
+  display:grid;
+  margin-bottom: 5px;
+  padding: 10px;
+}
+.tableDialogView{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  height: 250px;
+  
+  overflow-x: hidden;
+  overflow-y: scroll;
+ 
+  text-align: center; 
+}
+.editBtnOK{
+  margin-left: 200px;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.BtnOK{
+  font-size: 20px;
+  height: 40px;
+  width: 45px;
+  
+    
+  align-items: center;
+}
+.viewRow{
+  font-size:small;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  margin: 5px;
+ 
+}
+.viewRow td{
+  padding: 5px;
+}
+.divtotalOrder{
+  text-align: center;
+  align-items: center;
+  
+}
+
+.orderSplit{
+  display: grid;
+  grid-template-columns: 0.2fr 1fr;
+  margin-left: 10px;
+  margin-right: 10px;
+  
+  width: 100%;
+  overflow-x: hidden;
+}
+.sectionOrder{
+  width: 360px;
+  padding:5px;
+  margin-left: 20px;
+  
+}
+.formNewOrder input{
+  display: inline-flex;
+  width: 200px;
+}
+
+.newOrderCont{
+  margin-top: 20px;
+}
+
+.labelsOrders{
+  display: grid;
+  padding: 4px;
+  
+}
+.labelsOrders label{
+  display: grid;
+  padding: 4px;
+  height: 35px;
+  margin-top: 10px;
+  width: 120px;
+}
+.inputsOrders{
+  padding-top: 10px;
+  display: grid;
+  padding-inline: 10px;
+}
+
+
+.newOrderCont{
+  display: flex;
+  grid-template-rows: repeat(2, 1fr);
+}
+.btnOrdersDiv{
+  margin-top: 30px;
+  
+}
+.productsToCart{
+  display: grid;
+  margin-top:20px;
+  margin-left: 10px;
+  width: 100%;
+ 
+  
+}
+.productsOptions{
+  margin-top:15px;
+}
+.viewRowMedium{
+  font-size:medium;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  margin: 5px;
+  
+}
+.viewRowMedium td{
+  padding: 5px;
+}
+.divCartOpt{
+  margin-left: 10px;
+  display:grid;
+}
+.divClient{
+  margin:5px;
+  padding: 10px;
+  display: flex;
+  
+}
+.divClient label{
+  font-size: 16px;
+  margin-top: 15px;
+}
+.closeNewClient{
+  margin-top: 20px;
+  align-content: center;
+}
+.divCenter{
+  
+  display: grid;
+  justify-items: center;
+  justify-self: center;
+}
+
+.spanCloseClient{
+  margin-left: 100px;
+}
+.btn2div{
+  margin-top: 35px;
+  margin-left: 10px;
+}
+.textfSeller{
+ 
+  margin-top:20px;
+  width: 250px;
+}
+.divCartTable{
+  height: 340px;
+  
+}
+.tableorderinfo{
+  width: 100%;
+  margin:10px 10px 10px 10px;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1px;
+}
+
+.infoFin{
+  padding:10px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  display: flex;
+  margin-bottom: 5px;
+}
+.infoFin label{
+  margin-top:10px;
+  font-size: medium;
+}
+.infoFin input{
+  margin-left: 10px;
+  
+}
+.dataProductToAdd{
+  display:flex;
+  
+}
+.labeldescr{
+  border: 1px solid black;
+  background-color: black;
+ }
+ 
+ .btnMedium{
+   margin-top:10px;
+  font-size:medium;
+ 
+  height: 50px;
+  margin-right: 5px;
+  color:white;
+  background-color: var(--btn_color);
+  margin-right: 10px;
+ }
