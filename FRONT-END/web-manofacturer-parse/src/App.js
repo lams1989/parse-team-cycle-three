@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import UsersManager from 'pages/admin/UsersManager';
 import ProductsManager from 'pages/admin/ProductsManager';
-import AuthLayout from 'layouts/AuthLayout';
 import AdminLayout from 'layouts/AdminLayout';
 import SellerLayout from 'layouts/SellerLayout';
 import OrdersManager from 'pages/seller/OrdersManager';
@@ -10,7 +9,7 @@ import ButtonLogin from 'components/ButtonLogin'
 
 <script
   src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
-  
+
 ></script>
 
 
@@ -18,7 +17,7 @@ function App() {
   return (
     <Auth0Provider
       domain="parse-manofacturer.us.auth0.com"
-      clientId="ZJXbIjUCmTjoKJRf42cICwhuGHl8j3mL"
+      clientId="tHoSOnRwFju4K39I7TqS5eIoARoYgZmV"
       redirectUri={window.location.origin}>
 
       <Router>
@@ -54,10 +53,6 @@ function App() {
             </SellerLayout>
           </Route>
 
-          <Route path='/login'>
-            <AuthLayout />
-          </Route>
-          
           <Route path="/">
             <ButtonLogin />
           </Route>
