@@ -30,9 +30,12 @@
     display: flex;
     position: relative;
     align-items: center;
-    
-    
   }
+
+  .btnExit .iconSidebar {
+    margin: 0;
+  }
+  
   .sidebar .logo-details .img{
     opacity: 1;
   }

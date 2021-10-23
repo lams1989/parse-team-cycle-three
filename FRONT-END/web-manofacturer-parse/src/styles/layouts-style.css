@@ -18,6 +18,65 @@
   
 }
 
+.loginImageError {
+  display: flex;
+  justify-content: center;
+  width: 50%;
+}
+.information {
+  height: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.buttonGoLogin {
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: aliceblue;
+}
+
+.divBtnGoLogin {
+  height: 100px;
+  justify-content: center;
+  align-items: center;
+}
+
+.divBtnGoLogin .btnGeneral  {
+  width: 100%;
+  font-size:150%;
+  height: 50px;
+  margin-right: 5px;
+  color:white;
+  background-color: var(--btn_color);
+  margin-right: 10px;
+}
+
+.divImgGoLogin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btnGoLogin {
+  width: 50%;
+  font-size:150%;
+  height: 50px;
+  margin-right: 5px;
+  color:white;
+  background-color: var(--btn_color);
+  margin-right: 10px;
+}
+
+.textNotUtentication {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  color: #FC5F5D;
+  font-weight: bold;
+  font-size: xxx-large;
+}
 
 .sidebarSection{
   
@@ -27,6 +86,11 @@
   
 }
 
+.spinerClass {
+  display: flex;
+  justify-content: center;
+  margin-top: 200px;
+}
 
 .mainPage{
     height: 100%;
