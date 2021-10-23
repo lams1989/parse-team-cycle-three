@@ -19,8 +19,8 @@
             },
         },
         date: {
-            type: Date,
-            default: Date.now
+            type: String,
+            required: true
         },
         seller: {
             seller_id: {
