@@ -1,39 +1,39 @@
 
-import { updateUser, deleteUser} from 'utils/Api-connection';
-import React, { useState ,useEffect,useRef} from 'react';
+import { updateUser, deleteUser } from 'utils/Api-connection';
+import React, { useState, useEffect, useRef } from 'react';
 import { ToastContainer, toast, Zoom } from 'react-toastify';
 import { Dialog, Tooltip } from '@material-ui/core';
 import { nanoid } from 'nanoid';
 
 import { optainUsers } from "utils/Api-connection"
 const UsersTable = ({ }) => {
-  
-const [searching, setSearching] = useState('');
-const [usuariosFiltrados, setUsuariosFiltrados] = useState([]);
-const [reload, setReload] = useState(true);
-const [usersList, setUsersList] = useState([]);
 
-useEffect(() => {
-  const fetchUsers= async () => {
-  
-  await optainUsers(
-    (response) => {
-      setUsersList(response.data);
-      setReload(false);
-    },
-    (error) => {
-      console.error('Salio un error:', error);
+  const [searching, setSearching] = useState('');
+  const [usuariosFiltrados, setUsuariosFiltrados] = useState([]);
+  const [reload, setReload] = useState(true);
+  const [usersList, setUsersList] = useState([]);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+
+      await optainUsers(
+        (response) => {
+          setUsersList(response.data);
+          setReload(false);
+        },
+        (error) => {
+          console.error('Salio un error:', error);
+        }
+      );
+    };
+    console.log('consulta', reload);
+    if (reload) {
+      fetchUsers();
     }
-    );
-  };
-  console.log('consulta', reload);
-  if (reload) {
-    fetchUsers();
-  }
-  
-}, [reload]);
 
-  
+  }, [reload]);
+
+
   useEffect(() => {
     setUsuariosFiltrados(
       usersList.filter((elemento) => {
@@ -72,27 +72,27 @@ useEffect(() => {
           toast.error('Error actualizando usuario');
         }
       );
-     setEditable(false);
-     setReload(true);
+      setEditable(false);
+      setReload(true);
     };
 
-const ToDeleteUser = async () => {
-  setConfirmDeleteDialog(false);
-  await deleteUser(
-    user._id,
-    (response) => {
-      console.log(response.data);
-     
-      toast.success('usuario eliminado con éxito');
-    
-    },
-    (error) => {
-      console.error(error);
-      toast.error('Error eliminando el usuario');
+    const ToDeleteUser = async () => {
+      setConfirmDeleteDialog(false);
+      await deleteUser(
+        user._id,
+        (response) => {
+          console.log(response.data);
+
+          toast.success('usuario eliminado con éxito');
+
+        },
+        (error) => {
+          console.error(error);
+          toast.error('Error eliminando el usuario');
+        }
+      );
+      setReload(true);
     }
-  );
-  setReload(true);
-}
     return (
       <tr className="datarow">
         {editable ? (
@@ -136,7 +136,7 @@ const ToDeleteUser = async () => {
               : (
                 <><Tooltip title='Editar' arrow placement="left">
                   <button type="button" className="btnGeneral btnEdit" onClick={() => setEditable(!editable)}> <i class="fas fa-user-cog"></i></button></Tooltip>
-                  <Tooltip title='Eliminar' arrow placement="botton"> 
+                  <Tooltip title='Eliminar' arrow placement="botton">
                     <button type="reset" className="btnGeneral btnDelete" onClick={() => setConfirmDeleteDialog(true)}>  <i class="fas fa-user-minus"></i></button></Tooltip>
                 </>
               )}
@@ -149,24 +149,24 @@ const ToDeleteUser = async () => {
                 </div>
                 <div className="editBtnContainer2">
                   <button type="button" className="btnGeneral btnEdit" onClick={() => submitEditUser()} >Si</button>
-                  <button type="reset" className="btnGeneral btnDelete" onClick={() => setConfirmUpdateDialog(false)} >No</button> 
+                  <button type="reset" className="btnGeneral btnDelete" onClick={() => setConfirmUpdateDialog(false)} >No</button>
                 </div>
               </div>
             </Dialog>
-      
-            <Dialog open={confirmDeleteDialog}>
-  <div className="dialogDelete">
-    
-<h5>¿Está seguro de eliminar este producto?</h5>
-<p align="center">Rol: {user.role}  </p>
-<p className="pLarge" align="center"> {user.name}  </p>
 
-<div className="editBtnContainer2">
-  <button type="button" className="btnGeneral btnEdit"  onClick={() => ToDeleteUser()} >Si</button>
-  <button type="reset" className="btnGeneral btnDelete" onClick={() => setConfirmDeleteDialog(false)} >No</button>
-</div> 
- </div>
-</Dialog>
+            <Dialog open={confirmDeleteDialog}>
+              <div className="dialogDelete">
+
+                <h5>¿Está seguro de eliminar este producto?</h5>
+                <p align="center">Rol: {user.role}  </p>
+                <p className="pLarge" align="center"> {user.name}  </p>
+
+                <div className="editBtnContainer2">
+                  <button type="button" className="btnGeneral btnEdit" onClick={() => ToDeleteUser()} >Si</button>
+                  <button type="reset" className="btnGeneral btnDelete" onClick={() => setConfirmDeleteDialog(false)} >No</button>
+                </div>
+              </div>
+            </Dialog>
           </div>
         </td>
       </tr>
@@ -183,12 +183,12 @@ const ToDeleteUser = async () => {
         transition={Zoom}
         limit={1}
       />
-     <div className="searchContainerUser">
+      <div className="searchContainerUser">
         <label>Buscar Usuario por </label>
-          <input type="text" className="toSearchInput"
-           placeholder="Buscar" value={searching}  
-          onChange={(e) => setSearching(e.target.value)} /> 
-            
+        <input type="text" className="toSearchInput"
+          placeholder="Buscar" value={searching}
+          onChange={(e) => setSearching(e.target.value)} />
+
       </div>
       <div className="listSectionContainer divUsuariosList">
         <table className="ListTable">
