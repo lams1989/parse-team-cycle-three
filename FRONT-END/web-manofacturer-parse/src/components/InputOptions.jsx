@@ -39,7 +39,7 @@ export default function InputOptions({ listOptions, setOptionSelected, labelOf }
         }}
         filterOptions={(options, params) => {
           const filtered = filter(options, params);
-          
+
           const { inputValue } = params;
 
           return filtered;

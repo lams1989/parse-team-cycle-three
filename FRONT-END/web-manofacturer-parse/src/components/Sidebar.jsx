@@ -24,7 +24,7 @@ const Sidebar = () => {
           Manufacturas</div>
       </div>
       <ul className="nav-list">
-     
+
 
         <li>
           <Link to='/admin/ventas'>
