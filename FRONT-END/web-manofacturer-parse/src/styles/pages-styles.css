@@ -323,9 +323,8 @@ height: 100%;
   
 }
 /*size for orders list*/
-.divOrderslist{
-  height: 540px;
-  
+.divOrders{
+  height: 520px;
 }
 
 /*size for products list*/
@@ -478,11 +477,12 @@ height: 100%;
 
 
 .inputTotal{
+  font-size:30px;
   background-color: lightgray;
   height: 40px;
   width: 200px;
-}
 
+}
 /*other styles for specific section*/
 
 /**Sección para estilos de modulo ventas**/
@@ -831,7 +831,7 @@ cursor: pointer;
   width: 250px;
 }
 .divCartTable{
-  height: 340px;
+  height: 315px;
   
 }
 .tableorderinfo{
@@ -848,7 +848,8 @@ cursor: pointer;
 }
 .infoFin label{
   margin-top:10px;
-  font-size: medium;
+  font-size: 18px;
+  color:var(--colortitle)
 }
 .infoFin input{
   margin-left: 10px;

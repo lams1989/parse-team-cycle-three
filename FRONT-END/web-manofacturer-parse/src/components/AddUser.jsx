@@ -7,7 +7,7 @@ import { createUser, optainUsers, obtainUserById } from "utils/Api-connection"
 import { ToastContainer, toast, Zoom } from 'react-toastify';
 
 
-const AddUser =  ()  => {
+const AddUser = () => {
 
   const formAddUser = useRef(null);
 
@@ -19,7 +19,7 @@ const AddUser =  ()  => {
       newUser[key] = value;
     });
 
-   await createUser(
+    await createUser(
       {
         id: newUser.userId,
         name: newUser.name.toUpperCase(),

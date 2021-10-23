@@ -1,11 +1,12 @@
 
 import "styles/pages-styles.css"
 import { nanoid } from 'nanoid'
+
 import checkicon from "media/done_outline_white_48dp.svg"
 import deleteicon from "media/backspace_black_48dp.svg"
 import { ToastContainer, toast, Zoom } from 'react-toastify';
 
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import SelectDate from "./SelectDate";
 import { obtainProductByState } from "utils/Api-connection";
@@ -14,6 +15,8 @@ import { obtainClients } from "utils/Api-connection";
 import InputOptions from "./InputOptions";
 import { createClient } from "utils/Api-connection";
 import { createOrder } from "utils/Api-connection";
+import { Dialog } from '@material-ui/core';
+
 
 const AddOrder = () => {
 
@@ -28,6 +31,10 @@ const AddOrder = () => {
   const [client, setClient] = useState(null);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [productsToBuy, setProductsToBuy] = useState([]);
+  const [dialogReset, setDialogReset] = useState(false);
+  const [resetOrder, setResetOrder] = useState(false);
+
+  //const [reloadPage, setReloadPage]= useState(false);
 
 
   /**For the case of a new client */
@@ -37,7 +44,7 @@ const AddOrder = () => {
 
   const [newClientId, setNewClientId] = useState("");
 
-  /**for the addd products section */
+  /**for the addd products cart section */
   const [productSelected, setProductSelected] = useState();
   const [productQuantityToAdd, setproductQuantityToAdd] = useState(1);
   const [reloadClients, setReloadClients] = useState(false);
@@ -46,11 +53,12 @@ const AddOrder = () => {
   const [numRow, setNumberRow] = useState(0);
 
 
-  /**List of  options*/
+  /**List of  options for the inputs to choose, initial for the page*/
   const [optionSellers, setOptionSellers] = useState([]);
   const [optionClients, setOptionClients] = useState([]);
-  //const [listClients, setListClients] =useState([]);
+
   const [availableProducts, setAvailableProducts] = useState(null);
+
 
 
   useEffect(async () => {
@@ -68,7 +76,6 @@ const AddOrder = () => {
           var row = (jsonClients[i].client_doc_id + "-" + jsonClients[i].client_name);
           var data = { "data": row, "client_doc_id": jsonClients[i].client_doc_id, "client_name": jsonClients[i].client_name }
           options.push(data);
-          //  console.log(data);
         }
         console.log("datos: ", options);
         setOptionClients(options);
@@ -127,10 +134,6 @@ const AddOrder = () => {
     setReloadProducts(false);
   }, [reloadClients]);
 
-  useEffect(async () => {
-    console.log("row actual: ", actualRow)
-  }
-    , [actualRow]);
 
 
   /**ReloadProducts list of added products to buy (table) and reset fields of product */
@@ -149,11 +152,8 @@ const AddOrder = () => {
 
   }, [reloadProducts]);
 
-  useEffect(async () => {
-    console.log("aaa: ", actualRow);
 
-
-  }, [actualRow]);
+  /**If different product is selected */
   useEffect(async () => {
     console.log("producto select: ", productSelected);
     if (productSelected != null) {
@@ -165,7 +165,6 @@ const AddOrder = () => {
 
 
     }
-    // console.data("datasplit",data);
 
   }, [productSelected]);
 
@@ -179,6 +178,7 @@ const AddOrder = () => {
 
   }, [productQuantityToAdd]);
 
+  /**For adding products to the productsToBuy List */
   const addProductToCart = () => {
     console.log("to add products to cart");
 
@@ -206,7 +206,7 @@ const AddOrder = () => {
 
   }
 
-
+  /**For deleting products from the cart productsToBuy list */
   const deleteProductFromCart = (rowN, subtotal) => {
 
     console.log("i dont buy it, no");
@@ -223,6 +223,7 @@ const AddOrder = () => {
   }
 
 
+  /**Creates a order with all the data to be send to database */
   const submitCreateOrder = async () => {
 
     const clientObj = { "client_doc_id": client.client_doc_id, "client_name": client.client_name }
@@ -255,7 +256,7 @@ const AddOrder = () => {
         (response) => {
           console.log(response.data);
           toast.success('Orden de venta agregada con éxito');
-
+          resetOrderPage();
         },
         (error) => {
           console.error(error);
@@ -267,6 +268,28 @@ const AddOrder = () => {
     }
 
   };
+
+
+  /***For cleaning the data of page after an order is sent or cancel order */
+  const resetOrderPage = () => {
+
+    setIdOrder("");
+    setClient("");
+    setSeller("");
+    setProductsToBuy([]);
+    setTotalOrder(0);
+    setNewClientId("");
+    setNewClientName("");
+    setReloadProducts(true);
+    setReloadClients(true);
+    setDialogReset(false);
+
+  };
+
+
+  /**For creating new client and saving it to clients database, after that, the option
+   * of clients is reloaded and client can be selected from the input
+   */
   const saveNewClient = async () => {
     if (newClientId != "" && optionClients != null) {
 
@@ -292,8 +315,13 @@ const AddOrder = () => {
       toast.error("Digite un id válido");
     }
 
-
   }
+
+
+
+
+
+  /**User interface part */
   return (
 
     <div className=" orderSplit">
@@ -313,7 +341,7 @@ const AddOrder = () => {
           </div>
 
           <div className="inputsOrders">
-            <input name="id_order" value={idOrder} className="inputChange inputValue" type="number" min="1" placeholder="" onChange={(e) => setIdOrder(e.target.value)} required></input>
+            <input id="id_order_input" name="id_order" value={idOrder} className="inputChange inputValue" type="number" min="1" placeholder="" onChange={(e) => setIdOrder(e.target.value)} required></input>
 
             <SelectDate name="date" value={selectedDate} setSelectedDate={setSelectedDate} />
             <select name="state" value={stateOrder} className="selectStatus" onChange={(e) => setStateOrder(e.target.value)}>
@@ -407,7 +435,7 @@ const AddOrder = () => {
         </div>
 
 
-
+        /
         <div className="tableDialogView divCartTable">
 
           <table className="tableorderinfo">
@@ -446,7 +474,7 @@ const AddOrder = () => {
 
             </tbody>
             <tfoot>    <tr>
-              <td align="right" colspan="4">Total</td>
+              <td align="right" colspan="4">Total $</td>
               <td> <input className="inputChange inputNumber " placeholder="$ Total" value={totalOrder} disabled></input></td>
             </tr></tfoot>
           </table>
@@ -455,20 +483,34 @@ const AddOrder = () => {
 
 
         <div className="infoFin">
-          <label >Total Venta</label>
+          <label className="labeltotal">Total Venta $</label>
           <input className="inputChange inputTotal " placeholder="$ Total" value={totalOrder} disabled></input>
           <div className="divBtnTotalOrder ">
 
             <button type="submit" className="btnBig btnAddOrder" onClick={() => submitCreateOrder()}>
               <img className="btnIcon" src={checkicon} alt="img"></img> Guardar
             </button>
-            <button type="reset" className=" btnBig btnCancelOrder">
+            <button type="reset" onClick={() => setDialogReset(true)} className=" btnBig btnCancelOrder">
               Cancelar
             </button>
           </div>
         </div>
       </div>
 
+      <Dialog open={dialogReset}>
+        <div className="dialogDelete">
+
+          <h5>¿Está seguro de cancelar esta orden en progreso ?</h5>
+          <p align="center">Los datos no se guardarán.   </p>
+
+
+          <div className="editBtnContainer2">
+
+            <button type="button" id="reloadPage" className="btnGeneral btnEdit" onClick={() => resetOrderPage()} > Si</button>
+            <button type="button" className="btnGeneral btnDelete" onClick={() => setDialogReset(false)} >No</button>
+          </div>
+        </div>
+      </Dialog>
 
       <ToastContainer rtl
         position="top-center"
