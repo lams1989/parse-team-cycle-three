@@ -9,10 +9,7 @@ const PrivateRoute = ({ children }) => {
 
     const { user, isAuthenticated, isLoading, getAccessTokenSilently } = useAuth0();
     const override = css`display: block;  margin: 0 auto;  border-color: red;`;
-
     console.log(user, isAuthenticated, isLoading);
-
-
     useEffect(() => {
         const fetchAuth0Token = async () => {
             const accessToken = await getAccessTokenSilently({
@@ -25,13 +22,7 @@ const PrivateRoute = ({ children }) => {
         }
     }, [isAuthenticated, getAccessTokenSilently]);
 
-
-
-
-
-
     if (isLoading) return <div className='spinerClass'><ClipLoader loading={isLoading} css={override} size={150}></ClipLoader>...</div>
-
     return isAuthenticated ? <> ({children}) </> : (<div>
         <div className='textNotUtentication'>NO ESTAS AUTENTICADO</div>
         <br />
