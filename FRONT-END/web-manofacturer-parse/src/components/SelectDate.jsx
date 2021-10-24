@@ -1,9 +1,7 @@
 
 import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
-
 import "react-datepicker/dist/react-datepicker.css";
-
 
 const SelectDate = ({ setSelectedDate }) => {
   const [startDate, setStartDate] = useState(new Date());
@@ -11,13 +9,9 @@ const SelectDate = ({ setSelectedDate }) => {
   useEffect(() => {
     let day = startDate.toLocaleDateString("es-US", options);
     setSelectedDate(day);
-
   }, [startDate])
-
-
   return (
     <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
   );
-}
-
-export default SelectDate
+};
+export default SelectDate;
