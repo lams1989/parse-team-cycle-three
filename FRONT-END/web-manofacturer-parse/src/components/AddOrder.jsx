@@ -1,13 +1,10 @@
 
-import "styles/pages-styles.css"
-import { nanoid } from 'nanoid'
-
-import checkicon from "media/done_outline_white_48dp.svg"
-import deleteicon from "media/backspace_black_48dp.svg"
+import "styles/pages-styles.css";
+import { nanoid } from 'nanoid';
+import checkicon from "media/done_outline_white_48dp.svg";
+import deleteicon from "media/backspace_black_48dp.svg";
 import { ToastContainer, toast, Zoom } from 'react-toastify';
-
 import React, { useEffect, useState } from 'react';
-
 import SelectDate from "./SelectDate";
 import { obtainProductByState } from "utils/Api-connection";
 import { obtainUserByRole } from "utils/Api-connection";
@@ -21,29 +18,19 @@ import { Dialog } from '@material-ui/core';
 const AddOrder = () => {
 
   /**Selected info for the order */
-
   const [idOrder, setIdOrder] = useState("");
-
   const [totalOrder, setTotalOrder] = useState(0);
   const [stateOrder, setStateOrder] = useState("En proceso");
-
   const [seller, setSeller] = useState(null);
   const [client, setClient] = useState(null);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [productsToBuy, setProductsToBuy] = useState([]);
   const [dialogReset, setDialogReset] = useState(false);
   const [resetOrder, setResetOrder] = useState(false);
-
-  //const [reloadPage, setReloadPage]= useState(false);
-
-
   /**For the case of a new client */
   const [isnewClient, setIsNewClient] = useState(false);
-
   const [newClientName, setNewClientName] = useState("");
-
   const [newClientId, setNewClientId] = useState("");
-
   /**for the addd products cart section */
   const [productSelected, setProductSelected] = useState();
   const [productQuantityToAdd, setproductQuantityToAdd] = useState(1);
@@ -51,15 +38,10 @@ const AddOrder = () => {
   const [reloadProducts, setReloadProducts] = useState(false);
   const [actualRow, setActualRow] = useState(0);
   const [numRow, setNumberRow] = useState(0);
-
-
   /**List of  options for the inputs to choose, initial for the page*/
   const [optionSellers, setOptionSellers] = useState([]);
   const [optionClients, setOptionClients] = useState([]);
-
   const [availableProducts, setAvailableProducts] = useState(null);
-
-
 
   useEffect(async () => {
     console.log(
@@ -80,7 +62,6 @@ const AddOrder = () => {
         console.log("datos: ", options);
         setOptionClients(options);
 
-
       },
       (error) => {
         console.error('Salio un error:', error);
@@ -100,31 +81,24 @@ const AddOrder = () => {
         }
         console.log("datos: ", options);
         setOptionSellers(options);
-
-
       },
       (error) => {
         console.error('Salio un error:', error);
       }
     );
-
     await obtainProductByState("Disponible",
       (response) => {
         console.log('la respuesta que se recibio fue', response);
         console.log(response.data);
         const jsonProd = response.data;
         const optionsProd = [];
-
         for (var i in jsonProd) {
           var row = (jsonProd[i].id + "-" + jsonProd[i].description) + " $" + jsonProd[i].unitprice;
           var data = { "data": row, "description": jsonProd[i].description, "unitprice": jsonProd[i].unitprice, "id": jsonProd[i].id };
           optionsProd.push(data);
-
         }
         console.log("datos: ", optionsProd);
         setAvailableProducts(optionsProd);
-
-
       },
       (error) => {
         console.error('Salio un error:', error);
@@ -133,65 +107,45 @@ const AddOrder = () => {
     setReloadClients(false);
     setReloadProducts(false);
   }, [reloadClients]);
-
-
-
   /**ReloadProducts list of added products to buy (table) and reset fields of product */
   useEffect(async () => {
     console.log("aaa")
     setProductsToBuy(productsToBuy);
-
     document.getElementById("id_add").value = "";
     setproductQuantityToAdd(1);
     document.getElementById("descrip_add").value = "";
     document.getElementById("unitprice_add").value = 0;
     document.getElementById("total_add").value = 0;
-
     setProductSelected(null);
     setReloadProducts(false);
-
   }, [reloadProducts]);
-
-
   /**If different product is selected */
   useEffect(async () => {
     console.log("producto select: ", productSelected);
     if (productSelected != null) {
-
       document.getElementById("id_add").value = productSelected.id;
       document.getElementById("descrip_add").value = productSelected.description;
       document.getElementById("unitprice_add").value = productSelected.unitprice;
       document.getElementById("total_add").value = productSelected.unitprice * productQuantityToAdd;
-
-
     }
-
   }, [productSelected]);
-
   useEffect(async () => {
     console.log("producto select: ", productSelected);
     if (productSelected != null) {
       document.getElementById("unitprice_add").value = productSelected.unitprice;
       document.getElementById("total_add").value = productSelected.unitprice * productQuantityToAdd;
-
     }
-
   }, [productQuantityToAdd]);
-
   /**For adding products to the productsToBuy List */
   const addProductToCart = () => {
     console.log("to add products to cart");
-
     if (productSelected != null) {
-
       let id = document.getElementById("id_add").value = productSelected.id;
       let descrip = document.getElementById("descrip_add").value = productSelected.description;
       let uprice = document.getElementById("unitprice_add").value = productSelected.unitprice;
-
       let totalProduct = document.getElementById("total_add").value = productSelected.unitprice * productQuantityToAdd;
       console.log("unit ", productQuantityToAdd, "total", totalProduct);
       const rowProduct = { "id": id, "description": descrip, "unitprice": uprice, "quantity": productQuantityToAdd, "subtotal": totalProduct, "numRow": numRow }
-
       productsToBuy.push(rowProduct);
       let totalplus = totalOrder + totalProduct;
       setTotalOrder(totalplus)
@@ -202,13 +156,9 @@ const AddOrder = () => {
     } else {
       toast.error('Seleccione otra vez el producto o uno nuevo');
     }
-
-
-  }
-
+  };
   /**For deleting products from the cart productsToBuy list */
   const deleteProductFromCart = (rowN, subtotal) => {
-
     console.log("i dont buy it, no");
     console.log("row", rowN);
     let newtotal = totalOrder - subtotal;
@@ -216,19 +166,14 @@ const AddOrder = () => {
     /**Filtering the list */
     const list = productsToBuy.filter((elem) => {
       return elem.numRow !== rowN;
-    })
+    });
     setProductsToBuy(list);
-
     console.log("filtrado", productsToBuy);
-  }
-
-
+  };
   /**Creates a order with all the data to be send to database */
   const submitCreateOrder = async () => {
-
     const clientObj = { "client_doc_id": client.client_doc_id, "client_name": client.client_name }
     const sellerObj = { "seller_id": seller.seller_id, "seller_name": seller.seller_name }
-
     if (productsToBuy.length > 0 && client != null && seller != null) {
       const obj = {
         "id_order": idOrder,
@@ -238,10 +183,8 @@ const AddOrder = () => {
         "client": clientObj,
         "seller": sellerObj,
         "total": totalOrder
-
-      }
-      console.log("obj", obj)
-
+      };
+      console.log("obj", obj);
       await createOrder(
         {
           "id_order": idOrder,
@@ -251,7 +194,6 @@ const AddOrder = () => {
           "client": clientObj,
           "seller": sellerObj,
           "total": totalOrder
-
         },
         (response) => {
           console.log(response.data);
@@ -266,13 +208,9 @@ const AddOrder = () => {
     } else {
       toast.error('Error creando una orden venta. Revise de nuevo los datos.');
     }
-
   };
-
-
   /***For cleaning the data of page after an order is sent or cancel order */
   const resetOrderPage = () => {
-
     setIdOrder("");
     setClient("");
     setSeller("");
@@ -283,16 +221,12 @@ const AddOrder = () => {
     setReloadProducts(true);
     setReloadClients(true);
     setDialogReset(false);
-
   };
-
-
   /**For creating new client and saving it to clients database, after that, the option
    * of clients is reloaded and client can be selected from the input
    */
   const saveNewClient = async () => {
     if (newClientId != "" && optionClients != null) {
-
       console.log("doc", newClientId);
       console.log("name", newClientName);
       await createClient(
@@ -314,54 +248,35 @@ const AddOrder = () => {
     else {
       toast.error("Digite un id válido");
     }
-
-  }
-
-
-
-
-
+  };
   /**User interface part */
   return (
-
     <div className=" orderSplit">
-
-
-
       <div className="sectionOrder">
         <h2 className=" addNewSubt  marg-l">Ingrese la información: </h2>
         <div className="newOrderCont">
-
           <div className="labelsOrders">
-
             <label>ID Venta</label>
             <label>Fecha</label>
             <label>Estado Venta</label>
-
           </div>
-
           <div className="inputsOrders">
             <input id="id_order_input" name="id_order" value={idOrder} className="inputChange inputValue" type="number" min="1" placeholder="" onChange={(e) => setIdOrder(e.target.value)} required></input>
-
             <SelectDate name="date" value={selectedDate} setSelectedDate={setSelectedDate} />
             <select name="state" value={stateOrder} className="selectStatus" onChange={(e) => setStateOrder(e.target.value)}>
               <option className="pending" value="En proceso">En proceso</option>
               <option className="aproved" value="Entregada">Entregada</option>
               <option className="denied" value="Cancelada">Cancelada</option>
             </select>
-
-
           </div>
         </div>
         <div className="divClientOpt">
           <h5 >Vendedor</h5>
           <InputOptions listOptions={optionSellers} setOptionSelected={setSeller} labelOf="Buscar Vendedor" />
-
         </div>
         <div className="divClientOpt">
           <h5 >Cliente</h5>
           <InputOptions listOptions={optionClients} setOptionSelected={setClient} labelOf="Buscar Cliente" />
-
           <div className="divCenter">
             {
               isnewClient ?
@@ -372,50 +287,32 @@ const AddOrder = () => {
                   </div>
                   <div className="divClient">
                     <div>
-
                       <label>ID cliente </label>
                       <label>Nombre cliente</label>
-
                     </div>
                     <div>
-
                       <input type="number" className="inputChange " min="1" placeholder="ID Cliente" value={newClientId} onChange={(e) => setNewClientId(e.target.value)} required></input>
                       <input type="text" autoCapitalize="sentences" className="inputChange " placeholder="Nombre Cliente" value={newClientName} onChange={(e) => setNewClientName(e.target.value)} required></input></div>
-
                   </div>
                   <button type="submit" className="btnGeneral btnMedium" onClick={() => saveNewClient(true)}><i className="fas fa-save"></i>Guardar Cliente </button>
                 </> : (
                   <div className="saveBtnDiv">
                     <button type="submit" className="btnGeneral  btnMedium" onClick={() => setIsNewClient(true)}><i className="fas fa-user-plus"></i>Nuevo Cliente </button>
-
                   </div>
-
                 )
             }
           </div>
-
-
         </div>
-
       </div>
-
-
-
-
-
-
       <div className="listSectionContainer divProductToAdd ">
         <div>
           <h3 className="subt1">AÑADIR PRODUCTOS: </h3>
-
         </div>
         <div className="productsToCart">
           <div><InputOptions listOptions={availableProducts} setOptionSelected={setProductSelected} labelOf="Buscar Producto" /></div>
-
           <div className="dataProductToAdd">
             <div className="divCartOpt"><label>Id </label>
               <input id="id_add" className="inputChange inputNumber" type="number" placeholder="" min="1" disabled></input></div>
-
             <div className="divCartOpt"><label>Descripcion </label>
               <input id="descrip_add" className="inputChange mediumTD" type="text" placeholder="" min="1" disabled ></input></div>
             <div className="divCartOpt"><label>Cantidad </label>
@@ -423,7 +320,6 @@ const AddOrder = () => {
                 onChange={(e) => setproductQuantityToAdd(e.target.value)}></input></div>
             <div className="divCartOpt"><label>x Precio Und </label>
               <input id="unitprice_add" className="inputChange inputNumber" type="number" placeholder="$" disabled  ></input></div>
-
             <div className="divCartOpt"><label> = Total</label>
               <input id="total_add" className="inputChange inputNumber" type="number" placeholder="$" disabled ></input></div>
             <div className="btn2div">
@@ -431,13 +327,9 @@ const AddOrder = () => {
               <button type="button" className="btnGeneral btnDelete">
                 <img className="btnIcon" src={deleteicon} onClick={() => setReloadProducts(true)} alt="img"></img></button> </div>
           </div>
-
         </div>
-
-
         /
         <div className="tableDialogView divCartTable">
-
           <table className="tableorderinfo">
             <thead>
               <tr className="viewRowMedium">
@@ -449,10 +341,8 @@ const AddOrder = () => {
                 <th>Quitar</th>
               </tr>
             </thead>
-
             <tbody>  {productsToBuy.map((product) => {
               var rowN = product.numRow;
-
               {
                 return (
                   <tr key={nanoid()} className="viewRowMedium">
@@ -461,17 +351,11 @@ const AddOrder = () => {
                     <td className="smallTD ">  <label>{product.quantity}</label></td>
                     <td className="smallTD">$ {product.unitprice}</td>
                     <td className="smallTD">$ {product.unitprice * product.quantity} </td>
-
                     <button onClick={() => deleteProductFromCart(product.numRow, product.subtotal)}><i className="fas fa-backspace" ></i></button>
                   </tr>
-
-
                 );
               }
             })}
-
-
-
             </tbody>
             <tfoot>    <tr>
               <td align="right" colspan="4">Total $</td>
@@ -479,14 +363,10 @@ const AddOrder = () => {
             </tr></tfoot>
           </table>
         </div>
-
-
-
         <div className="infoFin">
           <label className="labeltotal">Total Venta $</label>
           <input className="inputChange inputTotal " placeholder="$ Total" value={totalOrder} disabled></input>
           <div className="divBtnTotalOrder ">
-
             <button type="submit" className="btnBig btnAddOrder" onClick={() => submitCreateOrder()}>
               <img className="btnIcon" src={checkicon} alt="img"></img> Guardar
             </button>
@@ -496,34 +376,23 @@ const AddOrder = () => {
           </div>
         </div>
       </div>
-
       <Dialog open={dialogReset}>
         <div className="dialogDelete">
-
           <h5>¿Está seguro de cancelar esta orden en progreso ?</h5>
           <p align="center">Los datos no se guardarán.   </p>
-
-
           <div className="editBtnContainer2">
-
             <button type="button" id="reloadPage" className="btnGeneral btnEdit" onClick={() => resetOrderPage()} > Si</button>
             <button type="button" className="btnGeneral btnDelete" onClick={() => setDialogReset(false)} >No</button>
           </div>
         </div>
       </Dialog>
-
       <ToastContainer rtl
         position="top-center"
         autoClose={2000}
         transition={Zoom}
         limit={1}
       />
-
     </div>
-
   )
-}
-
-
-
+};
 export default AddOrder

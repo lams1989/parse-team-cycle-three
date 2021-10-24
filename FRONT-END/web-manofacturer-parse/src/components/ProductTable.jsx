@@ -1,17 +1,13 @@
 
-import { nanoid } from 'nanoid'
+import { nanoid } from 'nanoid';
 import React, { useEffect, useState, useRef } from 'react';
 import { ToastContainer, toast, Zoom } from 'react-toastify';
 import { updateProductInfo, deleteProduct } from 'utils/Api-connection';
 import { Dialog, Tooltip } from '@material-ui/core';
-
 import { obtainProducts, obtainProductById, obtainProductByDescrip } from 'utils/Api-connection';
 
 const ProductTable = () => {
-
-
   const RowProduct = ({ product, setReload }) => {
-
     const [editable, setEditable] = useState(false);
     const [editState, setEditState] = useState(product.state);
     const [editUnitprice, setEditUnitprice] = useState(product.unitprice);
@@ -19,25 +15,9 @@ const ProductTable = () => {
     const [confirmDeleteDialog, setConfirmDeleteDialog] = useState(false);
     const [confirmUpdateDialog, setConfirmUpdateDialog] = useState(false);
 
-
-
-
-
-
     const updateProduct = async () => {
-      console.log("id: ", product.id);
-      console.log("_id: ", product._id);
-      console.log("state", editState);
-      console.log("desc", editDescrip.toLowerCase());
-      console.log("unitpr", editUnitprice);
-
-
       setConfirmUpdateDialog(false);
-
-
-
       await updateProductInfo(
-
         product._id,
         {
           "description": editDescrip.toLowerCase(),
@@ -46,31 +26,23 @@ const ProductTable = () => {
         },
         (response) => {
           console.log(response.data);
-
           toast.success('Producto modificado con éxito');
-
         },
         (error) => {
           console.error(error);
           toast.error('Error modificando un producto');
         }
-
       );
       setEditable(false);
       setReload(true);
     };
-
-
-
     const ToDeleteProduct = async () => {
       setConfirmDeleteDialog(false);
       await deleteProduct(
         product._id,
         (response) => {
           console.log(response.data);
-
           toast.success('producto eliminado con éxito');
-
         },
         (error) => {
           console.error(error);
@@ -79,7 +51,6 @@ const ProductTable = () => {
       );
       setReload(true);
     }
-
     return (
       <tr className="datarow">
         {editable ? (
@@ -105,7 +76,6 @@ const ProductTable = () => {
           </>
         )
         }
-
         <td className="smallTD">
           <div className="editBtnContainer">
             {editable ?
@@ -114,7 +84,6 @@ const ProductTable = () => {
                   <button type="submit" className="btnGeneral btnEdit" onClick={() => setConfirmUpdateDialog(true)}><i className="fas fa-save"></i>  </button></Tooltip>
                 <Tooltip title='Cancelar' arrow placement="right">
                   <button type="reset" className="btnGeneral btnDelete" onClick={() => setEditable(!editable)}>  <i class="fas fa-ban"></i></button></Tooltip>
-
               </>
               : (
                 <><Tooltip title='Editar' arrow placement="left">
@@ -123,36 +92,25 @@ const ProductTable = () => {
                     <button type="reset" className="btnGeneral btnDelete" onClick={() => setConfirmDeleteDialog(true)}>  <i className="fas fa-trash-alt"></i></button></Tooltip>
                 </>
               )}
-
-
-
             <Dialog open={confirmUpdateDialog}>
               <div className="dialogUpdate">
-
                 <h5>Actualización del producto:</h5>
-
                 <div className="infoUpdateDiv">
                   <p align="center"> ID: {product.id}      --    Estado: {editState}</p>
                   <p className="pLarge" align="center">Descripción: {editDescrip}</p>
                   <p align="center"> Precio Unitario: {editUnitprice}   </p>
-
                 </div>
-
                 <div className="editBtnContainer2">
                   <button type="button" className="btnGeneral btnEdit" onClick={() => updateProduct()} >Si</button>
                   <button type="reset" className="btnGeneral btnDelete" onClick={() => setConfirmUpdateDialog(false)} >No</button>
                 </div>
-
               </div>
             </Dialog>
-
             <Dialog open={confirmDeleteDialog}>
               <div className="dialogDelete">
-
                 <h5>¿Está seguro de eliminar este producto?</h5>
                 <p align="center">Id: {product.id}  </p>
                 <p className="pLarge" align="center"> {product.description}  </p>
-
                 <div className="editBtnContainer2">
                   <button type="button" className="btnGeneral btnEdit" onClick={() => ToDeleteProduct()} >Si</button>
                   <button type="reset" className="btnGeneral btnDelete" onClick={() => setConfirmDeleteDialog(false)} >No</button>
@@ -162,15 +120,10 @@ const ProductTable = () => {
           </div>
         </td>
       </tr>
-
     )
-
   }
-
-
   /**Table fetch data  and search*/
   const [reload, setReload] = useState(false);
-
   useEffect(async () => {
     console.log(
       'Hola, soy un use effect que se ejecuta solo una vez cuando la pagina se renderiza, para cargar la lista de productos inicial'
@@ -187,10 +140,8 @@ const ProductTable = () => {
     );
     setReload(false);
   }, [reload]);
-
   const formSearchProduct = useRef(null);
   const [listProducts, setListProducts] = useState([]);
-
   const submitSearchForm = async (e) => {
     e.preventDefault();
     const fd = new FormData(formSearchProduct.current);
@@ -202,7 +153,6 @@ const ProductTable = () => {
     const searchby = searchOpt.searchSelect;
     console.log("s: ", searchby);
     const info = searchOpt.toSearchInput;
-
     if (searchby == "searchbyid") {
       if (!Number(info)) {
         toast.error("digite un ID numérico", {
@@ -256,7 +206,6 @@ const ProductTable = () => {
           <button className="btnGeneral btnBack" onClick={() => setReload(true)}><i className="fas fa-undo-alt"></i>Volver a tabla</button> </>
       </div>
       <div className="listSectionContainer divProducts">
-
         <table className="ListTable">
           <thead className="thead ">
             <tr>
@@ -265,39 +214,25 @@ const ProductTable = () => {
               <th className="col_title ">Precio Unitario</th>
               <th className="col_title">Estado</th>
               <th className="col_title">Editar</th>
-
             </tr>
           </thead>
           <tbody>
-
             {listProducts.map((productObj) => {
               return (
                 <RowProduct key={nanoid()} product={productObj} setReload={setReload} />
               );
             })}
-
-
           </tbody>
         </table>
-
         <ToastContainer rtl
           position="top-center"
           autoClose={2000}
           transition={Zoom}
           limit={1}
         />
-
-
       </div>
-
     </>
   )
-
-
-
-
-}
-
-
+};
 export default ProductTable;
 
