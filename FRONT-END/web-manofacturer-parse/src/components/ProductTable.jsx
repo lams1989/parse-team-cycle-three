@@ -98,7 +98,7 @@ const ProductTable = () => {
                 <div className="infoUpdateDiv">
                   <p align="center"> ID: {product.id}      --    Estado: {editState}</p>
                   <p className="pLarge" align="center">Descripción: {editDescrip}</p>
-                  <p align="center"> Precio Unitario: {editUnitprice}   </p>
+                  <p align="center"> Precio Unitario: $ {editUnitprice}   </p>
                 </div>
                 <div className="editBtnContainer2">
                   <button type="button" className="btnGeneral btnEdit" onClick={() => updateProduct()} >Si</button>
@@ -186,7 +186,6 @@ const ProductTable = () => {
       );
     }
   }
-
   return (
     <>
       <div className="searchContainer  marg-l">

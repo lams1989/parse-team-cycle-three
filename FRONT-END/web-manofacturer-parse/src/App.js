@@ -6,7 +6,8 @@ import SellerLayout from 'layouts/SellerLayout';
 import OrdersManager from 'pages/seller/OrdersManager';
 import { Auth0Provider } from "@auth0/auth0-react";
 import ButtonLogin from 'components/ButtonLogin';
-
+import IndexAdmin from 'pages/admin/IndexAdmin';
+import IndexSeller from 'pages/seller/IndexSeller';
 <script
   src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
 ></script>
@@ -34,6 +35,7 @@ function App() {
                   <UsersManager />
                 </Route>
                 <Route path='/admin'>
+               <IndexAdmin/>
                 </Route>
               </Switch>
             </AdminLayout>
@@ -45,6 +47,7 @@ function App() {
                   <OrdersManager />
                 </Route>
                 <Route path='/vendedor'>
+                <IndexSeller/>
                 </Route>
               </Switch>
             </SellerLayout>
