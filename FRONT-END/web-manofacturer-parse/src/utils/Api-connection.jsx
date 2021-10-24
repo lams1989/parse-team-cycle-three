@@ -272,3 +272,13 @@ export const createOrder = async (data, successCallback, errorCallback) => {
   };
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
+export const updateOrder = async (idOrder, dataToUpdate, successCallback, errorCallback) => {
+  var options = {
+    method: 'PUT',
+    url: `http://localhost:3001/orders/upd/${idOrder}/`,
+    headers: { 'Content-Type': 'application/json' },
+    data: dataToUpdate
+  };
+  console.log(options);
+  await axios.request(options).then(successCallback).catch(errorCallback);
+};

@@ -14,17 +14,20 @@ const OrdersManager = () => {
   }
   return (
     <>
-      <div className="titlepage">
-        <span className="title"> Ventas</span>
-      </div>
-      <div className="tabscontainer">
-        <Tabs value={value} onChange={handleChange}>
-          <Tab label="Agregar Venta" />
-          <Tab label="Ver Lista de Ventas" />
-        </Tabs>
-      </div>
-      <TabInfo value={value} index={0}> </TabInfo>
-    </>
+    <div className="titlepage">
+
+      <span className="title"> Ventas</span>
+
+    </div>
+    <div className="tabscontainer">
+      <Tabs value={value} onChange={handleChange}>
+        <Tab label="Agregar Venta" />
+        <Tab label="Ver Lista de Ventas" />
+      
+      </Tabs>
+    </div>
+    <TabInfo value={value} index={0}> </TabInfo>
+  </>
   )
 }
 function TabInfo(props) {
@@ -33,6 +36,10 @@ function TabInfo(props) {
     <div>
       {(value == 0) && (<><AddOrder></AddOrder></>)}
       {(value == 1) && (<><OrdersTable></OrdersTable></>)}
+      
+    
+         
+      
     </div>
   )
 };

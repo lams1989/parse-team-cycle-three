@@ -6,7 +6,8 @@ import { Dialog, Tooltip } from '@material-ui/core';
 import { nanoid } from 'nanoid';
 import { optainUsers } from "utils/Api-connection";
 
-const UsersTable = ({ }) => {
+const UsersTable = ({setEditOrderMode }) => {
+
   const [searching, setSearching] = useState('');
   const [usuariosFiltrados, setUsuariosFiltrados] = useState([]);
   const [reload, setReload] = useState(true);

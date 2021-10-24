@@ -4,10 +4,13 @@ import { ToastContainer, toast, Zoom } from 'react-toastify';
 import React, { useState, useEffect, useRef } from 'react';
 import { obtainOrders, obtainOrderById, obtainOrderByClientName, deleteOrder } from 'utils/Api-connection';
 import { obtainOrderByClientId } from 'utils/Api-connection';
+import EditOrder from './EditOrder';
+import { maxHeight, maxWidth } from '@material-ui/system';
 
 const OrdersTable = ({ }) => {
   const RowOrder = ({ order, setReload }) => {
     const [confirmDeleteDialog, setConfirmDeleteDialog] = useState(false);
+    const [UpdateDialog, setUpdateDialog] = useState(false);
     const [viewInfoOrder, setViewInfoOrder] = useState(false);
     const ToDeleteOrder = async () => {
       setConfirmDeleteDialog(false);
@@ -31,16 +34,16 @@ const OrdersTable = ({ }) => {
         <td className="numberTD">{order.client.client_doc_id}</td>
         <td className="mediumTD">{order.client.client_name}</td>
         <td className="smallTD">{order.date}</td>
-        <td className="smallTD">{order.total}</td>
+        <td className="smallTD"> $ {order.total}</td>
         <td className="smallTD " >{order.state}</td>
         <td className="smallTD">
           <div className="editBtnContainer3">
             <Tooltip title='Ver' arrow placement="top">
               <button type="button" className="btnGeneral btnDelete" onClick={() => setViewInfoOrder(true)}> <i className="fas fa-eye"></i></button></Tooltip>
             <Tooltip title='Editar' arrow placement="top">
-              <button type="button" className="btnGeneral btnEdit"> <i className="fas fa-edit"></i></button></Tooltip>
+              <button type="button" className="btnGeneral btnEdit" onClick={() => setUpdateDialog(true)}> <i className="fas fa-edit"></i></button></Tooltip>
             <Tooltip title='Eliminar' arrow placement="top">
-              <button type="reset" className="btnGeneral btnDelete" onClick={() => setConfirmDeleteDialog(true)}>
+              <button type="button" className="btnGeneral btnDelete" onClick={() => setConfirmDeleteDialog(true)}>
                 <i className="fas fa-trash"></i></button></Tooltip>
           </div>
         </td>
@@ -91,6 +94,18 @@ const OrdersTable = ({ }) => {
             </div>
           </div>
         </Dialog>
+        <Dialog
+          fullWidth={true}
+          maxWidth={"xl"}
+          open={UpdateDialog}>
+          <div className="editDialog">
+            <div className="headerDialogView">
+              <h4>MODIFICAR UNA VENTA</h4>
+              <span className="spanClose">
+                <i className="far fa-times-circle" onClick={() => setUpdateDialog(false)}></i> </span></div>
+            <EditOrder orderObj={order} setUpdateDialog={setUpdateDialog} setReload={setReload}></EditOrder>
+          </div>
+        </Dialog>
         <Dialog open={confirmDeleteDialog}>
           <div className="dialogDelete">
             <div className="headerDialogView">
@@ -102,7 +117,7 @@ const OrdersTable = ({ }) => {
             <p className="pLarge" align="center"> Fecha: ID {order.date}</p>
             <div className="editBtnContainer2">
               <button type="button" className="btnGeneral btnEdit BtnOK" onClick={() => ToDeleteOrder()} >Si</button>
-              <button type="reset" className="btnGeneral btnDelete" onClick={() => setConfirmDeleteDialog(false)} >No</button>
+              <button type="button" className="btnGeneral btnDelete" onClick={() => setConfirmDeleteDialog(false)} >No</button>
             </div>
           </div>
         </Dialog>
@@ -113,6 +128,7 @@ const OrdersTable = ({ }) => {
   const formSearchOrder = useRef(null);
   const [reload, setReload] = useState(false);
   const [listOrders, setListOrders] = useState([]);
+
   const submitSearchOrderForm = async (e) => {
     e.preventDefault();
     const fd = new FormData(formSearchOrder.current);
@@ -198,10 +214,9 @@ const OrdersTable = ({ }) => {
     <div className="searchContainer  marg-l">
       <form id="formSearchingOrder" ref={formSearchOrder} onSubmit={submitSearchOrderForm} >
         <span>Buscar Venta por </span>
-        <select name="searchSelect" className="selectRole ">
+        <select id="searchSelect" name="searchSelect" className="selectRole ">
           <option value="" disabled>Buscar por</option>
           <option value="searchbyIdOrder">ID Venta</option>
-
           <option value="searchbyIdClient">ID Cliente</option>
           <option value="searchbyClientName">Nombre Cliente</option>
         </select>
