@@ -7,6 +7,8 @@ import AuthLayout from 'layouts/AuthLayout';
 import AdminLayout from 'layouts/AdminLayout';
 import SellerLayout from 'layouts/SellerLayout';
 import OrdersManager from 'pages/seller/OrdersManager';
+import IndexAdmin from 'pages/admin/IndexAdmin';
+import IndexSeller from 'pages/seller/IndexSeller';
 <script
   src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
 ></script>
@@ -30,6 +32,7 @@ function App() {
                 <UsersManager />
               </Route>
               <Route path='/admin'>
+               <IndexAdmin/>
               </Route>
             </Switch>
           </AdminLayout>
@@ -38,11 +41,12 @@ function App() {
         <Route path={['/vendedor', 'vendedor/ventas']}>
           <SellerLayout>
             <Switch>
-             
+
               <Route path='/vendedor/ventas/listadoventas'>
                 <OrdersManager />
               </Route>
               <Route path='/vendedor'>
+                <IndexSeller/>
               </Route>
             </Switch>
           </SellerLayout>

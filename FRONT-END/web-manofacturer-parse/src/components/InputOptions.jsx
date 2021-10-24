@@ -17,11 +17,11 @@ export default function InputOptions({ listOptions, setOptionSelected, labelOf }
 
 
   useEffect(async () => {
-    console.log(
-      'Hola, soy un use effect que se ejecuta cuando usas el input, para cargar la lista de opciones :)'
-    );
-    setOptionSelected(value);
-    console.log("value:", value);
+    
+    if(value!=null){
+
+      setOptionSelected(value);
+    }
     setReload(false);
   }, [value]);
 
@@ -30,6 +30,7 @@ export default function InputOptions({ listOptions, setOptionSelected, labelOf }
     <>
 
       <Autocomplete
+      
         value={value}
         onChange={(event, newValue) => {
 
@@ -45,7 +46,7 @@ export default function InputOptions({ listOptions, setOptionSelected, labelOf }
           return filtered;
         }}
         selectOnFocus
-        clearOnBlur
+        
         handleHomeEndKeys
         id="free-solo-with-text-demo"
         options={listOptions}
@@ -66,7 +67,7 @@ export default function InputOptions({ listOptions, setOptionSelected, labelOf }
         freeSolo
         renderInput={(params) => (
 
-          <TextField {...params} label={labelOf} />
+          <TextField {...params} label={labelOf}  size="small" />
         )}
       />
 

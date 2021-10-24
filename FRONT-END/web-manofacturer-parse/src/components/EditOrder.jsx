@@ -14,32 +14,35 @@ import { obtainUserByRole } from "utils/Api-connection";
 import { obtainClients } from "utils/Api-connection";
 import InputOptions from "./InputOptions";
 import { createClient } from "utils/Api-connection";
-import { createOrder } from "utils/Api-connection";
 import { Dialog } from '@material-ui/core';
+import { updateOrder } from "utils/Api-connection";
 
 
-const AddOrder = () => {
+
+const EditOrder = ({ orderObj, setUpdateDialog, setReload }) => {
 
   /**Selected info for the order */
 
-  const [idOrder, setIdOrder] = useState("");
+  const [idOrder, setIdOrder] = useState(orderObj.id_order);
+  const [totalOrder, setTotalOrder] = useState(orderObj.total);
+  const [stateOrder, setStateOrder] = useState(orderObj.state);
+  const [selectedDate, setSelectedDate] = useState(orderObj.date);
+  const [productsToBuy, setProductsToBuy] = useState(orderObj.description);
 
-  const [totalOrder, setTotalOrder] = useState(0);
-  const [stateOrder, setStateOrder] = useState("En proceso");
+  /**If decide to change the seller and client */
+  const [newSeller, setNewSeller] = useState(orderObj.seller);
+  const [newClient, setNewClient] = useState(orderObj.client);
 
-  const [seller, setSeller] = useState(null);
-  const [client, setClient] = useState(null);
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const [productsToBuy, setProductsToBuy] = useState([]);
-  const [dialogReset, setDialogReset] = useState(false);
+  const [editClient, setEditClient] = useState(false);
+  const [editSeller, setEditSeller] = useState(false);
 
 
+  const [dialogCancel, setDialogCancel] = useState(false);
+  const [confirmUpdateDialog, setConfirmUpdateDialog] = useState(false);
 
   /**For the case of a new client */
   const [isnewClient, setIsNewClient] = useState(false);
-
   const [newClientName, setNewClientName] = useState("");
-
   const [newClientId, setNewClientId] = useState("");
 
   /**for the addd products cart section */
@@ -54,7 +57,6 @@ const AddOrder = () => {
   /**List of  options for the inputs to choose, initial for the page*/
   const [optionSellers, setOptionSellers] = useState([]);
   const [optionClients, setOptionClients] = useState([]);
-
   const [availableProducts, setAvailableProducts] = useState(null);
 
 
@@ -63,6 +65,8 @@ const AddOrder = () => {
     console.log(
       'Hola, soy un use effect que se ejecuta cuando usas el input, para cargar la lista de opciones :)'
     );
+
+
     await obtainClients(
       (response) => {
         console.log('la respuesta que se recibio fue', response);
@@ -75,7 +79,7 @@ const AddOrder = () => {
           var data = { "data": row, "client_doc_id": jsonClients[i].client_doc_id, "client_name": jsonClients[i].client_name }
           options.push(data);
         }
-        console.log("datos: ", options);
+        console.log("datosClientes: ", options);
         setOptionClients(options);
 
 
@@ -96,7 +100,7 @@ const AddOrder = () => {
           options.push(data);
           console.log(data);
         }
-        console.log("datos: ", options);
+        console.log("datosVendedores: ", options);
         setOptionSellers(options);
 
 
@@ -133,8 +137,8 @@ const AddOrder = () => {
   }, [reloadClients]);
 
 
-
-  /**ReloadProducts list of added products to buy (table) and reset fields of product */
+  /**ReloadProducts list of available products to buy now (table) and reset fields 
+  */
   useEffect(async () => {
     console.log("aaa")
     setProductsToBuy(productsToBuy);
@@ -151,7 +155,7 @@ const AddOrder = () => {
   }, [reloadProducts]);
 
 
-  /**If different product is selected */
+  /**If a different product is selected , it cleans fields*/
   useEffect(async () => {
     console.log("producto select: ", productSelected);
     if (productSelected != null) {
@@ -166,6 +170,7 @@ const AddOrder = () => {
 
   }, [productSelected]);
 
+  /**For changing the quantity of the product and display the right total before added to cart */
   useEffect(async () => {
     console.log("producto select: ", productSelected);
     if (productSelected != null) {
@@ -221,58 +226,65 @@ const AddOrder = () => {
   }
 
 
-  /**Creates a order with all the data to be send to database */
-  const submitCreateOrder = async () => {
+  /**Edits or updates a order with all the data to be send to database */
+  const submitEditOrder = async () => {
 
-    const clientObj = { "client_doc_id": client.client_doc_id, "client_name": client.client_name }
-    const sellerObj = { "seller_id": seller.seller_id, "seller_name": seller.seller_name }
+    const clientObjEdited = { "client_doc_id": newClient.client_doc_id, "client_name": newClient.client_name }
+    const sellerObjEdited = { "seller_id": newSeller.seller_id, "seller_name": newSeller.seller_name }
+    let id_order_db = orderObj._id;
+    const obj = {
+      id_order_db,
+      "id_order": idOrder,
+      "date": selectedDate,
+      "state": stateOrder,
+      "description": productsToBuy,
+      "client": clientObjEdited,
+      "seller": sellerObjEdited,
+      "total": totalOrder
 
-    if (productsToBuy.length > 0 && client != null && seller != null) {
-     
-      await createOrder(
+    }
+    console.log("obj ", obj)
+
+    if (productsToBuy.length > 0 && newClient != null && newSeller != null) {
+
+      const clientObjEdited = { "client_doc_id": newClient.client_doc_id, "client_name": newClient.client_name }
+      const sellerObjEdited = { "seller_id": newSeller.seller_id, "seller_name": newSeller.seller_name }
+      let id_order_db = orderObj._id;
+
+      await updateOrder(
+
+        orderObj._id,
         {
           "id_order": idOrder,
           "date": selectedDate,
           "state": stateOrder,
           "description": productsToBuy,
-          "client": clientObj,
-          "seller": sellerObj,
+          "client": clientObjEdited,
+          "seller": sellerObjEdited,
           "total": totalOrder
-
         },
         (response) => {
           console.log(response.data);
-          toast.success('Orden de venta agregada con éxito');
-          resetOrderPage();
+
+          toast.success('Venta modificada con éxito');
+          setUpdateDialog(false);
+          setReload(true);
         },
         (error) => {
           console.error(error);
-          toast.error('Error creando una orden venta.ID ya existente');
+          toast.error('Error modificando la orden de venta');
+
         }
+
       );
+
     } else {
-      toast.error('Error. Revise cliente, vendedor y compra no vacía');
+      toast.error("Error al modificar la venta. No puede haber venta sin articulos.");
     }
 
-  };
+    setConfirmUpdateDialog(false);
 
-
-  /***For cleaning the data of page after an order is sent or cancel order */
-  const resetOrderPage = () => {
-
-    setIdOrder("");
-    setClient("");
-    setSeller("");
-    setProductsToBuy([]);
-    setTotalOrder(0);
-    setNewClientId("");
-    setNewClientName("");
-    setReloadProducts(true);
-    setReloadClients(true);
-    setDialogReset(false);
-
-  };
-
+  }
 
   /**For creating new client and saving it to clients database, after that, the option
    * of clients is reloaded and client can be selected from the input
@@ -289,7 +301,7 @@ const AddOrder = () => {
         },
         (response) => {
           console.log(response.data);
-          toast.success('Cliente fue agregado exitosamente, seleccionelo en el selector');
+          toast.success('Cliente fue agregado exitosamente, revise el selector de clientes');
           setIsNewClient(false);
           setReloadClients(true);
         },
@@ -305,18 +317,14 @@ const AddOrder = () => {
   }
 
 
-
-
-
   /**User interface part */
   return (
 
     <div className=" orderSplit">
 
 
-
-      <div className="sectionOrder">
-        <h2 className=" addNewSubt  marg-l">Ingrese la información: </h2>
+      <div className="sectionOrder ">
+        <h1 className=" addNewSubt  marg-l"> VENTA REALIZADA  # {orderObj.id_order}: </h1>
         <div className="newOrderCont">
 
           <div className="labelsOrders">
@@ -324,76 +332,89 @@ const AddOrder = () => {
             <label>ID Venta</label>
             <label>Fecha</label>
             <label>Estado Venta</label>
-
+            <label>Vendedor</label>
+            <label>Cliente</label>
           </div>
 
           <div className="inputsOrders">
-            <input id="id_order_input" name="id_order" value={idOrder} className="inputChange inputValue" type="number" min="1" placeholder="" onChange={(e) => setIdOrder(e.target.value)} required></input>
-
+            <label>{orderObj.id_order}</label>
             <SelectDate name="date" value={selectedDate} setSelectedDate={setSelectedDate} />
             <select name="state" value={stateOrder} className="selectStatus" onChange={(e) => setStateOrder(e.target.value)}>
               <option className="pending" value="En proceso">En proceso</option>
               <option className="aproved" value="Entregada">Entregada</option>
               <option className="denied" value="Cancelada">Cancelada</option>
             </select>
+            <input className="inputChange " value={newSeller.seller_name} disabled></input>
 
-
+            <input className="inputChange " value={newClient.client_name} disabled></input>
           </div>
         </div>
-        <div className="divClientOpt">
-          <h5 >Vendedor</h5>
-          <InputOptions listOptions={optionSellers} setOptionSelected={setSeller} labelOf="Buscar Vendedor" />
 
-        </div>
-        <div className="divClientOpt">
-          <h5 >Cliente</h5>
-          <InputOptions listOptions={optionClients} setOptionSelected={setClient} labelOf="Buscar Cliente" />
+        <div className="changeOpt">
+          <div>
+            <button className="btnGeneral btnOpt" onClick={() => setEditSeller(!editSeller)}>Cambiar Vendedor</button>
+            {editSeller && (<div className="divClientOpt">
 
-          <div className="divCenter">
-            {
-              isnewClient ?
-                <>
-                  <div className="closeNewClient">
-                    <button className="btnGeneral spanCloseClient" onClick={() => setIsNewClient(false)}>
-                      <i className="far fa-times-circle fa-1x" ></i> Cerrar </button>
-                  </div>
-                  <div className="divClient">
-                    <div>
+              <InputOptions listOptions={optionSellers} setOptionSelected={setNewSeller} labelOf="Buscar Vendedor" />
 
-                      <label>ID cliente </label>
-                      <label>Nombre cliente</label>
+            </div>)}
+          </div>
+          <div>
+            <>
+              <button className="btnGeneral btnOpt" onClick={() => setEditClient(!editClient)}>Cambiar Cliente</button>
+              {editClient && (<div className="divClientOpt">
+                <InputOptions listOptions={optionClients} setOptionSelected={setNewClient} labelOf="Buscar Cliente" />
 
-                    </div>
-                    <div>
+                <div className="divCenter">
+                  {
+                    isnewClient ?
+                      <div className="dataNewClientdiv">
+                        <div className="closeNewClient">
+                          <button type="submit" className="btnGeneral btnEdit mg-le" onClick={() => saveNewClient(true)}><i className="fas fa-save"></i>Guardar  </button>
 
-                      <input type="number" className="inputChange " min="1" placeholder="ID Cliente" value={newClientId} onChange={(e) => setNewClientId(e.target.value)} required></input>
-                      <input type="text" autoCapitalize="sentences" className="inputChange " placeholder="Nombre Cliente" value={newClientName} onChange={(e) => setNewClientName(e.target.value)} required></input></div>
+                          <button className="btnGeneral spanCloseClient" onClick={() => setIsNewClient(false)}>
+                            <i className="far fa-times-circle fa-1x" ></i> Cerrar </button>
+                        </div>
+                        <div className="divClient">
+                          <div>
 
-                  </div>
-                  <button type="submit" className="btnGeneral btnOpt" onClick={() => saveNewClient(true)}><i className="fas fa-save"></i>Guardar Cliente </button>
-                </> : (
-                  <div className="saveBtnDiv">
-                    <button type="submit" className="btnGeneral  btnOpt" onClick={() => setIsNewClient(true)}><i className="fas fa-user-plus"></i>Nuevo Cliente </button>
+                            <label>ID Cliente  </label>
+                            <label>Nombre Cliente </label>
 
-                  </div>
+                          </div>
+                          <div>
 
-                )
-            }
+                            <input type="number" className="inputChange " min="1" placeholder="ID Cliente" value={newClientId} onChange={(e) => setNewClientId(e.target.value)} required></input>
+                            <input type="text" autoCapitalize="sentences" className="inputChange " placeholder="Nombre Cliente" value={newClientName} onChange={(e) => setNewClientName(e.target.value)} required></input></div>
+
+                        </div>
+
+                      </div> : (
+                        <div className="saveBtnDiv">
+                          <button type="submit" className="btnGeneral  btnOpt" onClick={() => setIsNewClient(true)}><i className="fas fa-user-plus"></i>Nuevo Cliente </button>
+
+                        </div>
+
+                      )
+                  }
+                </div>
+
+              </div>)}
+            </>
           </div>
 
-
         </div>
+
+
 
       </div>
 
 
 
 
-
-
       <div className="listSectionContainer divProductToAdd ">
         <div>
-          <h3 className="subt1">AÑADIR PRODUCTOS: </h3>
+          <h3 className="subt1"> PRODUCTOS COMPRADOS: </h3>
 
         </div>
         <div className="productsToCart">
@@ -474,27 +495,49 @@ const AddOrder = () => {
           <input className="inputChange inputTotal " placeholder="$ Total" value={totalOrder} disabled></input>
           <div className="divBtnTotalOrder ">
 
-            <button type="submit" className="btnBig btnAddOrder" onClick={() => submitCreateOrder()}>
+            <button type="submit" className="btnBig btnAddOrder" onClick={() => setConfirmUpdateDialog(true)}>
               <img className="btnIcon" src={checkicon} alt="img"></img> Guardar
             </button>
-            <button type="reset" onClick={() => setDialogReset(true)} className=" btnBig btnCancelOrder">
+            <button type="button" onClick={() => setUpdateDialog(false)} className=" btnBig btnCancelOrder">
               Cancelar
             </button>
           </div>
         </div>
       </div>
 
-      <Dialog open={dialogReset}>
+      <Dialog open={confirmUpdateDialog}>
+        <div className="dialogUpdate">
+
+          <h5>Actualización de la Orden:</h5>
+
+          <div className="infoUpdateDiv">
+            <p align="center"> ID: {idOrder}      --    Estado: {stateOrder}</p>
+            <p align="center">Cliente:{newClient.client_doc_id} - {newClient.client_name}</p>
+            <p align="center"> Vendedor: {newSeller.seller_id} - {newSeller.seller_name}   </p>
+
+            <p align="center"> Precio Total: ${totalOrder}   </p>
+
+          </div>
+
+          <div className="editBtnContainer2">
+            <button type="button" className="btnGeneral btnEdit" onClick={() => submitEditOrder()} >Si</button>
+            <button type="reset" className="btnGeneral btnDelete" onClick={() => setConfirmUpdateDialog(false)} >No</button>
+          </div>
+
+        </div>
+      </Dialog>
+
+      <Dialog open={dialogCancel}>
         <div className="dialogDelete">
 
-          <h5>¿Está seguro de cancelar esta orden en progreso ?</h5>
-          <p align="center">Los datos no se guardarán.   </p>
+          <h5>¿Está seguro de cancelar la edición de la orden ?</h5>
+          <p align="center">Los datos editados no se guardarán.   </p>
 
 
           <div className="editBtnContainer2">
 
-            <button type="button" id="reloadPage" className="btnGeneral btnEdit" onClick={() => resetOrderPage()} > Si</button>
-            <button type="button" className="btnGeneral btnDelete" onClick={() => setDialogReset(false)} >No</button>
+            <button type="button" id="reloadPage" className="btnGeneral btnEdit" onClick={() => setUpdateDialog(false)}> Si</button>
+            <button type="button" className="btnGeneral btnDelete" onClick={() => setDialogCancel(false)} >No</button>
           </div>
         </div>
       </Dialog>
@@ -513,4 +556,4 @@ const AddOrder = () => {
 
 
 
-export default AddOrder
+export default EditOrder

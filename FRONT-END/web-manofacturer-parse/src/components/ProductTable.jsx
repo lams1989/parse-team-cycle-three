@@ -134,7 +134,7 @@ const ProductTable = () => {
                 <div className="infoUpdateDiv">
                   <p align="center"> ID: {product.id}      --    Estado: {editState}</p>
                   <p className="pLarge" align="center">Descripción: {editDescrip}</p>
-                  <p align="center"> Precio Unitario: {editUnitprice}   </p>
+                  <p align="center"> Precio Unitario: $ {editUnitprice}   </p>
 
                 </div>
 
