@@ -1,10 +1,17 @@
 import axios from 'axios';
 
+const getToken = () => {
+  return `bearer ${localStorage.getItem('token')}`;
+}
+
 export const createProduct = async (data, successCallback, errorCallback) => {
   const options = {
     method: 'POST',
     url: 'http://localhost:3001/products/',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: getToken(),
+    },
     data
   };
   await axios.request(options).then(successCallback).catch(errorCallback);
@@ -13,7 +20,11 @@ export const createProduct = async (data, successCallback, errorCallback) => {
 export const obtainProducts = async (successCallback, errorCallback) => {
   var options = {
     method: 'GET',
-    url: 'http://localhost:3001/products/'
+    url: 'http://localhost:3001/products/',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: getToken(),
+    }
   };
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
@@ -22,7 +33,10 @@ export const obtainProductById = async (id, successCallback, errorCallback) => {
   var options = {
     method: 'GET',
     url: `http://localhost:3001/products/${id}/`,
-    headers: { 'Content-Type': 'application/json' }
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: getToken(),
+    }
   };
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
@@ -31,7 +45,10 @@ export const obtainProductByDescrip = async (descrip, successCallback, errorCall
   var options = {
     method: 'GET',
     url: `http://localhost:3001/products/d/${descrip}/`,
-    headers: { 'Content-Type': 'application/json' }
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: getToken(),
+    }
   };
   console.log(options);
   await axios.request(options).then(successCallback).catch(errorCallback);
@@ -41,7 +58,10 @@ export const obtainProductByState = async (state, successCallback, errorCallback
   var options = {
     method: 'GET',
     url: `http://localhost:3001/products/s/${state}/`,
-    headers: { 'Content-Type': 'application/json' }
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: getToken(),
+    }
   };
   console.log(options);
   await axios.request(options).then(successCallback).catch(errorCallback);
@@ -52,7 +72,10 @@ export const updateProductInfo = async (id, dataToUpdate, successCallback, error
   var options = {
     method: 'PATCH',
     url: `http://localhost:3001/products/upd/${id}/`,
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: getToken(),
+    },
     data: dataToUpdate
   };
   console.log(options);
@@ -64,7 +87,10 @@ export const deleteProduct = async (id, successCallback, errorCallback) => {
   var options = {
     method: 'DELETE',
     url: `http://localhost:3001/products/${id}`,
-    headers: { 'Content-Type': 'application/json' }
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: getToken(),
+    },
   };
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
@@ -73,7 +99,10 @@ export const createUser = async (data, successCallback, errorCallback) => {
   var options = {
     method: 'POST',
     url: 'http://localhost:3001/users/',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: getToken(),
+    },
     data
   };
   await axios.request(options).then(successCallback).catch(errorCallback);
@@ -82,7 +111,11 @@ export const createUser = async (data, successCallback, errorCallback) => {
 export const optainUsers = async (successCallback, errorCallback) => {
   var options = {
     method: 'GET',
-    url: 'http://localhost:3001/users/'
+    url: 'http://localhost:3001/users/',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: getToken(),
+    },
   };
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
@@ -91,7 +124,10 @@ export const updateUser = async (id, dataToUpdate, successCallback, errorCallbac
   var options = {
     method: 'PATCH',
     url: `http://localhost:3001/users/upd/${id}/`,
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: getToken(),
+    },
     data: dataToUpdate
   };
   console.log(options);
@@ -102,7 +138,10 @@ export const obtainUserById = async (id, successCallback, errorCallback) => {
   var options = {
     method: 'GET',
     url: `http://localhost:3001/users/${id}/`,
-    headers: { 'Content-Type': 'application/json' }
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: getToken(),
+    }
   };
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
@@ -110,7 +149,10 @@ export const obtainUserByRole = async (role, successCallback, errorCallback) => 
   var options = {
     method: 'GET',
     url: `http://localhost:3001/users/r/${role}/`,
-    headers: { 'Content-Type': 'application/json' }
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: getToken(),
+    }
   };
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
@@ -120,7 +162,10 @@ export const deleteUser = async (id, successCallback, errorCallback) => {
   var options = {
     method: 'DELETE',
     url: `http://localhost:3001/users/${id}`,
-    headers: { 'Content-Type': 'application/json' }
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: getToken(),
+    }
   };
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
@@ -131,7 +176,11 @@ export const deleteUser = async (id, successCallback, errorCallback) => {
 export const obtainOrders = async (successCallback, errorCallback) => {
   var options = {
     method: 'GET',
-    url: 'http://localhost:3001/orders/'
+    url: 'http://localhost:3001/orders/',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: getToken(),
+    }
   };
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
@@ -140,7 +189,10 @@ export const obtainOrderById = async (id, successCallback, errorCallback) => {
   var options = {
     method: 'GET',
     url: `http://localhost:3001/orders/${id}/`,
-    headers: { 'Content-Type': 'application/json' }
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: getToken(),
+    }
   };
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
@@ -149,7 +201,10 @@ export const obtainOrderByClientId = async (idclient, successCallback, errorCall
   var options = {
     method: 'GET',
     url: `http://localhost:3001/orders/idclient/${idclient}/`,
-    headers: { 'Content-Type': 'application/json' }
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: getToken(),
+    }
   };
   console.log(options);
   await axios.request(options).then(successCallback).catch(errorCallback);
@@ -159,7 +214,10 @@ export const obtainOrderByClientName = async (clientname, successCallback, error
   var options = {
     method: 'GET',
     url: `http://localhost:3001/orders/clientname/${clientname}/`,
-    headers: { 'Content-Type': 'application/json' }
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: getToken(),
+    }
   };
   console.log(options);
   await axios.request(options).then(successCallback).catch(errorCallback);
@@ -170,7 +228,10 @@ export const deleteOrder = async (id, successCallback, errorCallback) => {
   var options = {
     method: 'DELETE',
     url: `http://localhost:3001/orders/${id}`,
-    headers: { 'Content-Type': 'application/json' }
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: getToken(),
+    }
   };
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
@@ -178,7 +239,11 @@ export const deleteOrder = async (id, successCallback, errorCallback) => {
 export const obtainClients = async (successCallback, errorCallback) => {
   var options = {
     method: 'GET',
-    url: 'http://localhost:3001/clients/'
+    url: 'http://localhost:3001/clients/',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: getToken(),
+    }
   };
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
@@ -187,7 +252,10 @@ export const createClient = async (data, successCallback, errorCallback) => {
   var options = {
     method: 'POST',
     url: 'http://localhost:3001/clients/',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: getToken(),
+    },
     data
   };
   await axios.request(options).then(successCallback).catch(errorCallback);
@@ -196,7 +264,10 @@ export const createOrder = async (data, successCallback, errorCallback) => {
   var options = {
     method: 'POST',
     url: 'http://localhost:3001/orders/',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: getToken(),
+    },
     data
   };
   await axios.request(options).then(successCallback).catch(errorCallback);

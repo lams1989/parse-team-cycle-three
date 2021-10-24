@@ -1,28 +1,21 @@
-import { nanoid } from 'nanoid'
+import { nanoid } from 'nanoid';
 import { Dialog, Tooltip } from '@material-ui/core';
 import { ToastContainer, toast, Zoom } from 'react-toastify';
-
 import React, { useState, useEffect, useRef } from 'react';
 import { obtainOrders, obtainOrderById, obtainOrderByClientName, deleteOrder } from 'utils/Api-connection';
 import { obtainOrderByClientId } from 'utils/Api-connection';
 
 const OrdersTable = ({ }) => {
-
   const RowOrder = ({ order, setReload }) => {
-
     const [confirmDeleteDialog, setConfirmDeleteDialog] = useState(false);
-
     const [viewInfoOrder, setViewInfoOrder] = useState(false);
-
     const ToDeleteOrder = async () => {
       setConfirmDeleteDialog(false);
       await deleteOrder(
         order._id,
         (response) => {
           console.log(response.data);
-
           toast.success('Venta eliminada con éxito');
-
         },
         (error) => {
           console.error(error);
@@ -31,11 +24,7 @@ const OrdersTable = ({ }) => {
       );
       setReload(true);
     }
-
     return (
-
-
-
       <tr className="datarow">
         <td className="numberTD">{order.id_order}</td>
         <td className="numberTD">{order.seller.seller_id}</td>
@@ -55,10 +44,7 @@ const OrdersTable = ({ }) => {
                 <i className="fas fa-trash"></i></button></Tooltip>
           </div>
         </td>
-
-
         <Dialog open={viewInfoOrder}>
-
           <div className="dialogViewOrder">
             <div className="headerDialogView">
               <h5>Venta # {order.id_order}</h5>
@@ -69,10 +55,8 @@ const OrdersTable = ({ }) => {
               <span className="pLarge" > Cliente: ID {order.client.id} - {order.client.client_name} </span>
               <span> Vendedor: {order.seller.seller_id} - {order.seller.seller_name} </span>
               <span> Fecha: {order.date} </span>
-
             </div>
             <div className="tableDialogView">
-
               <table className="tableorderinfo">
                 <thead>
                   <tr className="viewRow">
@@ -81,10 +65,8 @@ const OrdersTable = ({ }) => {
                     <th>Cantidad</th>
                     <th>Precio Und</th>
                     <th>Subtotal</th>
-
                   </tr>
                 </thead>
-
                 <tbody>
                   {order.description.map((product) => {
                     return (
@@ -93,14 +75,10 @@ const OrdersTable = ({ }) => {
                         <td className="mediumTD">{product.description}</td>
                         <td className="smallTD ">{product.quantity}</td>
                         <td className="smallTD">$ {product.unitprice}</td>
-
                         <td className="smallTD">$ {product.unitprice * product.quantity} </td>
                       </tr>
-
-
                     );
                   })}
-
                 </tbody>
                 <tfoot>    <tr>
                   <td align="right" colspan="4">Total</td>
@@ -108,51 +86,33 @@ const OrdersTable = ({ }) => {
                 </tr></tfoot>
               </table>
             </div>
-
             <div className="divtotalOrder">
-
               <button type="button" className="btnGeneral btnEdit BtnOK" onClick={() => setViewInfoOrder(false)} >OK</button>
             </div>
-
-
           </div>
         </Dialog>
-
-
         <Dialog open={confirmDeleteDialog}>
           <div className="dialogDelete">
             <div className="headerDialogView">
               <h5>¿Está seguro de eliminar esta venta?</h5>
               <span className="spanClose">
                 <i className="far fa-times-circle fa-2x" onClick={() => setConfirmDeleteDialog(false)}></i> </span></div>
-
             <p align="center">ID: {order.id_order}   - Total: $ {order.total} </p>
             <p className="pLarge" align="center"> Cliente: ID {order.client.client_doc_id} - {order.client.client_name} </p>
             <p className="pLarge" align="center"> Fecha: ID {order.date}</p>
-
-
             <div className="editBtnContainer2">
               <button type="button" className="btnGeneral btnEdit BtnOK" onClick={() => ToDeleteOrder()} >Si</button>
               <button type="reset" className="btnGeneral btnDelete" onClick={() => setConfirmDeleteDialog(false)} >No</button>
             </div>
           </div>
         </Dialog>
-
       </tr>
-
-
     )
   }
-
-
-
-
   /**table section fetch data and search methods */
   const formSearchOrder = useRef(null);
-
   const [reload, setReload] = useState(false);
   const [listOrders, setListOrders] = useState([]);
-
   const submitSearchOrderForm = async (e) => {
     e.preventDefault();
     const fd = new FormData(formSearchOrder.current);
@@ -164,7 +124,6 @@ const OrdersTable = ({ }) => {
     const searchby = searchOpt.searchSelect;
     console.log("s: ", searchby);
     const info = searchOpt.toSearchInput;
-
     if (searchby == "searchbyIdOrder") {
       if (!Number(info)) {
         toast.error("digite un ID numérico", {
@@ -211,17 +170,13 @@ const OrdersTable = ({ }) => {
           console.log('la respuesta que se recibio fue', response);
           console.log(response.data);
           setListOrders(response.data);
-
         },
         (error) => {
           console.error('Salio un error:', error);
         }
       );
     }
-
-
   }
-
   useEffect(async () => {
     console.log(
       'Hola, soy un use effect que se ejecuta cuando la pagina se renderiza, para cargar la lista inicial o para recargar tabla :)'
@@ -236,12 +191,9 @@ const OrdersTable = ({ }) => {
         console.error(' An error:', error);
       }
     );
-
     document.getElementById("formSearchingOrder").reset();
     setReload(false);
   }, [reload]);
-
-
   return (<>
     <div className="searchContainer  marg-l">
       <form id="formSearchingOrder" ref={formSearchOrder} onSubmit={submitSearchOrderForm} >
@@ -252,8 +204,6 @@ const OrdersTable = ({ }) => {
 
           <option value="searchbyIdClient">ID Cliente</option>
           <option value="searchbyClientName">Nombre Cliente</option>
-
-
         </select>
         <input type="text" name="toSearchInput" className="toSearchInput" placeholder="Buscar" />
         <button type="submit" className="btnGeneral btnSearchUser" >
@@ -262,10 +212,7 @@ const OrdersTable = ({ }) => {
       </form>
       <button className="btnGeneral btnBack" onClick={() => setReload(!reload)}><i className="fas fa-undo-alt"></i>Volver a tabla</button>
     </div>
-
     <div className="listSectionContainer divOrders">
-
-
       <table className="ListTable">
         <thead className="thead ">
           <tr>
@@ -285,17 +232,10 @@ const OrdersTable = ({ }) => {
             console.log(order);
             return (
               <RowOrder key={nanoid()} order={order} setReload={setReload} />
-
             );
           })}
-
-
-
-
-
         </tbody>
       </table>
-
       <ToastContainer rtl
         position="top-center"
         autoClose={2000}
@@ -305,8 +245,8 @@ const OrdersTable = ({ }) => {
     </div>
   </>
   )
-}
-export default OrdersTable
+};
+export default OrdersTable;
 
 
 

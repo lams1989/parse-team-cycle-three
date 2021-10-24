@@ -4,10 +4,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import { ToastContainer, toast, Zoom } from 'react-toastify';
 import { Dialog, Tooltip } from '@material-ui/core';
 import { nanoid } from 'nanoid';
+import { optainUsers } from "utils/Api-connection";
 
-import { optainUsers } from "utils/Api-connection"
 const UsersTable = ({ }) => {
-
   const [searching, setSearching] = useState('');
   const [usuariosFiltrados, setUsuariosFiltrados] = useState([]);
   const [reload, setReload] = useState(true);
@@ -15,7 +14,6 @@ const UsersTable = ({ }) => {
 
   useEffect(() => {
     const fetchUsers = async () => {
-
       await optainUsers(
         (response) => {
           setUsersList(response.data);
@@ -30,10 +28,7 @@ const UsersTable = ({ }) => {
     if (reload) {
       fetchUsers();
     }
-
   }, [reload]);
-
-
   useEffect(() => {
     setUsuariosFiltrados(
       usersList.filter((elemento) => {
@@ -41,21 +36,16 @@ const UsersTable = ({ }) => {
       })
     );
   }, [searching, usersList]);
-
-
   const RowUser = ({ user }) => {
     const [editable, setEditable] = useState(false);
     const [editState, setEditState] = useState(user.state);
     const [editRole, setEditRole] = useState(user.role);
     const [confirmUpdateDialog, setConfirmUpdateDialog] = useState(false);
-
     const [confirmDeleteDialog, setConfirmDeleteDialog] = useState(false);
 
     const submitEditUser = async () => {
       console.log('role', editRole);
       console.log('State', editState);
-
-
       setConfirmUpdateDialog(false);
       await updateUser(
         user._id,
@@ -75,16 +65,13 @@ const UsersTable = ({ }) => {
       setEditable(false);
       setReload(true);
     };
-
     const ToDeleteUser = async () => {
       setConfirmDeleteDialog(false);
       await deleteUser(
         user._id,
         (response) => {
           console.log(response.data);
-
           toast.success('usuario eliminado con éxito');
-
         },
         (error) => {
           console.error(error);
@@ -153,7 +140,6 @@ const UsersTable = ({ }) => {
                 </div>
               </div>
             </Dialog>
-
             <Dialog open={confirmDeleteDialog}>
               <div className="dialogDelete">
 
@@ -170,11 +156,8 @@ const UsersTable = ({ }) => {
           </div>
         </td>
       </tr>
-
-
     )
   }
-
   return (
     <>
       <ToastContainer rtl
@@ -188,7 +171,6 @@ const UsersTable = ({ }) => {
         <input type="text" className="toSearchInput"
           placeholder="Buscar" value={searching}
           onChange={(e) => setSearching(e.target.value)} />
-
       </div>
       <div className="listSectionContainer divUsuariosList">
         <table className="ListTable">
@@ -213,6 +195,5 @@ const UsersTable = ({ }) => {
       </div>
     </>
   )
-}
-
+};
 export default UsersTable

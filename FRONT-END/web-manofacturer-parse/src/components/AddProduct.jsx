@@ -1,17 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react';
-
-
+import React, { useRef } from 'react';
 import { createProduct } from 'utils/Api-connection';
 import { ToastContainer, toast, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
-
 const ProductsManager = () => {
-
   const formAddProduct = useRef(null);
-
-
   const submitCreateForm = async (e) => {
     e.preventDefault();
     const fd = new FormData(formAddProduct.current);
@@ -37,18 +30,11 @@ const ProductsManager = () => {
         toast.error('Error creando un producto');
       }
     );
-
-
   };
-
-
   return (
     <div className="MainSection">
       <h2 align="center" className=" addNewSubt marg-l">Nuevo Producto </h2>
-
       <div className="newOrderContainer">
-
-
         <form id="formCreateProduct" ref={formAddProduct} onSubmit={submitCreateForm} >
           <ul className="ulProduct">
             <li>
@@ -86,30 +72,8 @@ const ProductsManager = () => {
         transition={Zoom}
         limit={1}
       />
-
-      {/*  <div className="searchContainer withupdatesection marg-l">
-        <form ref={formSearchProduct} onSubmit={submitSearchForm} >
-          <span>Selecciona </span>
-          <select name= "searchSelect" className="selectRole" required >
-            <option value="" disabled> Buscar por</option>
-            <option value="searchbyid">ID Producto</option>
-            <option value= "searchbyDescrip">Descripción</option>
-          </select>
-          <input type="text" className="toSearchInput" name="toSearchInput" placeholder="Digita la info" required/>
-          <span>para </span>
-          <button type="submit" className="btnGeneral btnSearchUser marg-l"  >
-          <img className="btnIcon"  src={search} alt="img"></img>  Buscar</button>
-         
-        </form>
-        
-        <button className="btnGeneral btnBack" onClick={()=>setReload(!reload)}><i className="fas fa-undo-alt"></i>Volver a tabla</button> 
-
-      </div>
-  <ProductTable listpr={listProducts} setReload={setReload}/>*/}
-
     </div>
-  )
-}
-
+  );
+};
 export default ProductsManager;
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import 'styles/layouts-style.css';
 import Sidebar from 'components/Sidebar';
 import PrivateRoute from 'components/PrivateRoute';
@@ -14,6 +14,5 @@ const AdminLayout = ({ children }) => {
             </div>
         </PrivateRoute>
     )
-}
-
+};
 export default AdminLayout;
