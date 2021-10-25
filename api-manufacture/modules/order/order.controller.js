@@ -33,7 +33,7 @@
         function (req, res) {
             res.status(200).json(req.response);
         });
-    router.put('/:orderId',
+    router.put('/upd/:orderId',
         OrderMiddleware.modifyOrder,
         function (req, res) {
             res.status(200).json(req.response);

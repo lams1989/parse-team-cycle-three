@@ -276,7 +276,10 @@ export const updateOrder = async (idOrder, dataToUpdate, successCallback, errorC
   var options = {
     method: 'PUT',
     url: `http://localhost:3001/orders/upd/${idOrder}/`,
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+       'Content-Type': 'application/json',
+      Authorization: getToken(),
+      },
     data: dataToUpdate
   };
   console.log(options);
