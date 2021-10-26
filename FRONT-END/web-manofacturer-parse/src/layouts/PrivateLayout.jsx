@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { useAuth0 } from "@auth0/auth0-react";
 import ClipLoader from "react-spinners/ClipLoader";
 import { css } from "@emotion/react";
+
+import 'styles/layouts-style.css';
+import Sidebar from 'components/Sidebar';
 import errorImage from "media/error.png"
 import { Link } from 'react-router-dom';
 import { obtainUserData, obtainUserByEmail,createUser } from 'utils/Api-connection';
@@ -86,8 +89,11 @@ const PrivateLayout = ({ children }) => {
       }
     
       return (<>
-          <div >
+          <div className="adminLayoutContainer">
+                <Sidebar />
+                <main className="mainPage">
                     {children}
+                </main>
             </div>
       </>
       );

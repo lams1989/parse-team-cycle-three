@@ -6,7 +6,7 @@ import SellerLayout from 'layouts/SellerLayout';
 import OrdersManager from 'pages/seller/OrdersManager';
 import { Auth0Provider } from "@auth0/auth0-react";
 import ButtonLogin from 'components/ButtonLogin';
-import IndexAdmin from 'pages/admin/IndexAdmin';
+import Index from 'pages/admin/Index';
 import IndexSeller from 'pages/seller/IndexSeller';
 import { UserContext } from 'context/UserContext';
 import { useState } from 'react';
@@ -18,9 +18,9 @@ import PrivateLayout from 'layouts/PrivateLayout';
 
 
 function App() {
-  const [userData, setUserData ]= useState({});
+  const [userData, setUserData] = useState({});
   return (
-   
+
     <Auth0Provider
       domain='parse-manofacturer.us.auth0.com'
       clientId='tHoSOnRwFju4K39I7TqS5eIoARoYgZmV'
@@ -28,68 +28,61 @@ function App() {
       audience='api-autentication-parse-manofacturer'
     >
       <div>
-       <UserContext.Provider value={{userData, setUserData}}>
-      <Router>
-        <Switch>
-          <Route path={['/admin', '/admin/productos', '/admin/ventas', '/admin/usuarios']}>
-            <PrivateLayout>
-            <AdminLayout>
-              <Switch>
-          
-                <Route path='/admin/productos'>
-                <PrivateRoute roleList={["administrador"]}>
-                  <ProductsManager />
-                </PrivateRoute>
-                </Route>
-                <Route path='/admin/ventas'>
-                <PrivateRoute roleList={["administrador"]}>
-                 <OrdersManager />
-                 </PrivateRoute>
-                </Route>
-                <Route path='/admin/usuarios'>
-                <PrivateRoute roleList={["administrador"]}>
-                  <UsersManager />
-                  </PrivateRoute>
-                </Route>   
-               
-                <Route path='/admin'>
-                <PrivateRoute roleList={["administrador"]}>
-               <IndexAdmin/>
-               </PrivateRoute>
-                </Route>
-                
-              </Switch>
-            
-            </AdminLayout>
-            </PrivateLayout>
-          </Route>
-          <Route path={['/vendedor', 'vendedor/ventas']}>
-          <PrivateLayout>
-            <SellerLayout>
-              <Switch>
-                <Route path='/vendedor/ventas/listadoventas'>
-                <PrivateRoute roleList={["vendedor, administrador"]}>
-                  <OrdersManager />
-                  </PrivateRoute>
-                </Route>
-                <Route path='/vendedor'>
-                <PrivateRoute roleList={["vendedor, administrador"]}>
-                <IndexSeller/>
-                </PrivateRoute>
-                </Route>
-              </Switch>
-            </SellerLayout>
-            </PrivateLayout>
+        <UserContext.Provider value={{ userData, setUserData }}>
+          <Router>
+            <Switch>
+              <Route path={['/admin', '/admin/productos', '/admin/ventas', '/admin/usuarios']}>
+                <PrivateLayout>
 
-          </Route>
-          <Route path="/">
-            <ButtonLogin />
-          </Route>
-        </Switch>
-      </Router>
-      
-    </UserContext.Provider>
-    </div>
+                  <Switch>
+
+                    <Route path='/admin/productos'>
+                      <PrivateRoute roleList={["administrador"]}>
+                        <ProductsManager />
+                      </PrivateRoute>
+                    </Route>
+                    <Route path='/admin/ventas'>
+                      <PrivateRoute roleList={["administrador"]}>
+                        <OrdersManager />
+                      </PrivateRoute>
+                    </Route>
+                    <Route path='/admin/usuarios'>
+                      <PrivateRoute roleList={["administrador"]}>
+                        <UsersManager />
+                      </PrivateRoute>
+                    </Route>
+
+                    <Route path='/admin'>
+                      <PrivateRoute roleList={["administrador"]}>
+                        <Index />
+                      </PrivateRoute>
+                    </Route>
+
+                    {/**Routes for module orders available for both seller and admin */}
+                    <Route path='/ventas'>
+                      <PrivateRoute roleList={["vendedor" ,"administrador"]}>
+                        <OrdersManager />
+                      </PrivateRoute>
+                    </Route>
+
+                    <Route path='/vendedor'>
+                      <PrivateRoute roleList={["vendedor"]}>
+                        <Index />
+                      </PrivateRoute>
+                    </Route>
+                  </Switch>
+
+                </PrivateLayout>
+              </Route>
+              
+              <Route path="/">
+                <ButtonLogin />
+              </Route>
+            </Switch>
+          </Router>
+
+        </UserContext.Provider>
+      </div>
     </Auth0Provider>
   );
 };
