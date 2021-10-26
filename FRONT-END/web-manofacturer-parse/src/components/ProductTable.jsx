@@ -83,7 +83,7 @@ const ProductTable = () => {
                 <Tooltip title='GUARDAR' arrow placement="left" >
                   <button type="submit" className="btnGeneral btnEdit" onClick={() => setConfirmUpdateDialog(true)}><i className="fas fa-save"></i>  </button></Tooltip>
                 <Tooltip title='Cancelar' arrow placement="right">
-                  <button type="reset" className="btnGeneral btnDelete" onClick={() => setEditable(!editable)}>  <i class="fas fa-ban"></i></button></Tooltip>
+                  <button type="reset" className="btnGeneral btnDelete" onClick={() => setEditable(!editable)}>  <i className="fas fa-ban"></i></button></Tooltip>
               </>
               : (
                 <><Tooltip title='Editar' arrow placement="left">

@@ -7,6 +7,7 @@ import logoutImage from "media/exit_to_app_white_48dp.svg";
 import users from "media/people_white_48dp.svg";
 import shop from "media/home_white_48dp.svg";
 import { useAuth0 } from "@auth0/auth0-react";
+import PrivateComponent from './PrivateComponent';
 
 const Sidebar = () => {
   const outSesion = () => {
@@ -30,18 +31,22 @@ const Sidebar = () => {
             <span className="links_name">  Ventas</span>
           </Link>
         </li>
+        <PrivateComponent roleList={["administrador"]}>
         <li>
           <Link to='/admin/productos'>
             <img className="iconSidebar" src={products} id="btnProducts" alt="img"></img>
             <span className="links_name">Productos</span>
           </Link>
         </li>
+        </PrivateComponent>
+        {/* <PrivateComponent roleList={["administrador"]}> */}
         <li>
           <Link to='/admin/usuarios'>
             <img className="iconSidebar" src={users} id="btnUsers" alt="img"></img>
             <span className="links_name">Usuarios</span>
           </Link>
         </li>
+         {/* </PrivateComponent> */}
       </ul>
       <div className="logoutsection">
         <button className="btnGeneral btnEdit btnExit" onClick={() => outSesion()}>

@@ -11,7 +11,6 @@ import IndexSeller from 'pages/seller/IndexSeller';
 import { UserContext } from 'context/UserContext';
 import { useState } from 'react';
 import PrivateRoute from 'components/PrivateRoute';
-import PrivateLayout from 'layouts/PrivateLayout';
 <script
   src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
 ></script>
@@ -32,7 +31,6 @@ function App() {
       <Router>
         <Switch>
           <Route path={['/admin', '/admin/productos', '/admin/ventas', '/admin/usuarios']}>
-            <PrivateLayout>
             <AdminLayout>
               <Switch>
           
@@ -42,45 +40,38 @@ function App() {
                 </PrivateRoute>
                 </Route>
                 <Route path='/admin/ventas'>
-                <PrivateRoute roleList={["administrador"]}>
+                {/* <PrivateRoute roleList={["admin"]}> */}
                  <OrdersManager />
-                 </PrivateRoute>
+                 {/* </PrivateRoute> */}
                 </Route>
                 <Route path='/admin/usuarios'>
-                <PrivateRoute roleList={["administrador"]}>
+                {/* <PrivateRoute roleList={["admin","vendedor"]}> */}
                   <UsersManager />
-                  </PrivateRoute>
+                  {/* </PrivateRoute> */}
                 </Route>   
                
                 <Route path='/admin'>
-                <PrivateRoute roleList={["administrador"]}>
+                {/* <PrivateRoute roleList={["admin"]}> */}
                <IndexAdmin/>
-               </PrivateRoute>
+               {/* </PrivateRoute> */}
                 </Route>
                 
               </Switch>
             
             </AdminLayout>
-            </PrivateLayout>
+            
           </Route>
           <Route path={['/vendedor', 'vendedor/ventas']}>
-          <PrivateLayout>
             <SellerLayout>
               <Switch>
                 <Route path='/vendedor/ventas/listadoventas'>
-                <PrivateRoute roleList={["vendedor, administrador"]}>
                   <OrdersManager />
-                  </PrivateRoute>
                 </Route>
                 <Route path='/vendedor'>
-                <PrivateRoute roleList={["vendedor, administrador"]}>
                 <IndexSeller/>
-                </PrivateRoute>
                 </Route>
               </Switch>
             </SellerLayout>
-            </PrivateLayout>
-
           </Route>
           <Route path="/">
             <ButtonLogin />
