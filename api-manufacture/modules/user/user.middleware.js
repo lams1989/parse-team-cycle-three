@@ -9,9 +9,9 @@
         getUserByEmail: getUserByEmail,
         getUserByRole: getUserByRole,
         getUserByState: getUserByState,
-        getUserData:getUserData,
+     
         modifyUser: modifyUser,
-        removeUser: removeUser,
+        removeUser: removeUser
       
       
     };
@@ -43,18 +43,18 @@
             next(err);
         }
     };
-    function getUserData(req, res, next) {
-        UserService.fetchUserData(req)
-            .then(success)
-            .catch(failure);
-        function success(data) {
-            req.response = data;
-            next();
-        }
-        function failure(err) {
-            next(err);
-        }
-    };
+    // function getUserData(req, res, next) {
+    //     UserService.fetchUserData(req)
+    //         .then(success)
+    //         .catch(failure);
+    //     function success(data) {
+    //         req.response = data;
+    //         next();
+    //     }
+    //     function failure(err) {
+    //         next(err);
+    //     }
+    // };
 
  
 
