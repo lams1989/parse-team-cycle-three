@@ -77,8 +77,8 @@ const AddOrder = () => {
         const json = response.data;
         const options = [];
         for (var i in json) {
-          var row = (json[i].id + "-" + json[i].name);
-          var data = { "data": row, "seller_id": json[i].id, "seller_name": json[i].name };
+          var row = ( json[i].name);
+          var data = { "data": row, "seller_id": json[i]._id, "seller_name": json[i].name };
           options.push(data);
           console.log(data);
         }
@@ -178,7 +178,7 @@ const AddOrder = () => {
   /**Creates a order with all the data to be send to database */
   const submitCreateOrder = async () => {
 
-    if (productsToBuy.length > 0 && client != null && seller != null) {
+    if (productsToBuy.length > 0 && client != null && seller != null && idOrder!="") {
       const clientObj = { "client_doc_id": client.client_doc_id, "client_name": client.client_name }
       const sellerObj = { "seller_id": seller.seller_id, "seller_name": seller.seller_name }
       const obj = {

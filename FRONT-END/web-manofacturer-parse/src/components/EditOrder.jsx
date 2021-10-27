@@ -95,8 +95,8 @@ const EditOrder = ({ orderObj, setUpdateDialog, setReload }) => {
         const json = response.data;
         const options = [];
         for (var i in json) {
-          var row = (json[i].id + "-" + json[i].name);
-          var data = { "data": row, "seller_id": json[i].id, "seller_name": json[i].name };
+          var row = ( json[i].name);
+          var data = { "data": row, "seller_id": json[i]._id, "seller_name": json[i].name };
           options.push(data);
           console.log(data);
         }

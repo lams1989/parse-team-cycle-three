@@ -31,7 +31,7 @@ const OrdersTable = ({ }) => {
     return (
       <tr className="datarow">
         <td className="numberTD">{order.id_order}</td>
-        <td className="numberTD">{order.seller.seller_id}</td>
+        <td className="smallTD">{order.seller.seller_name}</td>
         <td className="numberTD">{order.client.client_doc_id}</td>
         <td className="mediumTD">{order.client.client_name}</td>
         <td className="smallTD">{order.date}</td>
@@ -61,7 +61,7 @@ const OrdersTable = ({ }) => {
             </div>
             <div className="infoOrderheader">
               <span className="pLarge" > Cliente: ID {order.client.id} - {order.client.client_name} </span>
-              <span> Vendedor: {order.seller.seller_id} - {order.seller.seller_name} </span>
+              <span> Vendedor:   {order.seller.seller_name} </span>
               <span> Fecha: {order.date} </span>
             </div>
             <div className="tableDialogView">
@@ -237,7 +237,7 @@ const OrdersTable = ({ }) => {
         <thead className="thead ">
           <tr>
             <th className="col_title ">ID Venta</th>
-            <th className="col_title ">ID Vendedor</th>
+            <th className="col_title "> Vendedor</th>
             <th className="col_title">ID Cliente</th>
             <th className="col_title">Cliente</th>
             <th className="col_title">Fecha Venta</th>
