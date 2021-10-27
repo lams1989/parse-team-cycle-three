@@ -29,6 +29,8 @@ export const obtainProducts = async (successCallback, errorCallback) => {
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
 
+
+
 export const obtainProductById = async (id, successCallback, errorCallback) => {
   var options = {
     method: 'GET',
