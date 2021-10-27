@@ -1,4 +1,6 @@
 import React from 'react'
+
+import { Link } from 'react-router-dom';
 import { useUser } from 'context/UserContext';
 const Index = () => {
     const { userData } = useUser();
@@ -16,15 +18,32 @@ const Index = () => {
                         <div className="titlepage">
                             <span className="title">  Bienvenido, Administrador (a)</span>
                         </div>
-                        <span>{day}</span> </>
+                        <span>{day}</span> 
+                        <Link to='/admin/ventas'>
+                    <button className="btnGeneral btnEdit mg-top">  Crear Venta Nueva</button>
+                         </Link> 
+                         <Link to='/admin/productos'>
+                    <button className="btnGeneral btnEdit mg-top">  Agregar Producto</button>
+                         </Link> 
+                         <Link to='/admin/usuarios'>
+                    <button className="btnGeneral btnEdit mg-top">  Ver Usuarios</button>
+                         </Link>
+                        </>
+                        
                     )}
 
 
                     {(userData.role) === "vendedor" && (<>
                         <div className="titlepage">
                             <span className="title">  Bienvenido, Vendedor (a)</span>
+                  
+                   
                         </div>
-                        <span>{day}</span> </>
+                        <span>{day}</span>
+                        <Link to='/vendedor/ventas'>
+                    <button className="btnGeneral btnEdit mg-top">  Crear Venta Nueva</button>
+                         </Link> </>
+                        
                     )}
 
                     {(userData.role) === "no_asignado" && (<>

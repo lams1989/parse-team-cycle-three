@@ -89,12 +89,13 @@ const PrivateLayout = ({ children }) => {
       }
     
       return (<>
-          <div className="adminLayoutContainer">
+      {children}
+          {/* <div className="adminLayoutContainer">
                 <Sidebar />
                 <main className="mainPage">
                     {children}
                 </main>
-            </div>
+            </div> */}
       </>
       );
 //    return isAuthenticated ? <> ({children}) </> : (<div>

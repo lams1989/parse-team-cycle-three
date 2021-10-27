@@ -44,6 +44,7 @@ const OrdersTable = ({ }) => {
             <Tooltip title='Editar' arrow placement="top">
               <button type="button" className="btnGeneral btnEdit" onClick={() => setUpdateDialog(true)}> <i className="fas fa-edit"></i></button></Tooltip>
           
+          {/**The seller shouldnt delete orders, only the admin */}
               <PrivateComponent roleList={["administrador"]}>
             <Tooltip title='Eliminar' arrow placement="top">
               <button type="button" className="btnGeneral btnDelete" onClick={() => setConfirmDeleteDialog(true)}>
