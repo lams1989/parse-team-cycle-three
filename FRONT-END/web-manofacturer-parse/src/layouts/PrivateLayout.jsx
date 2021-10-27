@@ -90,27 +90,10 @@ const PrivateLayout = ({ children }) => {
     
       return (<>
       {children}
-          {/* <div className="adminLayoutContainer">
-                <Sidebar />
-                <main className="mainPage">
-                    {children}
-                </main>
-            </div> */}
+         
       </>
       );
-//    return isAuthenticated ? <> ({children}) </> : (<div>
-//         <div className='textNotUtentication'>NO ESTAS AUTENTICADO</div>
-//         <br />
-//         <div className='divBtnGoLogin'>
-//             <Link to='/'>
-//                 <button className='btnGeneral '>LOGIN</button>
-//             </ Link>
-//         </div>
-//         <div className='divImgGoLogin'>
-//             <img className="loginImageError" src={errorImage} id="btnLogout" alt="img"></img>
-//         </div>
 
-//     </div>);
 };
 
 export default PrivateLayout;

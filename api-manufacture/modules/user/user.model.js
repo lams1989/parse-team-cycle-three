@@ -22,9 +22,9 @@
             type: String,
             required: true
         },
-        nickname:{type:String},
-        picture:{type:String},
-        created_at:{type:String}
+        nickname:String,
+        picture:String,
+        created_at:String
     });
 
     module.exports = mongoose.model('users', UserSchema);
