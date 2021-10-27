@@ -6,6 +6,10 @@ import { ToastContainer, toast, Zoom } from 'react-toastify';
 
 const AddUser = () => {
 
+  {/**You can add an user with their email, state and role.
+   When they iniciate with their email, if theres information in database, 
+  their state and role will appear*/}
+  
   const formAddUser = useRef(null);
   const submitCreateUser =  (e) => {
     e.preventDefault();
@@ -14,17 +18,7 @@ const AddUser = () => {
     formData.forEach((value, key) => {
       newUser[key] = value;
     });
-    const r={
-      name: newUser.name,
-      email: newUser.email.toLowerCase(),
-      role: newUser.role,
-      state: newUser.state,
-      nickname: newUser.name, 
-      picture: "",
-      created_at: ""
-    }
-    console.log(r);
-  
+
      createUser(
       {
         "name": newUser.name,
@@ -33,7 +27,7 @@ const AddUser = () => {
         "state": newUser.state,
         "nickname": newUser.name,
         "picture": "",
-        "created_at": ""
+        "created_at": "" + new Date()
       },
       (response) => {
         console.log(response.data);

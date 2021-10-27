@@ -15,6 +15,7 @@
     box-sizing: border-box;
     font-family: 'Segoe UI', 'Open Sans', 'Helvetica Neue', sans-serif;
     margin-left: var(--margin_sidebar);
+    
 
 }
 
@@ -31,6 +32,7 @@
 }
 .buttonGoLogin {
   height: 100px;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -102,5 +104,5 @@
     align-content: center;
     justify-content: center;
     overflow-x: hidden;
-
+    
 }

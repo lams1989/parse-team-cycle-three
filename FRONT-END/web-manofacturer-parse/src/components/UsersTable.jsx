@@ -1,4 +1,5 @@
 
+
 import { updateUser, deleteUser } from 'utils/Api-connection';
 import React, { useState, useEffect, useRef } from 'react';
 import { ToastContainer, toast, Zoom } from 'react-toastify';
@@ -85,25 +86,24 @@ const UsersTable = ({setEditOrderMode }) => {
       <tr className="datarow">
         {editable ? (
           <>
-            <td className="numberTD"><label  >{user.id}</label></td>
-            <td className="smallLargeTD"><label>{user.name}</label></td>
+            <td className="smallLargeTDname"><label>{user.name}</label></td>
             <td className="mediumTD"><label>{user.email}</label></td>
 
             <td className="smallLargeTD "><select className="selectStatus" defaultValue={user.role} required onChange={(e) => setEditRole(e.target.value)}>
               <option value="" disabled>Selecciona</option>
               <option className="aproved" value="administrador">Administrador</option>
               <option className="aproved" value="vendedor">Vendedor</option>
+              <option className="aproved" value="no_asignado">No_asignado</option>
             </select></td>
             <td className="smallLargeTD "><select className="selectStatus" defaultValue={user.state} required onChange={(e) => setEditState(e.target.value)}>
               <option value="" disabled>Selecciona</option>
-              <option className="aproved" value="aprobado">Aprobado</option>
-              <option className="denied" value="no aprobado">No aprobado</option>
-              <option className="denied" value="pendiente">Pendiente</option>
+              <option className="aproved" value="Aprobado">Aprobado</option>
+              <option className="denied" value="No aprobado">No aprobado</option>
+              <option className="denied" value="Pendiente">Pendiente</option>
             </select></td>
           </>
         ) : (
           <>
-            <td className="numberTD">{user.id}</td>
             <td className="mediumTD">{user.name}</td>
             <td className="smallTD">{user.email}</td>
             <td className="smallLargeTD ">{user.role}</td>
@@ -124,7 +124,7 @@ const UsersTable = ({setEditOrderMode }) => {
               : (
                 <><Tooltip title='Editar' arrow placement="left">
                   <button type="button" className="btnGeneral btnEdit" onClick={() => setEditable(!editable)}> <i class="fas fa-user-cog"></i></button></Tooltip>
-                  <Tooltip title='Eliminar' arrow placement="botton">
+                  <Tooltip title='Eliminar' arrow placement="bottom">
                     <button type="reset" className="btnGeneral btnDelete" onClick={() => setConfirmDeleteDialog(true)}>  <i class="fas fa-user-minus"></i></button></Tooltip>
                 </>
               )}
@@ -177,7 +177,6 @@ const UsersTable = ({setEditOrderMode }) => {
         <table className="ListTable">
           <thead className="thead">
             <tr>
-              <th className="col_title">ID</th>
               <th className="col_title">Nombre</th>
               <th className="col_title">Correo</th>
               <th className="col_title">Rol</th>

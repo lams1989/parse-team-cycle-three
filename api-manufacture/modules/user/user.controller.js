@@ -18,11 +18,7 @@
             res.status(200).json(req.response);
         });
         
-    router.get('/auth/:self',
-    UserMiddleware.getUserData,
-     function (req, res) {
-            res.status(200).json(req.response);
-        });
+    
     router.get('/:id',
         UserMiddleware.getUserById,
         function (req, res) {

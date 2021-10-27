@@ -134,7 +134,8 @@
   }
   .logoutsection{
       position: relative;
-      margin-top: 400px;
+      margin-top: 350px;
+      font-size: small;
   }
   .logoutsection a:hover{
     background: #0d6efd;

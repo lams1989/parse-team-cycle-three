@@ -50,7 +50,7 @@ const Index = () => {
                         <div className="titlepage">
                             <span className="title">  Bienvenido</span>
                         </div>
-                        <span> Aún no tienes rol asignado. Revisa más tarde.</span>
+                        <span> Aún no tienes rol asignado. <br/>Revisa más tarde o vuelve a ingresar.</span>
                         <span>{day}</span> </>
                     )}
 
@@ -61,7 +61,7 @@ const Index = () => {
 
                 <div className="notifMessage">
                     <span className="stateNotifi">Su usuario esta pendiente de activación.
-                        <br />Revise más tarde.
+                        <br />Revise o ingrese de nuevo más tarde.
                     </span>
 
                 </div>   <span className="dateInfo">{day}</span>
@@ -74,7 +74,7 @@ const Index = () => {
                 <>
                     <div className="notifMessage">
                         <span className="stateNotifi">Su usuario NO está aprobado.
-                            <br />Revise más tarde.
+                            <br />Revise con el admin o ingrese de nuevo más tarde.
                         </span>
 
                     </div>   <span className="dateInfo">{day}</span>

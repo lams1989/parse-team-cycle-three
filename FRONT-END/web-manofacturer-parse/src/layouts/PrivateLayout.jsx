@@ -48,7 +48,7 @@ const PrivateLayout = ({ children }) => {
                             {
                                 name: userdata.name,
                                 email: userdata.email,
-                                role: "No_asignado",
+                                role: "no_asignado",
                                 state: "Pendiente", 
                                 nickname: userdata.nickname, 
                                 picture: userdata.picture,

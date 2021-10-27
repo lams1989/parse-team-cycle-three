@@ -39,7 +39,6 @@ margin-top: 20px;
 
 /*title page div style*/
 .titlepage{
-  margin-top: 10px;
   align-items: center;
   margin-left: 10px;
   display: grid;
@@ -370,6 +369,7 @@ height: 100%;
   text-align: left; 
   width: 100%;
   
+  
 }
 .thead{
   background-color: whitesmoke;
@@ -403,7 +403,6 @@ height: 100%;
   width: 100%;
   
 }
-
 .datarow td{
   padding:6px;
   border-bottom:1px solid;
@@ -427,6 +426,11 @@ height: 100%;
 .smallLargeTD{
   width: 200px;
   
+}
+.smallLargeTDname{
+  width: 200px;
+  
+  padding-left:5px;
 }
 .descripTD{
   width: 620px;
