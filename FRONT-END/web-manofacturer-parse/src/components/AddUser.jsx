@@ -5,21 +5,35 @@ import { createUser } from "utils/Api-connection";
 import { ToastContainer, toast, Zoom } from 'react-toastify';
 
 const AddUser = () => {
+
   const formAddUser = useRef(null);
-  const submitCreateUser = async (e) => {
+  const submitCreateUser =  (e) => {
     e.preventDefault();
     const formData = new FormData(formAddUser.current);
     const newUser = {};
     formData.forEach((value, key) => {
       newUser[key] = value;
     });
-    await createUser(
+    const r={
+      name: newUser.name,
+      email: newUser.email.toLowerCase(),
+      role: newUser.role,
+      state: newUser.state,
+      nickname: newUser.name, 
+      picture: "",
+      created_at: ""
+    }
+    console.log(r);
+  
+     createUser(
       {
-        id: newUser.userId,
-        name: newUser.name.toUpperCase(),
-        email: newUser.email.toLowerCase(),
-        role: newUser.role,
-        state: newUser.state
+        "name": newUser.name,
+        "email": newUser.email.toLowerCase(),
+        "role": newUser.role,
+        "state": newUser.state,
+        "nickname": newUser.name,
+        "picture": "",
+        "created_at": ""
       },
       (response) => {
         console.log(response.data);
@@ -39,10 +53,6 @@ const AddUser = () => {
         <form id="formAddUser" ref={formAddUser} onSubmit={submitCreateUser}>
           <ul className="ulProduct">
             <li>
-              <label> ID Usuario</label>
-              <input name="userId" className="inputChange inputValue" type="text" required placeholder="ID"></input>
-            </li>
-            <li>
               <label> Nombre</label>
               <input name="name" className="inputChange mediumTD" type="text" required placeholder="Nombre"></input>
             </li>
@@ -53,17 +63,18 @@ const AddUser = () => {
             <li className="addDataRoleContainer">
               <label> Rol </label>
               <select name="role" className="selectRole">
-                <option className="sellerRole" value="noRoleYet" disabled>Selecciona un rol</option>
                 <option className="sellerRole" value="vendedor">Vendedor</option>
                 <option className="adminRole" value="administrador">Administrador</option>
+                <option className="sellerRole" value="no_asignado" >No_asignado</option>
+              
               </select>
             </li>
             <li>
               <label> Estado </label>
               <select name="state" className="selectStatus">
-                <option className="aproved" value="aprobado">Aprobado</option>
-                <option className="denied" value="no aprobado">No Aprobado</option>
-                <option className="pending" value="pendiente">Pendiente</option>
+                <option className="aproved" value="Aprobado">Aprobado</option>
+                <option className="denied" value="No aprobado">No Aprobado</option>
+                <option className="pending" value="Pendiente">Pendiente</option>
               </select>
             </li>
           </ul>

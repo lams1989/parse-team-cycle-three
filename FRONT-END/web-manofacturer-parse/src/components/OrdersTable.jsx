@@ -6,6 +6,7 @@ import { obtainOrders, obtainOrderById, obtainOrderByClientName, deleteOrder } f
 import { obtainOrderByClientId } from 'utils/Api-connection';
 import EditOrder from './EditOrder';
 import { maxHeight, maxWidth } from '@material-ui/system';
+import PrivateComponent from './PrivateComponent';
 
 const OrdersTable = ({ }) => {
   const RowOrder = ({ order, setReload }) => {
@@ -42,9 +43,13 @@ const OrdersTable = ({ }) => {
               <button type="button" className="btnGeneral btnDelete" onClick={() => setViewInfoOrder(true)}> <i className="fas fa-eye"></i></button></Tooltip>
             <Tooltip title='Editar' arrow placement="top">
               <button type="button" className="btnGeneral btnEdit" onClick={() => setUpdateDialog(true)}> <i className="fas fa-edit"></i></button></Tooltip>
+          
+          {/**The seller shouldnt delete orders, only the admin */}
+              <PrivateComponent roleList={["administrador"]}>
             <Tooltip title='Eliminar' arrow placement="top">
               <button type="button" className="btnGeneral btnDelete" onClick={() => setConfirmDeleteDialog(true)}>
                 <i className="fas fa-trash"></i></button></Tooltip>
+                </PrivateComponent>
           </div>
         </td>
         <Dialog open={viewInfoOrder}>

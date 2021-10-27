@@ -157,6 +157,17 @@ export const obtainUserByRole = async (role, successCallback, errorCallback) => 
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
 
+export const obtainUserByEmail = async (email, successCallback, errorCallback) => {
+  var options = {
+    method: 'GET',
+    url: `http://localhost:3001/users/e/${email}/`,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: getToken(),
+    }
+  };
+  await axios.request(options).then(successCallback).catch(errorCallback);
+};
 
 export const deleteUser = async (id, successCallback, errorCallback) => {
   var options = {
@@ -283,5 +294,18 @@ export const updateOrder = async (idOrder, dataToUpdate, successCallback, errorC
     data: dataToUpdate
   };
   console.log(options);
+  await axios.request(options).then(successCallback).catch(errorCallback);
+};
+
+/*Users by autentication Auth0 */
+export const obtainUserData = async (successCallback, errorCallback) => {
+  var options = {
+    method: 'GET',
+    url: 'http://localhost:3001/users/auth/self/',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: getToken(),
+    },
+  };
   await axios.request(options).then(successCallback).catch(errorCallback);
 };

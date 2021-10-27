@@ -1,6 +1,7 @@
 
 import "styles/pages-styles.css";
 import { nanoid } from 'nanoid';
+import { Link } from 'react-router-dom';
 import checkicon from "media/done_outline_white_48dp.svg";
 import deleteicon from "media/backspace_black_48dp.svg";
 import { ToastContainer, toast, Zoom } from 'react-toastify';
@@ -13,6 +14,7 @@ import InputOptions from "./InputOptions";
 import { createClient } from "utils/Api-connection";
 import { createOrder } from "utils/Api-connection";
 import { Dialog } from '@material-ui/core';
+import PrivateComponent from "./PrivateComponent";
 
 
 const AddOrder = () => {
@@ -26,6 +28,7 @@ const AddOrder = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [productsToBuy, setProductsToBuy] = useState([]);
   const [dialogReset, setDialogReset] = useState(false);
+  const [dialogFinish, setDialogFinish] = useState(false);
   const [resetOrder, setResetOrder] = useState(false);
   /**For the case of a new client */
   const [isnewClient, setIsNewClient] = useState(false);
@@ -108,15 +111,17 @@ const AddOrder = () => {
     setReloadProducts(false);
   }, [reloadClients]);
   /**ReloadProducts list of added products to buy (table) and reset fields of product */
+
   useEffect(async () => {
-    console.log("aaa")
+
     setProductsToBuy(productsToBuy);
-    document.getElementById("id_add").value = "";
     setproductQuantityToAdd(1);
-    document.getElementById("descrip_add").value = "";
-    document.getElementById("unitprice_add").value = 0;
-    document.getElementById("total_add").value = 0;
-    setProductSelected(null);
+    //document.getElementById("id_add").value = "";
+
+    //document.getElementById("descrip_add").value = "";
+    //document.getElementById("unitprice_add").value = 0;
+    //document.getElementById("total_add").value = 0;
+    //setProductSelected(null);
     setReloadProducts(false);
   }, [reloadProducts]);
   /**If different product is selected */
@@ -144,7 +149,7 @@ const AddOrder = () => {
       let descrip = document.getElementById("descrip_add").value = productSelected.description;
       let uprice = document.getElementById("unitprice_add").value = productSelected.unitprice;
       let totalProduct = document.getElementById("total_add").value = productSelected.unitprice * productQuantityToAdd;
-      console.log("unit ", productQuantityToAdd, "total", totalProduct);
+
       const rowProduct = { "id": id, "description": descrip, "unitprice": uprice, "quantity": productQuantityToAdd, "subtotal": totalProduct, "numRow": numRow }
       productsToBuy.push(rowProduct);
       let totalplus = totalOrder + totalProduct;
@@ -172,9 +177,10 @@ const AddOrder = () => {
   };
   /**Creates a order with all the data to be send to database */
   const submitCreateOrder = async () => {
-    const clientObj = { "client_doc_id": client.client_doc_id, "client_name": client.client_name }
-    const sellerObj = { "seller_id": seller.seller_id, "seller_name": seller.seller_name }
+
     if (productsToBuy.length > 0 && client != null && seller != null) {
+      const clientObj = { "client_doc_id": client.client_doc_id, "client_name": client.client_name }
+      const sellerObj = { "seller_id": seller.seller_id, "seller_name": seller.seller_name }
       const obj = {
         "id_order": idOrder,
         "date": selectedDate,
@@ -197,8 +203,10 @@ const AddOrder = () => {
         },
         (response) => {
           console.log(response.data);
+          setDialogFinish(true);
           toast.success('Orden de venta agregada con éxito');
-          resetOrderPage();
+
+         
         },
         (error) => {
           console.error(error);
@@ -209,19 +217,8 @@ const AddOrder = () => {
       toast.error('Error. Revise cliente, vendedor y compra no vacía');
     }
   };
-  /***For cleaning the data of page after an order is sent or cancel order */
-  const resetOrderPage = () => {
-    setIdOrder("");
-    setClient("");
-    setSeller("");
-    setProductsToBuy([]);
-    setTotalOrder(0);
-    setNewClientId("");
-    setNewClientName("");
-    setReloadProducts(true);
-    setReloadClients(true);
-    setDialogReset(false);
-  };
+
+
   /**For creating new client and saving it to clients database, after that, the option
    * of clients is reloaded and client can be selected from the input
    */
@@ -381,7 +378,15 @@ const AddOrder = () => {
           <h5>¿Está seguro de cancelar esta orden en progreso ?</h5>
           <p align="center">Los datos no se guardarán.   </p>
           <div className="editBtnContainer2">
-            <button type="button" id="reloadPage" className="btnGeneral btnEdit" onClick={() => resetOrderPage()} > Si</button>
+            <PrivateComponent roleList={["vendedor"]}>
+              <Link to='/vendedor/'>
+                <button className="btnGeneral btnEdit">  Si</button>
+              </Link></PrivateComponent>
+            <PrivateComponent roleList={["administrador"]}>
+              <Link to='/admin/'>
+                <button className="btnGeneral btnEdit">  Si</button>
+              </Link></PrivateComponent>
+
             <button type="button" className="btnGeneral btnDelete" onClick={() => setDialogReset(false)} >No</button>
           </div>
         </div>
@@ -392,7 +397,31 @@ const AddOrder = () => {
         transition={Zoom}
         limit={1}
       />
+
+
+
+      <Dialog open={dialogFinish}>
+        <div className="dialogDelete">
+          <h5>Su venta se ha guardado <br /> con éxito.</h5>
+          <p align="center">Id venta: {idOrder} - Total : ${totalOrder}  </p>
+
+          <div className="editBtnContainer2">
+            <PrivateComponent roleList={["vendedor"]}>
+              <Link to='/vendedor/'>
+                <button className="btnGeneral btnEdit">  OK</button>
+              </Link></PrivateComponent>
+            <PrivateComponent roleList={["administrador"]}>
+              <Link to='/admin/'>
+                <button className="btnGeneral btnEdit">  OK</button>
+              </Link></PrivateComponent>
+            {/* <button type="button" id="reloadPage" className="btnGeneral btnEdit" onClick={() => reloadPage()} > OK</button> */}
+
+          </div>
+        </div>
+      </Dialog>
     </div>
+
+
   )
 };
 export default AddOrder

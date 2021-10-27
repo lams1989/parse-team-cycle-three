@@ -17,7 +17,12 @@
         function (req, res) {
             res.status(200).json(req.response);
         });
-
+        
+    router.get('/auth/:self',
+    UserMiddleware.getUserData,
+     function (req, res) {
+            res.status(200).json(req.response);
+        });
     router.get('/:id',
         UserMiddleware.getUserById,
         function (req, res) {
@@ -29,7 +34,7 @@
         function (req, res) {
             res.status(200).json(req.response);
         });
-
+        
     router.get('/e/:userEmail',
         UserMiddleware.getUserByEmail,
         function (req, res) {
@@ -59,6 +64,17 @@
         function (req, res) {
             res.status(200).json(req.response);
         });
+
+
+        const genercCallback = (res) => (err, result) => {
+            if (err) {
+              res.status(500).send('Error consultando los usuarios');
+            } else {
+              res.json(result);
+            }
+          };
+          
+     
 
     module.exports = router;
 

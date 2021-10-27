@@ -9,9 +9,11 @@
         getUserByEmail: getUserByEmail,
         getUserByRole: getUserByRole,
         getUserByState: getUserByState,
-     
+        getUserData:getUserData,
         modifyUser: modifyUser,
-        removeUser: removeUser
+        removeUser: removeUser,
+      
+      
     };
 
     var UserService = require('./user.module')().UserService;
@@ -41,6 +43,20 @@
             next(err);
         }
     };
+    function getUserData(req, res, next) {
+        UserService.fetchUserData(req)
+            .then(success)
+            .catch(failure);
+        function success(data) {
+            req.response = data;
+            next();
+        }
+        function failure(err) {
+            next(err);
+        }
+    };
+
+ 
 
     function getUserById(req, res, next) {
         UserService.fetchUserById(req.params.id)
@@ -125,7 +141,7 @@
             .then(success)
             .catch(failure);
         function success() {
-            req.response = "deleled user";
+            req.response = "deleted user";
             next();
         }
         function failure(err) {
